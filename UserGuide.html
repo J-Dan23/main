@@ -14,14 +14,14 @@
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#updating-the-current-food-record-code-update-code">3.2. Updating the current Food Record: <code>update</code></a></li>
+<li><a href="#updating-the-current-food-record-code-update-code">3.2. Updating the current Food Record : <code>update</code></a></li>
 <li><a href="#deleting-a-food-item-from-current-food-record-code-delete-code">3.3. Deleting a Food Item from current Food Record: <code>delete</code></a></li>
 <li><a href="#listing-all-food-items-in-calgo-s-current-food-record-code-list-code">3.4. Listing all Food items in Calgo&#8217;s current Food Record : <code>list</code></a></li>
 <li><a href="#showing-all-food-items-consumed-on-a-particular-day-code-stomach-code">3.5. Showing all food items consumed on a particular day : <code>stomach</code></a></li>
 <li><a href="#consuming-food-on-a-certain-day-code-nom-code">3.6. Consuming food on a certain day : <code>nom</code></a></li>
 <li><a href="#deleting-something-consumed-on-a-certain-day-code-vomit-code">3.7. Deleting something consumed on a certain day : <code>vomit</code></a></li>
-<li><a href="#exporting-the-current-food-record-export">3.8. Exporting the current Food Record : 'export'</a></li>
-<li><a href="#getting-food-items-by-keywords-or-food-item-values-code-find-code">3.9. Getting Food items by keywords or Food item values: <code>find</code></a></li>
+<li><a href="#exporting-the-current-food-record-code-export-code">3.8. Exporting the current Food Record : <code>export</code></a></li>
+<li><a href="#getting-food-items-by-keywords-or-food-item-values-code-find-code">3.9. Getting Food items by keywords or Food item values : <code>find</code></a></li>
 <li><a href="#setting-a-dietary-goal-code-goal-code">3.10. Setting a dietary goal: <code>goal</code></a></li>
 <li><a href="#generating-insights-code-report-code">3.11. Generating insights : <code>report</code></a></li>
 <li><a href="#clearing-all-entries-code-clear-code">3.12. Clearing all entries : <code>clear</code></a></li>
@@ -168,7 +168,7 @@ This command will display only available commands containing the keyword 'list'.
 </div>
 </div>
 <div class="sect2">
-<h3 id="updating-the-current-food-record-code-update-code"><a class="link" href="#updating-the-current-food-record-code-update-code">3.2. Updating the current Food Record: <code>update</code></a></h3>
+<h3 id="updating-the-current-food-record-code-update-code"><a class="link" href="#updating-the-current-food-record-code-update-code">3.2. Updating the current Food Record : <code>update</code></a></h3>
 <div class="paragraph">
 <p>Updates a Food Item in the Food Record.</p>
 </div>
@@ -393,7 +393,7 @@ Deletes 3 portions of of the first food item consumed on 2020-03-04.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exporting-the-current-food-record-export"><a class="link" href="#exporting-the-current-food-record-export">3.8. Exporting the current Food Record : 'export'</a></h3>
+<h3 id="exporting-the-current-food-record-code-export-code"><a class="link" href="#exporting-the-current-food-record-code-export-code">3.8. Exporting the current Food Record : <code>export</code></a></h3>
 <div class="paragraph">
 <p>Provides a human-readable text file (FoodRecords.txt) in the target folder (default: same folder as the Calgo application), containing all Food item records including name, calories, and nutritional values.</p>
 </div>
@@ -410,24 +410,9 @@ Deletes 3 portions of of the first food item consumed on 2020-03-04.</p>
 <div class="paragraph">
 <p>Format: <code>export</code> or <code>export location/LOCATION</code></p>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>edit 1 p/91234567 e/johndoe@example.com</code><br>
-Edits the phone number and email address of the 1st person to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
-</li>
-<li>
-<p><code>edit 2 n/Betsy Crower t/</code><br>
-Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all existing tags.</p>
-</li>
-</ul>
-</div>
 </div>
 <div class="sect2">
-<h3 id="getting-food-items-by-keywords-or-food-item-values-code-find-code"><a class="link" href="#getting-food-items-by-keywords-or-food-item-values-code-find-code">3.9. Getting Food items by keywords or Food item values: <code>find</code></a></h3>
+<h3 id="getting-food-items-by-keywords-or-food-item-values-code-find-code"><a class="link" href="#getting-food-items-by-keywords-or-food-item-values-code-find-code">3.9. Getting Food items by keywords or Food item values : <code>find</code></a></h3>
 <div class="paragraph">
 <p>Finds all Food items whose names contain any of the keyword(s), even as an incompletely-spelled word (e.g. by mistake).<br>
 Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
@@ -600,10 +585,6 @@ Format: <code>exit</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
-</li>
-<li>
 <p><strong>Clear</strong> : <code>clear</code></p>
 </li>
 <li>
@@ -612,10 +593,6 @@ e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1
 <li>
 <p><strong>Delete</strong> : <code>delete n/FOOD_NAME</code><br>
 e.g. <code>delete pizza</code></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
 </li>
 <li>
 <p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code> <strong>OR</strong> <code>find [cal/CALORIES] [p/PROTEINS] [c/CARBS] [f/FATS]</code><br>
@@ -634,8 +611,8 @@ eg. <code>stomach d/</code> <strong>OR</strong> <code>stomach d/2020-03-04</code
 eg. <code>nom n/chicken d/2020-03-04 portion/1.5</code> <strong>OR</strong> <code>nom n/chicken d/ portion/</code></p>
 </li>
 <li>
-<p><strong>Vomit</strong> : <code>vomit [n/FOOD_NAME] [d/DATE] [portion/PORTION]</code><br>
-eg. <code>vomit n/chicken d/2020-03-04 portion/3</code> <strong>OR</strong> <code>vomit n/apple pie d/ portion/</code></p>
+<p><strong>Vomit</strong> : <code>vomit [index/INDEX_OF_FOOD] [d/DATE] [portion/PORTION]</code><br>
+eg. <code>vomit num/1 d/2020-03-04 portion/3</code> <strong>OR</strong> <code>num/2 d/ portion/</code></p>
 </li>
 <li>
 <p><strong>Export</strong> : <code>export</code> <strong>OR</strong> <code>export C:\Users\eugen\OneDrive\Desktop\</code></p>
@@ -652,4 +629,4 @@ eg. <code>vomit n/chicken d/2020-03-04 portion/3</code> <strong>OR</strong> <cod
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 11:18:48 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 11:24:51 UTC</div></div></div></body></html>
