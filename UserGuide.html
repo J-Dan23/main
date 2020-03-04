@@ -13,7 +13,7 @@
 <li><a href="#quick-start">2. Quick Start</a></li>
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
+<li><a href="#displaying-help-code-help-code">3.1. Displaying help : <code>help</code></a></li>
 <li><a href="#updating-the-current-food-record-code-update-code">3.2. Updating the current Food Record : <code>update</code></a></li>
 <li><a href="#deleting-a-food-item-from-current-food-record-code-delete-code">3.3. Deleting a Food Item from current Food Record: <code>delete</code></a></li>
 <li><a href="#listing-all-food-items-in-calgo-s-current-food-record-code-list-code">3.4. Listing all Food items in Calgo&#8217;s current Food Record : <code>list</code></a></li>
@@ -85,7 +85,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all Food items currently recorded in the Food Records.</p>
 </li>
 <li>
-<p><strong><code>update</strong>`n/kiwi cal/125 p/1 c/20 f/3</code> : adds <code>kiwi</code> to the Food Records if there is currently no Food called 'kiwi' inside it, with 'kiwi&#8217;s details saved as: 125 calories, 1 gram of protein, 20 grams of carbohydrates, and 3 grams of fats.</p>
+<p><strong><code>update</strong>n/kiwi cal/125 p/1 c/20 f/3</code> : adds <code>kiwi</code> to the Food Records if there is currently no Food called 'kiwi' inside it, with its details saved as: 125 calories, 1 gram of protein, 20 grams of carbohydrates, and 3 grams of fats.</p>
 </li>
 <li>
 <p><strong><code>find</code></strong><code>banana</code> : finds the entry banana in the Food Records and returns its details if available; otherwise an error message will be shown.</p>
@@ -130,7 +130,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
+<h3 id="displaying-help-code-help-code"><a class="link" href="#displaying-help-code-help-code">3.1. Displaying help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Displays a guide for all available commands in Calgo.</p>
 </div>
@@ -408,14 +408,13 @@ Deletes 3 portions of of the first food item consumed on 2020-03-04.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Format: <code>export</code> or <code>export location/LOCATION</code></p>
+<p>Format: <code>export [location/LOCATION]</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="getting-food-items-by-keywords-or-food-item-values-code-find-code"><a class="link" href="#getting-food-items-by-keywords-or-food-item-values-code-find-code">3.9. Getting Food items by keywords or Food item values : <code>find</code></a></h3>
 <div class="paragraph">
-<p>Finds all Food items whose names contain any of the keyword(s), even as an incompletely-spelled word (e.g. by mistake).<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+<p>Finds all Food items whose names contain any of the keyword(s), even as an incompletely-spelled word (e.g. by mistake).</p>
 </div>
 <div class="ulist">
 <ul>
@@ -427,6 +426,9 @@ Format: <code>find [cal/CALORIES] [p/PROTEINS] [c/CARBS] [f/FATS]</code></p>
 <p>Otherwise, an error message will be shown.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -629,4 +631,4 @@ eg. <code>vomit num/1 d/2020-03-04 portion/3</code> <strong>OR</strong> <code>nu
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 11:24:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 15:55:11 UTC</div></div></div></body></html>
