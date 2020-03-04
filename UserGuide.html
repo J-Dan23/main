@@ -21,8 +21,10 @@
 <li><a href="#editing-a-person-code-edit-code-to-be-edited-by-ray">3.6. Editing a person : <code>edit</code> (TO BE EDITED BY RAY)</a></li>
 <li><a href="#getting-food-items-by-keywords-or-food-item-values-code-find-code">3.7. Getting Food items by keywords or Food item values: <code>find</code></a></li>
 <li><a href="#deleting-a-person-code-delete-code-to-be-edited-by-ray">3.8. Deleting a person : <code>delete</code> (TO BE EDITED BY RAY)</a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.9. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.10. Exiting the program : <code>exit</code></a></li>
+<li><a href="#setting-a-dietary-goal-code-goal-code">3.9. Setting a dietary goal: <code>goal</code></a></li>
+<li><a href="#generating-insights-code-report-code">3.10. Generating insights : <code>report</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -82,7 +84,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all Food items currently recorded in the Food Records.</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/kiwi cal/125 p/1 c/20 f/3</code> : adds a Food named <code>kiwi</code> to the Food Records with its details saved as: 125 calories, 1 gram of protein, 20 grams of carbohydrates, and 3 grams of fats.</p>
+<p><strong><code>update</strong>`n/kiwi cal/125 p/1 c/20 f/3</code> : If there is no Food named <code>kiwi</code> in Food Records, this command adds <code>kiwi</code> to the Food Records with its details saved as: 125 calories, 1 gram of protein, 20 grams of carbohydrates, and 3 grams of fats.</p>
 </li>
 <li>
 <p><strong><code>find</code></strong><code>banana</code> : finds the entry banana in the Food Records and returns its details if available; otherwise an error message will be shown.</p>
@@ -208,7 +210,7 @@ As pizza is already in the user’s food preset, this command overrides the nutr
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can leave the any of the proteins, carbohydrates or fats value of a food item blank when updating a Food Item into the Food Record.
+You can leave any of the proteins, carbohydrates or fats value of a food item blank when updating a Food Item into the Food Record.
 </td>
 </tr>
 </table>
@@ -351,7 +353,7 @@ Format: <code>find [cal/CALORIES] [p/PROTEINS] [c/CARBS] [f/FATS]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find wI</code><br>
+<p><code>find kiwi</code><br>
 Returns <code>kiwi</code> and <code>kiwi juice</code></p>
 </li>
 <li>
@@ -407,14 +409,97 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.9. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="setting-a-dietary-goal-code-goal-code"><a class="link" href="#setting-a-dietary-goal-code-goal-code">3.9. Setting a dietary goal: <code>goal</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries from the address book.<br>
+<p>Sets a numerical goal for the desired number of calories to be consumed in a day.<br></p>
+</div>
+<div class="paragraph">
+<p>This goal will be used to provide helpful insights for users in the Report.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>goal [g/GOAL]</code></p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>goal 2800</code><br>
+Sets the desired number of calories to be consumed to be 2800.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generating-insights-code-report-code"><a class="link" href="#generating-insights-code-report-code">3.10. Generating insights : <code>report</code></a></h3>
+<div class="paragraph">
+<p>Given a date, the command generates a document (in pdf format) of relevant insights about the user&#8217;s food consumption pattern of the same date.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The report includes the following insights:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>All Food items consumed on the given date. For each Food item, the following information will be included:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Quantity consumed, for instance 3 servings.</p>
+</li>
+<li>
+<p>Number of calories consumed from the Food item.</p>
+</li>
+<li>
+<p>Amount of carbohydrates, proteins and fats consumed from the Food item.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The user&#8217;s most liked Food item.</p>
+</li>
+<li>
+<p>The total number of calories consumed in that day.</p>
+</li>
+<li>
+<p>The total number of carbohydrates, proteins and fats consumed in that day.</p>
+</li>
+<li>
+<p>A curated Food plan that includes Food items, that includes a healthy quantity of the user&#8217;s favourite Food, while ensuring it meets user&#8217;s dietary goal.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>report <code>27-03-2020</code><br>
+This generates a pdf containing the above-mentioned insights made on the consumption of  Food by the user, on 27th of March 2020.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></h3>
+<div class="paragraph">
+<p>Clears all entries from the Food Record.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.10. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.12. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
@@ -466,9 +551,15 @@ e.g. <code>find strawberry jam</code> <strong>OR</strong><br>
 <p><strong>Export</strong> : <code>export</code> <strong>OR</strong> <code>export C:\Users\eugen\OneDrive\Desktop\</code></p>
 </li>
 <li>
+<p><strong>Goal</strong> : <code>goal [g/GOAL]</code></p>
+</li>
+<li>
+<p><strong>Report</strong> : <code>report [Date in dd-mm-yyyy]</code></p>
+</li>
+<li>
 <p><strong>Help</strong> : <code>help</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 08:40:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 08:49:57 UTC</div></div></div></body></html>
