@@ -187,7 +187,7 @@ This command will display only available commands containing the keyword 'list'.
 </div>
 </div>
 <div class="paragraph">
-<p>Format: <code>update n/FOOD_NAME cal/CALORIES [p/PROTEINS] [c/CARBS] [f/FATS]</code></p>
+<p>Format: <code>update n/NAME cal/CALORIES [p/PROTEINS] [c/CARBS] [f/FATS]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -196,10 +196,10 @@ This command will display only available commands containing the keyword 'list'.
 <ul>
 <li>
 <p><code>update n/pizza cal/200 p/10 c/200</code><br>
-This command adds a new food item, pizza into the user’s food presets with nutritional details of 200 calories, 10g of protein, 200g of carbohydrates.</p>
+This command adds a new food item, pizza into the user’s food presets with nutritional details of 200Cal calories, 10g of protein, 200g of carbohydrates.</p>
 </li>
 <li>
-<p><code>update n/pizza c/100 p/10 c/100 f/30</code><br>
+<p><code>update n/pizza cal/100 p/10 c/100 f/30</code><br>
 As pizza is already in the user’s food preset, this command overrides the nutritional details of pizza with 200Cal calories, 10g of protein, 200g of carbohydrates and 20g of fats.</p>
 </li>
 </ul>
@@ -223,7 +223,7 @@ You can leave any of the proteins, carbohydrates or fats value of a food item bl
 <p>Deletes the specified Food Item from the Food Record.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>delete n/FOOD_NAME</code></p>
+<p>Format: <code>delete n/NAME</code></p>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -292,7 +292,7 @@ Displays a list of food user has consumed today.</p>
 <p>Adds a food item into the log which keeps track of what the user has eaten on that day.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>nom [n/FOOD_NAME] [d/DATE] [portion/PORTION]</code></p>
+<p>Format: <code>nom [n/NAME] [d/DATE] [portion/PORTION]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -590,10 +590,10 @@ Format: <code>exit</code></p>
 <p><strong>Clear</strong> : <code>clear</code></p>
 </li>
 <li>
-<p><strong>Update</strong> : <code>update n/FOOD_NAME cal/CALORIES [p/PROTEINS] [p/PROTEINS] [c/CARBS] [f/FATS]</code></p>
+<p><strong>Update</strong> : <code>update n/NAME cal/CALORIES [p/PROTEINS] [p/PROTEINS] [c/CARBS] [f/FATS]</code></p>
 </li>
 <li>
-<p><strong>Delete</strong> : <code>delete n/FOOD_NAME</code><br>
+<p><strong>Delete</strong> : <code>delete n/NAME</code><br>
 e.g. <code>delete pizza</code></p>
 </li>
 <li>
@@ -609,7 +609,7 @@ e.g. <code>find strawberry jam</code> <strong>OR</strong><br>
 eg. <code>stomach d/</code> <strong>OR</strong> <code>stomach d/2020-03-04</code></p>
 </li>
 <li>
-<p><strong>Nom</strong> : nom [n/FOOD_NAME] [d/DATE] [portion/PORTION]<br>
+<p><strong>Nom</strong> : nom [n/NAME] [d/DATE] [portion/PORTION]<br>
 eg. <code>nom n/chicken d/2020-03-04 portion/1.5</code> <strong>OR</strong> <code>nom n/chicken d/ portion/</code></p>
 </li>
 <li>
@@ -617,7 +617,7 @@ eg. <code>nom n/chicken d/2020-03-04 portion/1.5</code> <strong>OR</strong> <cod
 eg. <code>vomit num/1 d/2020-03-04 portion/3</code> <strong>OR</strong> <code>num/2 d/ portion/</code></p>
 </li>
 <li>
-<p><strong>Export</strong> : <code>export</code> <strong>OR</strong> <code>export C:\Users\eugen\OneDrive\Desktop\</code></p>
+<p><strong>Export</strong> : <code>export</code> <strong>OR</strong> <code>export location /C:\Users\eugen\OneDrive\Desktop\</code></p>
 </li>
 <li>
 <p><strong>Goal</strong> : <code>goal [g/GOAL]</code></p>
@@ -631,4 +631,4 @@ eg. <code>vomit num/1 d/2020-03-04 portion/3</code> <strong>OR</strong> <code>nu
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 15:55:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-04 16:01:58 UTC</div></div></div></body></html>
