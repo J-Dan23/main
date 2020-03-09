@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Person's remark in the remark book.
+ * Guarantees: immutable; is always valid.
  */
 public class Remark {
 
