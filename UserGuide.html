@@ -16,16 +16,17 @@
 <li><a href="#displaying-help-code-help-code">3.1. Displaying help : <code>help</code></a></li>
 <li><a href="#updating-the-current-food-record-code-update-code">3.2. Updating the current Food Record : <code>update</code></a></li>
 <li><a href="#deleting-a-food-item-from-current-food-record-code-delete-code">3.3. Deleting a Food Item from current Food Record: <code>delete</code></a></li>
-<li><a href="#listing-all-food-items-in-calgo-s-current-food-record-code-list-code">3.4. Listing all Food items in Calgo&#8217;s current Food Record : <code>list</code></a></li>
+<li><a href="#listing-all-food-items-in-calgo-s-current-food-record-code-list-code">3.4. Listing All Food Items in Calgo&#8217;s Current Food Record : <code>list</code></a></li>
 <li><a href="#showing-all-food-items-consumed-on-a-particular-day-code-stomach-code">3.5. Showing all food items consumed on a particular day : <code>stomach</code></a></li>
 <li><a href="#consuming-food-on-a-certain-day-code-nom-code">3.6. Consuming food on a certain day : <code>nom</code></a></li>
 <li><a href="#deleting-something-consumed-on-a-certain-day-code-vomit-code">3.7. Deleting something consumed on a certain day : <code>vomit</code></a></li>
-<li><a href="#exporting-the-current-food-record-code-export-code">3.8. Exporting the current Food Record : <code>export</code></a></li>
-<li><a href="#getting-food-items-by-keywords-or-food-item-values-code-find-code">3.9. Getting Food items by keywords or Food item values : <code>find</code></a></li>
-<li><a href="#setting-a-dietary-goal-code-goal-code">3.10. Setting a dietary goal: <code>goal</code></a></li>
-<li><a href="#generating-insights-code-report-code">3.11. Generating insights : <code>report</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.12. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.13. Exiting the program : <code>exit</code></a></li>
+<li><a href="#exporting-the-current-food-record-into-a-reference-sheet-code-export-code">3.8. Exporting the Current Food Record into a Reference Sheet : <code>export</code></a></li>
+<li><a href="#getting-food-items-by-keywords-in-name-or-nutritional-value-code-find-code">3.9. Getting Food items by Keywords in Name or Nutritional Value : <code>find</code></a></li>
+<li><a href="#generating-an-ideal-daily-calorie-goal-code-getgoal-code">3.10. Generating an ideal daily calorie goal: <code>getGoal</code></a></li>
+<li><a href="#setting-a-daily-calorie-goal-code-setgoal-code">3.11. Setting a daily calorie goal: <code>setGoal</code></a></li>
+<li><a href="#generating-insights-code-report-code">3.12. Generating insights : <code>report</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.13. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.14. Exiting the program : <code>exit</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -37,7 +38,7 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Calgo is an <strong>all-in-one calorie tracker</strong> with deliverable insights to ensure that you are always one step ahead in your fitness goals.</p>
+<p>Calgo is an <strong>all-in-one smart calorie tracker</strong> to ensure that you are always one step ahead in your fitness goals.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -75,29 +76,33 @@
 </li>
 <li>
 <p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
-e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
-</li>
-<li>
-<p>You can try experimenting to see the results for yourself! Some example commands:</p>
+e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>list</code></strong> : lists all Food items currently recorded in the Food Records.</p>
+<p>You can refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> below for details of each command.</p>
 </li>
+</ul>
+</div>
+</li>
+<li>
+<p>Try experimenting with the commands yourself! Here are some examples:</p>
+<div class="ulist">
+<ul>
 <li>
 <p><strong><code>update</strong>n/kiwi cal/125 p/1 c/20 f/3</code> : adds <code>kiwi</code> to the Food Records if there is currently no Food called 'kiwi' inside it, with its details saved as: 125 calorie, 1 gram of protein, 20 grams of carbohydrates, and 3 grams of fats.</p>
 </li>
 <li>
-<p><strong><code>find</code></strong><code>banana</code> : finds the entry banana in the Food Records and returns its details if available; otherwise an error message will be shown.</p>
+<p><strong><code>find</code></strong><code>n/banana</code> or <strong><code>find</code></strong><code>banana</code>: finds the entry banana in the Food Record and returns its details if available; otherwise an message reflecting no such Food item is shown.</p>
+</li>
+<li>
+<p><strong><code>list</code></strong> : lists all Food items currently recorded in the Food Record.</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the Calgo application</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> section below for details of each command.</p>
 </li>
 </ol>
 </div>
@@ -114,16 +119,44 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/kiwi</code>.</p>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user</p>
+<div class="ulist">
+<ul>
+<li>
+<p>e.g. in <code>n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>n/kiwi</code> to name the Food item as 'kiwi'.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/kiwi t/favourite fruit</code> or as <code>n/kiwi</code>.</p>
+<p>Items in square brackets are optional</p>
+<div class="ulist">
+<ul>
+<li>
+<p>e.g. in <code>[t/TAG]</code>, <code>TAG</code> is an optional parameter which can be used as <code>t/fruit</code> to tag the Food item as a 'fruit'.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be left empty, or used as <code>t/favourite</code>, <code>t/favourite t/green</code> etc.</p>
+<p>Items with <code>…</code>​ after them can be used multiple times (including zero times)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>e.g. <code>[t/TAG]&#8230;&#8203;</code> implies it can be left empty, or used as <code>t/favourite</code>, <code>t/favourite t/green</code> or with more than 2 tags.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PROTEINS</code>, <code>p/PROTEINS n/NAME</code> is also acceptable.</p>
+<p>Parameters can be in any order, as long as the correct prefix appears before the parameter</p>
+<div class="ulist">
+<ul>
+<li>
+<p>e.g. if the command specifies <code>n/NAME p/PROTEINS</code>, <code>p/PROTEINS n/NAME</code> gives the same functionality.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -238,10 +271,31 @@ Deletes pizza from the Food Record</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-food-items-in-calgo-s-current-food-record-code-list-code"><a class="link" href="#listing-all-food-items-in-calgo-s-current-food-record-code-list-code">3.4. Listing all Food items in Calgo&#8217;s current Food Record : <code>list</code></a></h3>
+<h3 id="listing-all-food-items-in-calgo-s-current-food-record-code-list-code"><a class="link" href="#listing-all-food-items-in-calgo-s-current-food-record-code-list-code">3.4. Listing All Food Items in Calgo&#8217;s Current Food Record : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all Food items in the Food Records, with their respective nutritional values of calorie, protein, carbohydrates, and fats.<br>
-Format: <code>list</code></p>
+<p>To view a list of all Food items in the current Food Record, you can simply use the <code>list</code> command.<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Food items will be listed in alphabetical order with their corresponding details.<br></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This resets the display to show all Food items, and is most useful after performing a <code>find</code> command.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -393,61 +447,102 @@ Deletes 3 portions of of the first food item consumed on 2020-03-04.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exporting-the-current-food-record-code-export-code"><a class="link" href="#exporting-the-current-food-record-code-export-code">3.8. Exporting the current Food Record : <code>export</code></a></h3>
+<h3 id="exporting-the-current-food-record-into-a-reference-sheet-code-export-code"><a class="link" href="#exporting-the-current-food-record-into-a-reference-sheet-code-export-code">3.8. Exporting the Current Food Record into a Reference Sheet : <code>export</code></a></h3>
 <div class="paragraph">
-<p>Provides a human-readable text file (FoodRecords.txt) in the target folder (default: same folder as the Calgo application), containing all Food item records including name, calorie, and nutritional values.</p>
+<p>Should you feel the need to obtain a portable version of the current Food Record entries, the <code>export</code> command provides an editable text file (FoodRecords.txt) in the exports folder.<br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Calgo data is saved in the application automatically after any command that changes the data. There is no need to save manually.<br></p>
-</li>
-<li>
-<p>However, to obtain a more readable form of this data, use the <code>export</code> command.</p>
+<p>FoodRecords.txt shows the Food Record in alphabetical order of names, and includes the corresponding details of each Food item.</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Calgo data is saved in the application automatically. There is no need to save manually for each session. The <code>export</code> command allows users to manually track their calories with a reference sheet of the Food entries previously entered.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>Format: <code>export [location/LOCATION]</code></p>
+<p>Format: <code>export</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="getting-food-items-by-keywords-or-food-item-values-code-find-code"><a class="link" href="#getting-food-items-by-keywords-or-food-item-values-code-find-code">3.9. Getting Food items by keywords or Food item values : <code>find</code></a></h3>
+<h3 id="getting-food-items-by-keywords-in-name-or-nutritional-value-code-find-code"><a class="link" href="#getting-food-items-by-keywords-in-name-or-nutritional-value-code-find-code">3.9. Getting Food items by Keywords in Name or Nutritional Value : <code>find</code></a></h3>
 <div class="paragraph">
-<p>Finds all Food items whose names contain any of the keyword(s), even as an incompletely-spelled word (e.g. by mistake).</p>
+<p>We can use the <code>find</code> command to show all the Food items containing the given keyword in their names, or Food items with a nutritional value lower (or equal to) than the specified value (i.e. either in terms of the number of calories, or grams of proteins/carbohydrates/fat).</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Alternatively, Food items can also be found by entering a specific value of its attributes, i.e. Calories, Proteins, Carbohydrates, or Fats.<br>
-Format: <code>find [cal/CALORIES] [p/PROTEINS] [c/CARBS] [f/FATS]</code></p>
-</li>
-<li>
-<p>Otherwise, an error message will be shown.</p>
+<p>If no such Food item(s) exist, there will be an indicative message shown.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+<p>Format: <code>find [n/NAME] [cal/CALORIES] [p/PROTEINS] [c/CARBS] [f/FATS]</code><br>
+Quick-Find Format: <code>find NAME</code> (no 'n/' prefix needed)</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case insensitive. e.g <code>Kiwi</code> will match <code>kiwi</code></p>
+<p>The search is case insensitive.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>e.g <code>find n/Kiwi</code> results can contain both 'kiwi' and 'Kiwi'.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>The order of the keywords does not matter. e.g. <code>Grilled Cheeseburger</code> will match <code>Cheeseburger Grilled</code></p>
+<p>The order of the keywords does not matter. e.g.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>e.g. <code>find Grilled Cheeseburger</code> and <code>find Cheeseburger Grilled</code> have the same results.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Incompletely-spelled words will be matched to all Food items containing the incompletely-spelled word. e.g. <code>Kiw</code> will match <code>Kiwi</code></p>
+<p>Incompletely-spelled keywords will be matched to all Food items containing it.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>e.g. <code>find Kiw</code> can give 'Kiwi' and 'Kiwi Juice'</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Food items matching at least one keyword (even if it is spelt incomplete) will be returned (i.e. <code>OR</code> search). e.g. <code>Ki Juice</code> results can include <code>Kiwi Ice Cream</code>, <code>Orange Juice</code>, <code>Kiki Brand Lemonade</code></p>
+<p>Food items containing at least one keyword (even if it is spelt incompletely) will be returned.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>e.g. <code>find Ki Jui</code> results can contain 'Kiwi Ice Cream' (which contains 'Ki'), 'Orange Juice' (which contains 'Jui'), and so on.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Finding by specific Food attribute values would filter out all matching Food items satisfying the criteria. e.g. <code>cal/90 c/10</code> results can include <code>KG Biscuit</code>, <code>Apple Slices</code> which have 90 calorie and 10 grams of carbohydrates.</p>
+<p>In finding Food items via nutritional value, only Food items with nutritional values lower than the one stated will be shown.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>e.g. <code>find cal/50</code> results will only contain Food items with calories less than or equal to 50 calories.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -463,26 +558,77 @@ Format: <code>find [cal/CALORIES] [p/PROTEINS] [c/CARBS] [f/FATS]</code></p>
 Returns <code>kiwi</code> and <code>kiwi juice</code></p>
 </li>
 <li>
-<p><code>find `cal/100 p/25</code><br>
-Returns <code>chocolate protein powder shake</code> and <code>ON protein milkshake</code> which have 100 calorie and 25 grams of protein</p>
+<p><code>find p/25</code><br>
+Returns <code>chocolate protein powder shake</code> and <code>vanilla protein milkshake</code> which have 25 and 20 grams of protein respectively.</p>
 </li>
 <li>
-<p><code>find</code><br>
-Returns an error message</p>
+<p><code>find n/food_item_not_in_food_record</code><br>
+Returns a message showing 0 Food items listed.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="setting-a-dietary-goal-code-goal-code"><a class="link" href="#setting-a-dietary-goal-code-goal-code">3.10. Setting a dietary goal: <code>goal</code></a></h3>
+<h3 id="generating-an-ideal-daily-calorie-goal-code-getgoal-code"><a class="link" href="#generating-an-ideal-daily-calorie-goal-code-getgoal-code">3.10. Generating an ideal daily calorie goal: <code>getGoal</code></a></h3>
 <div class="paragraph">
-<p>Sets a numerical goal for the desired number of calorie to be consumed in a day.<br></p>
+<p>Generates a smart goal based on user&#8217;s age, gender, height, weight, ideal weight, the date by which they want to reach
+their ideal weight and the number of hours they exercise per week.</p>
 </div>
 <div class="paragraph">
-<p>This goal will be used to provide helpful insights for users in the Report.<br></p>
+<p>This helps users provide a scientifically accurate goal based on their target weight and date.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>goal GOAL</code></p>
+<p>Format: <code>getGoal a/AGE g/GENDER h/HEIGHT w/WEIGHT i/IDEAL_WEIGHT d/TARGET_DATE e/WEEKLY_EXERCISE_TIME</code></p>
+</div>
+<div class="paragraph">
+<p>Do note the following:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>AGE is in number of years.</p>
+</li>
+<li>
+<p>GENDER only accepts values "F", "M" and "N" which refer to Female, Male and Non-binary respectively.</p>
+</li>
+<li>
+<p>HEIGHT is expressed in centimeters.</p>
+</li>
+<li>
+<p>WEIGHT and IDEAL_WEIGHT are expressed in kilograms.</p>
+</li>
+<li>
+<p>TARGET_DATE is expressed in yyyy-mm-dd format.</p>
+</li>
+<li>
+<p>WEEKLY_EXERCISE_TIME is expressed in hours.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>getGoal a/23 g/M h/170 w/57.2 i/65 d/2020-12-31 e/5</code><br>
+Returns: "You should consume about 2,580 calories a day to reach your goal of 65 kg. by December 31, 2020."
+Sets a goal for the desired number of calories to be consumed in a day.<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-a-daily-calorie-goal-code-setgoal-code"><a class="link" href="#setting-a-daily-calorie-goal-code-setgoal-code">3.11. Setting a daily calorie goal: <code>setGoal</code></a></h3>
+<div class="paragraph">
+<p>This goal will be used to provide helpful insights for users.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>setGoal GOAL</code></p>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -490,16 +636,17 @@ Returns an error message</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>goal 2800</code><br>
-Sets the desired number of calorie to be consumed to be 2800.</p>
+<p><code>setGoal 2580</code><br>
+Sets the desired number of calories to be consumed to be 2580.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="generating-insights-code-report-code"><a class="link" href="#generating-insights-code-report-code">3.11. Generating insights : <code>report</code></a></h3>
+<h3 id="generating-insights-code-report-code"><a class="link" href="#generating-insights-code-report-code">3.12. Generating insights : <code>report</code></a></h3>
 <div class="paragraph">
-<p>Given a date, the command generates a document (in pdf format) of relevant insights about the user&#8217;s food consumption pattern of the same date.</p>
+<p>Given a date, the command generates a document (in pdf format) of relevant insights about the user&#8217;s food consumption
+pattern of the same date.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -517,25 +664,26 @@ Sets the desired number of calorie to be consumed to be 2800.</p>
 <p>Quantity consumed, for instance 3 servings.</p>
 </li>
 <li>
-<p>Number of calorie consumed from the Food item.</p>
+<p>Number of calories consumed from each Food item.</p>
 </li>
 <li>
-<p>Amount of carbohydrates, protein and fats consumed from the Food item.</p>
+<p>Amount of carbohydrates, protein and fats consumed from each Food item.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>The user&#8217;s most liked Food item.</p>
+<p>The user&#8217;s most eaten Food item in the past seven days.</p>
 </li>
 <li>
-<p>The total number of calorie consumed in that day.</p>
+<p>The total number of calories consumed in that day.</p>
 </li>
 <li>
 <p>The total number of carbohydrates, protein and fats consumed in that day.</p>
 </li>
 <li>
-<p>A curated Food plan that includes Food items, that includes a healthy quantity of the user&#8217;s favourite Food, while ensuring it meets user&#8217;s dietary goal.</p>
+<p>A curated Food plan that includes a healthy quantity of the user&#8217;s favourite Food items,
+while ensuring it meets user&#8217;s daily calorie goal.</p>
 </li>
 </ul>
 </div>
@@ -557,14 +705,14 @@ This generates a pdf containing the above-mentioned insights made on the consump
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.12. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.13. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the Food Record.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.13. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.14. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
@@ -597,7 +745,7 @@ Format: <code>exit</code></p>
 e.g. <code>delete pizza</code></p>
 </li>
 <li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code> <strong>OR</strong> <code>find [cal/CALORIES] [p/PROTEINS] [c/CARBS] [f/FATS]</code><br>
+<p><strong>Find</strong> : <code>find [n/NAME] [cal/CALORIES] [p/PROTEINS] [c/CARBS] [f/FATS]</code><br>
 e.g. <code>find strawberry jam</code> <strong>OR</strong><br>
 <code>find cal/100 f/10</code></p>
 </li>
@@ -620,10 +768,16 @@ eg. <code>vomit num/1 d/2020-03-04 portion/3</code> <strong>OR</strong> <code>nu
 <p><strong>Export</strong> : <code>export</code> <strong>OR</strong> <code>export location /C:\Users\eugen\OneDrive\Desktop\</code></p>
 </li>
 <li>
-<p><strong>Goal</strong> : <code>goal GOAL</code></p>
+<p><strong>getGoal</strong> : <code>getGoal a/AGE g/GENDER h/HEIGHT w/WEIGHT i/IDEAL_WEIGHT d/TARGET_DATE e/WEEKLY_EXERCISE_TIME</code>
+eg. `getGoal a/23 g/M h/170 w/57.2 i/65 d/2020-12-31 e/5`t</p>
 </li>
 <li>
-<p><strong>Report</strong> : <code>report [Date in dd-mm-yyyy]</code></p>
+<p><strong>setGoal</strong> : <code>setGoal GOAL</code>
+eg. <code>setGoal 2580</code></p>
+</li>
+<li>
+<p><strong>Report</strong> : <code>report [Date in dd-mm-yyyy]</code>
+eg. <code>report 2020-03-27</code></p>
 </li>
 <li>
 <p><strong>Help</strong> : <code>help</code></p>
@@ -631,4 +785,4 @@ eg. <code>vomit num/1 d/2020-03-04 portion/3</code> <strong>OR</strong> <code>nu
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-24 05:06:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-24 07:24:54 UTC</div></div></div></body></html>
