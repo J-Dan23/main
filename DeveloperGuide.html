@@ -22,8 +22,8 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#proposed-undo-redo-feature">3.1. [Proposed] Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
+<li><a href="#lexicographical-code-list-code-command">3.1. Lexicographical <code>list</code> Command</a></li>
+<li><a href="#food-consumption-management">3.2. Food Consumption Management</a></li>
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
 </ul>
@@ -33,19 +33,16 @@
 <li><a href="#dev-ops">6. Dev Ops</a></li>
 <li><a href="#product-scope">Appendix A: Product Scope</a></li>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
-<li><a href="#use-cases">Appendix C: Use Cases</a>
-<ul class="sectlevel2">
-<li><a href="#use-case-find-food-item-by-name">C.1. Use case: find Food item by name</a></li>
-</ul>
-</li>
+<li><a href="#use-cases">Appendix C: Use Cases</a></li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
 <li><a href="#product-survey">Appendix F: Product Survey</a></li>
 <li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-food">G.2. Deleting a food</a></li>
-<li><a href="#saving-data">G.3. Saving data</a></li>
+<li><a href="#deleting-a-code-food-code">G.2. Deleting a <code>Food</code></a></li>
+<li><a href="#listing-all-code-food-code-entries">G.3. Listing all <code>Food</code> entries</a></li>
+<li><a href="#saving-data">G.4. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -71,7 +68,7 @@
 <div class="title">Figure 1. Architecture Diagram</div>
 </div>
 <div class="paragraph">
-<p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of each component.</p>
+<p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the Calgo Application. From now on, all instances of Calgo Application will be referred to as App. Given below is a quick overview of each component.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -80,28 +77,28 @@
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The <code>.puml</code> files used to create diagrams in this document can be found in the <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/docs/diagrams/">diagrams</a> folder.
+The <code>.puml</code> files used to create diagrams in this document can be found in the <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/tree/master/docs/diagrams/">diagrams</a> folder.
 Refer to the <a href="UsingPlantUml.html">Using PlantUML guide</a> to learn how to create and edit diagrams.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p><code>Main</code> has two classes called <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/src/main/java/seedu/protein/Main.java"><code>Main</code></a> and <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/src/main/java/seedu/protein/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
+<p>The <code>Main</code> component has two classes called <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/blob/master/src/main/java/life/calgo/Main.java"><code>Main</code></a> and <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/blob/master/src/main/java/life/calgo/MainApp.java"><code>MainApp</code></a>. This component is responsible for:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>At app launch: Initializes the components in the correct sequence, and connects them up with each other.</p>
+<p>Launching App: Initializes the other components in the correct sequence, and connects them up with each other.</p>
 </li>
 <li>
-<p>At shut down: Shuts down the components and invokes cleanup method where necessary.</p>
+<p>Exiting App: Shuts down the components and invokes cleanup method where necessary.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components.
-The following class plays an important role at the architecture level:</p>
+In particular, the <code>LogsCenter</code> class plays an important role at the architecture level:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -116,26 +113,26 @@ The following class plays an important role at the architecture level:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#Design-Ui"><strong><code>UI</code></strong></a>: The UI of the App.</p>
+<p><a href="#Design-Ui"><strong><code>UI</code></strong></a>: The User Interface (UI).</p>
 </li>
 <li>
 <p><a href="#Design-Logic"><strong><code>Logic</code></strong></a>: The command executor.</p>
 </li>
 <li>
-<p><a href="#Design-Model"><strong><code>Model</code></strong></a>: Holds the data of the App in-memory.</p>
+<p><a href="#Design-Model"><strong><code>Model</code></strong></a>: The in-memory representation of the App data.</p>
 </li>
 <li>
-<p><a href="#Design-Storage"><strong><code>Storage</code></strong></a>: Reads data from, and writes data to, the hard disk.</p>
+<p><a href="#Design-Storage"><strong><code>Storage</code></strong></a>: The file manager for reading from and writing to the hard disk.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Each of the four components</p>
+<p>Each of the four components:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Defines its <em>API</em> in an <code>interface</code> with the same name as the Component.</p>
+<p>Defines its <em>Application Programming Interface (API)</em> in an <code>interface</code> with the same name as the Component.</p>
 </li>
 <li>
 <p>Exposes its functionality using a <code>{Component Name}Manager</code> class.</p>
@@ -143,7 +140,7 @@ The following class plays an important role at the architecture level:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>For example, the <code>Logic</code> component (see the class diagram given below) defines it&#8217;s API in the <code>Logic.java</code> interface and exposes its functionality using the <code>LogicManager.java</code> class.</p>
+<p>For example, the <code>Logic</code> component (see the class diagram given below) defines its API in the <code>Logic.java</code> interface and exposes its functionality using the <code>LogicManager.java</code> class.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -174,16 +171,16 @@ The following class plays an important role at the architecture level:</p>
 <div class="title">Figure 4. Structure of the UI Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/src/main/java/seedu/protein/ui/Ui.java"><code>Ui.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/tree/master/src/main/java/life/calgo/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>FoodListPanel</code>, <code>DailyListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/src/main/java/seedu/protein/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/blob/master/src/main/java/life/calgo/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/blob/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component,</p>
+<p>The <code>UI</code> component:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -206,7 +203,7 @@ The following class plays an important role at the architecture level:</p>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> :
-<a href="https://github.com/AY1920S2-CS2103T-F11-1/main/src/main/java/seedu/protein/logic/Logic.java"><code>Logic.java</code></a></p>
+<a href="https://github.com/AY1920S2-CS2103T-F11-1/main/blob/master/src/main/java/life/calgo/logic/Logic.java"><code>Logic.java</code></a></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -258,7 +255,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <div class="title">Figure 7. Structure of the Model Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/src/main/java/seedu/protein/model/Model.java"><code>Model.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/blob/master/src/main/java/life/calgo/model/Model.java"><code>Model.java</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>Model</code>,</p>
@@ -269,10 +266,10 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores the Food Record data.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>exposes both unmodifiable <code>ObservableList&lt;Food&gt;</code> and <code>ObservableList&lt;ConsumedFood&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
@@ -286,7 +283,7 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Person</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+As a more OOP model, we can store a <code>Tag</code> list in <code>Food Record</code>, which <code>Food</code> can reference. This would allow <code>Food Record</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Food</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
 <br>
 <span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
 </td>
@@ -303,18 +300,24 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="title">Figure 8. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/src/main/java/seedu/protein/storage/Storage.java"><code>Storage.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-F11-1/main/blob/master/src/main/java/life/calgo/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The <code>Storage</code> component,</p>
+<p>The <code>Storage</code> component can do the following:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>can save <code>UserPref</code> objects in json format and read it back.</p>
+<p>can save <code>UserPref</code> objects in json format and read it back for the next session.</p>
 </li>
 <li>
-<p>can save the Address Book data in json format and read it back.</p>
+<p>can save <code>FoodRecord</code> data in json format and read it back for the next session.</p>
+</li>
+<li>
+<p>generate insights <code>report</code> based on user food consumption.</p>
+</li>
+<li>
+<p>generate a user-friendly version of the current <code>FoodRecord</code>.</p>
 </li>
 </ul>
 </div>
@@ -322,7 +325,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect2">
 <h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
 <div class="paragraph">
-<p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
+<p>Classes used by multiple components are in the <code>life.calgo.commons</code> package.</p>
 </div>
 </div>
 </div>
@@ -334,177 +337,72 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="proposed-undo-redo-feature"><a class="link" href="#proposed-undo-redo-feature">3.1. [Proposed] Undo/Redo feature</a></h3>
+<h3 id="lexicographical-code-list-code-command"><a class="link" href="#lexicographical-code-list-code-command">3.1. Lexicographical <code>list</code> Command</a></h3>
 <div class="sect3">
-<h4 id="proposed-implementation"><a class="link" href="#proposed-implementation">3.1.1. Proposed Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.1.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>With a large number of <code>Food</code> objects, it will be useful to see all entries sorted in lexicographic order.<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>list</code> command is therefore one of the most commonly used in <code>Calgo</code>, especially after a <code>find</code> command. However, it simply shows all current <code>Food</code> entries in the <code>Model</code>, and does not perform sorting.</p>
+</div>
+<div class="paragraph">
+<p>Sorting by lexicographic order is done by the <code>UniqueFoodList</code>, containing <code>Food</code> which implements the <code>Comparable&lt;Food&gt;</code> interface.<br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current protein book state in its history.</p>
+<p><code>Food</code> objects are arranged in lexicographic order by <code>Name</code>.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous protein book state from its history.</p>
-</li>
-<li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone protein book state from its history.</p>
+<p><code>UniqueFoodList</code> sorts the <code>Food</code> whenever they are added or edited in the <code>Model</code>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial protein book state, and the <code>currentStatePointer</code> pointing to that single protein book state.</p>
+<p>With this, a top-level idea of the execution of the lexicographical <code>list</code> command is given in the sequence diagram below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UndoRedoState0.png" alt="UndoRedoState0">
+<img src="images/ListCommandSequenceDiagram.png" alt="ListCommandSequenceDiagram">
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th food in the protein book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the protein book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted protein book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState1.png" alt="UndoRedoState1">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new food. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified protein book state to be saved into the <code>addressBookStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState2.png" alt="UndoRedoState2">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the protein book state will not be saved into the <code>addressBookStateList</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the food was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous protein book state, and restores the protein book to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState3.png" alt="UndoRedoState3">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial protein book state, then there are no previous protein book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoSequenceDiagram.png" alt="UndoSequenceDiagram">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The lifeline for <code>UndoCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the protein book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest protein book state, then there are no undone protein book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the protein book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState4.png" alt="UndoRedoState4">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all protein book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/UndoRedoState5.png" alt="UndoRedoState5">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/CommitActivityDiagram.png" alt="CommitActivityDiagram">
-</div>
+<p>Step 1: <code>UI</code> detects that the user has entered a <code>String</code>.<br>
+Step 2: <code>UI</code> passes this <code>String</code> into <code>Logic</code> to eventually produce a <code>ListCommand</code>.<br>
+Step 3: <code>Logic</code> executes the <code>ListCommand</code> to filter out relevant <code>Food</code> entries from the <code>Model</code>.<br>
+Step 4: All <code>Food</code> entries are shown in the GUI.<br>
+Step 5: <code>Logic</code> produces a <code>CommandResult</code> which displays its status in the GUI.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
+<h5 id="aspect-how-list-executes"><a class="link" href="#aspect-how-list-executes">Aspect: How List executes</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire protein book.</p>
+<p><strong>Alternative 1 (current choice):</strong> Sort whenever <code>Food</code> is added or edited in the <code>Model</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>Pros: Will guarantee correctness of sorting. Furthermore, since <code>Food</code> objects are sorted whenever they are added or edited one by one, each sorting operation will not be too expensive.</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
+<p>Cons: We must ensure that the implementations of each individual underlying command are correct and do not interfere with the sorting process. Moreover, this may be expensive if there are many unsorted <code>Food</code> objects at once, which is seldom the case.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<p><strong>Alternative 2:</strong> Sort only when calling the <code>list</code> command.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the food being deleted).</p>
+<p>Pros: Easier to implement, may be less computationally expensive.</p>
 </li>
 <li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
+<p>Cons: May lead to certain bugs, especially during adding or editing such as through the <code>update</code> command. Also, not guaranteed to work when reading in from <code>foodrecord.json</code> for the next session.</p>
 </li>
 </ul>
 </div>
@@ -513,44 +411,171 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
+<h5 id="aspect-data-structure-to-store-code-food-code-objects"><a class="link" href="#aspect-data-structure-to-store-code-food-code-objects">Aspect: Data structure to store <code>Food</code> objects</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of protein book states.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use <code>UniqueFoodList</code> to store all <code>Food</code> objects.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Any changes to the <code>Model</code> are automatically reflected in the GUI. This is very useful for testing and debugging manually. Also, we do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
+</li>
+<li>
+<p>Cons: Many of the underlying <code>ObservableList</code> methods are built-in and cannot be edited. They are also difficult to understand for those unfamiliar. This can make development slightly trickier, especially in following certain software engineering principles.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a simpler data structure like an <code>ArrayList</code>.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
 </li>
 <li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
+<p>Cons: More troublesome as we to implement methods to display on the GUI. Also, the methods create a risk to violations of certain software engineering principles, if not careful. These methods are also subject to being changed which can introduce regression in the future.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="summary"><a class="link" href="#summary">3.1.3. Summary</a></h4>
+<div class="paragraph">
+<p><code>list</code> will make the GUI display a lexicographically sorted list of <code>Food</code> previously entered. This can be exemplified in an activity diagram below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ListActivityDiagram.png" alt="ListActivityDiagram">
+</div>
+<div class="title">Figure 9. Activity Diagram for List command</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></h3>
+<h3 id="food-consumption-management"><a class="link" href="#food-consumption-management">3.2. Food Consumption Management</a></h3>
 <div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+<p>In Calgo, you will find that there is a date associated with each list of <code>ConsumedFood</code>.
+When adding food to be consumed, removing food, or displaying food consumed on certain days,
+a <code>FilteredList</code> will be populated with relevant <code>ConsumedFood</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">3.2.1. Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>Nom</code>, <code>Vomit</code> and <code>Stomach</code> commands are facilitated by the <code>FoodRecord</code>. <br>
+<code>FoodRecord</code> contains a <code>UniqueDateToLogMap</code>, which maps a <code>LocalDate</code> to a <code>DailyFoodLog</code>.<br>
+<code>DailyFoodLog</code> contains a <code>LinkedHashMap</code> storing <code>Food</code> in the sequence that they were consumed and maps those <code>Food</code> to a <code>Double</code> portion.</p>
+</div>
+<div class="paragraph">
+<p>This section covers how the <code>Nom</code> command is implemented. The <code>Vomit</code> and <code>Stomach</code> commands work in very similar way, hence their implementation is omitted for brevity.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario of the <code>Nom</code> command and how the components interact at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1: User enters a command, which is saved as a <code>String</code> and passed into the <code>LogicManager</code>.<br>
+Step 2: The <code>String</code> cascades down the layers of abstraction until <code>NomCommandParser</code> handles it and create a
+<code>DailyFoodLog</code> which reflects the consumption.<br>
+Step 3: A <code>NomCommand</code> is created and executed, updating both <code>ModelManager</code> and <code>FoodRecord</code> about the consumed food.
+Step 4: A <code>FilteredList</code> in <code>ModelManger</code> will then check with <code>FoodRecord</code> to create <code>ConsumedFood</code> items to display in the Graphical User Interface (GUI).<br>
+Step 5: The GUI automatically detects changes in <code>FilteredList</code> and refreshes to display updated content.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram illustrates the aforementioned steps:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NomSequenceDiagram.png" alt="NomSequenceDiagram">
+</div>
+<div class="title">Figure 10. Sequence Diagram for Nom command</div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarizes what happens when the user executes a Nom command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NomActivityDiagram.png" alt="NomActivityDiagram">
+</div>
+<div class="title">Figure 11. Activity Diagram for Nom</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-nom-executes"><a class="link" href="#aspect-how-nom-executes">Aspect: How Nom executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Create a new <code>DailyFoodLog</code> to pass into <code>ModelManager</code> and <code>FoodRecord</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Maintain comprehensive layers of abstraction and allows code to be easily testable.</p>
+</li>
+<li>
+<p>Cons: Difficult for newcomers or even existing users to trace because of long execution path.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Bypass <code>ModelManager</code> or even not use <code>FoodRecord</code> for storage of data during runtime by allowing everything to be done
+from parser.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Reduce dependencies on <code>ModelManager</code> and <code>FoodRecord</code>, and make code contained in a single class file easier to navigate.</p>
+</li>
+<li>
+<p>Cons: Violates layers of abstraction set in place by previous structure of AddressBook3. Violates Single Responsibility Principle and reduce
+cohesiveness of code.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-aspect-data-structure-to-support-the-consumption-commands"><a class="link" href="#aspect-aspect-data-structure-to-support-the-consumption-commands">Aspect: Aspect: Data structure to support the consumption commands</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a single <code>FilteredList</code> to store food for any day by repopulating it each time
+a consumption related command is used.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Only uses a single <code>FilteredList</code>, so it is clear which list you are using for display.</p>
+</li>
+<li>
+<p>Cons: May have performance issue in terms of speed when there are too many entries.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a <code>FilteredList</code> for each date, to store food consumed on that date.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Faster retrieval for display of <code>ConsumedFood</code> items. However, under practical circumstances, the difference is negligible.</p>
+</li>
+<li>
+<p>Cons: May have performance issue in terms of storage because it requires many lists to be stored in addition to <code>LinkedHashMap</code>
+in <code>DailyFoodLog</code> for each <code>LocalDate</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -561,7 +586,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a> below)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -577,7 +602,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><code>SEVERE</code> : Critical problem detected which may possibly cause the termination of the application</p>
+<p><code>SEVERE</code> : Critical problem detected which may possibly cause the termination of the App</p>
 </li>
 <li>
 <p><code>WARNING</code> : Can continue, but with caution</p>
@@ -594,7 +619,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="sect2">
 <h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
 <div class="paragraph">
-<p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
+<p>Certain properties of the App can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 </div>
@@ -638,7 +663,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p>has a need to manage a significant number of Food items (finding information about each Food item, tracking consumption, etc)</p>
 </li>
 <li>
-<p>prefers desktop apps over other types</p>
+<p>prefers desktop Apps over other types</p>
 </li>
 <li>
 <p>can type fast</p>
@@ -647,7 +672,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p>prefers typing over mouse input</p>
 </li>
 <li>
-<p>is reasonably comfortable using CLI apps</p>
+<p>is reasonably comfortable using CLI Apps</p>
 </li>
 </ul>
 </div>
@@ -657,16 +682,16 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>generate consumption reports and view progress and statistics</p>
+<p><strong>Insights:</strong> set goals, generate consumption reports and view progress and statistics</p>
 </li>
 <li>
-<p>app tolerates incomplete inputs and produces valid entries as output</p>
+<p><strong>Hassle-Free Convenience:</strong> conveniently handles entry conflicts, tolerates incomplete search inputs and produces fast responses</p>
 </li>
 <li>
-<p>generate Food records as a portable file</p>
+<p><strong>Flexibility:</strong> generate Food records as a portable file, tracking wherever, whenever, without a device</p>
 </li>
 <li>
-<p>manage caloric tracking faster than a typical mouse/GUI driven app</p>
+<p><strong>Efficiency:</strong> manage caloric tracking faster than a typical mouse/GUI driven App</p>
 </li>
 </ul>
 </div>
@@ -676,7 +701,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <h2 id="user-stories"><a class="link" href="#user-stories">Appendix B: User Stories</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
+<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (possible future development) - <code>*</code></p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 59%;">
 <colgroup>
@@ -694,6 +719,12 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who does not know what my food is made of</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find out the nutritional composition of a particular food by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">locate details of the Food item without having to go through the entire Food record</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
@@ -715,8 +746,8 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user who wants to save a copy of my current Food records</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">specify a location for the save file</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have the benefit of convenience</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">save my file at a convenient location</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily access it</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -726,33 +757,21 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">food who does not know what my food is made of</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find out the nutritional composition of a particular food by name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locate details of the Food item without having to go through the entire Food record</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">lazy user who does not like typing too many tedious characters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have some form of autocomplete or input correction measure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find entries using incomplete words or phrases</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">obtain the same intended results for a search through the Food records as in the case of typing fully and correctly</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who cannot fully remember the Food name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have some form of autocomplete or input correction measure for incomplete keywords</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">obtain the possible results for a search through the Food records as in the case of typing fully and correctly</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who cannot fully remember the Food name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">access a Food item&#8217;s information by any one of its nutritional values I happen to remember</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">obtain a list of possible Food items that are relevant</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user who dislikes memorising things</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have an option to see the entire Food record</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">know what Food items have their data currently in the records</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who has many entries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view entire food record in lexicographic order</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily navigate to the entry in the record</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -768,7 +787,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who don&#8217;t like redundant things</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who doesn&#8217;t like redundant things</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">see and be warned if a Food item that I am about to update my Food Record with already exists</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">so that I can save time and effort and not create a duplicate item in the Food record.</p></td>
 </tr>
@@ -793,7 +812,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user who is interested to lose weight</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find out the number of calorie I have consumed each day</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find out the number of calories I have consumed each day</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">can check which days I have exceed my desired number of daily calorie and exercise more to compensate.</p></td>
 </tr>
 <tr>
@@ -804,12 +823,6 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user who is a fitness influencer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">get a screenshot and share my daily food consumption</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">can inspire my followers.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user who remembers the big picture but not the specifics</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">search for a particular part of a guide</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">not be bothered by unnecessary information.</p></td>
@@ -817,7 +830,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">forgetful user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to find exact command formats</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to lookup exact command formats</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">so that I won&#8217;t need to go through the trouble of memorising commands</p></td>
 </tr>
 <tr>
@@ -832,10 +845,28 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <td class="tableblock halign-left valign-top"><p class="tableblock">have some suggestions based on my goals and consumption patterns</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">know my options when I am indecisive on what to eat</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who cannot fully remember the Food name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">access a Food item&#8217;s information by any one of its nutritional values I happen to remember</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">obtain a list of possible Food items that are relevant</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fitness influencer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get a screenshot and share my daily food consumption</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">can conveniently continue to inspire my followers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who cannot fully remember the food name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have some form of autocomplete or input correction measure for incomplete keywords</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">obtain the possible results for a search through the Food records as in the case of typing fully and correctly</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>{More to be added}</em></p>
+<p><em>{More to be added as development proceeds and is always ongoing}</em></p>
 </div>
 </div>
 </div>
@@ -845,7 +876,11 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>Calgo</code> application and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-obtain-reference-for-app-s-commands" class="discrete">Use case: obtain reference for app&#8217;s commands</h3>
+<div class="paragraph">
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+=== Use case: find Food item by name
+=== Use case: obtain reference for app&#8217;s commands</p>
+</div>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -862,18 +897,20 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </li>
 </ol>
 </div>
-<div class="sect2">
-<h3 id="use-case-find-food-item-by-name"><a class="link" href="#use-case-find-food-item-by-name">C.1. Use case: find Food item by name</a></h3>
+<h3 id="use-case-code-find-code-code-food-code-item-by-keyword-which-can-be-an-incomplete-word" class="discrete">Use case: <code>find</code> <code>Food</code> item by keyword (which can be an incomplete word)</h3>
+<div class="paragraph">
+<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt; 3abe701be49df3e7f9500a6b3f39d925b6f2a537</p>
+</div>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to find a Food item by the <code>name</code> keyword, which can be an incomplete word</p>
+<p>User requests to find a <code>Food</code> item by the keyword.</p>
 </li>
 <li>
-<p>Calgo shows a list of Food items which contains <code>name</code> in any part of the name of the Food item</p>
+<p><code>Calgo</code> shows a list of <code>Food</code> items which contains <code>name</code> in any part of the name of the <code>Food</code> item.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -884,63 +921,21 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p><strong>Extensions</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>The Food record is empty</strong><br>
-A message indicating that no such Food item exists is shown<br>
-Use case ends</p>
-</div>
-<h3 id="use-case-find-food-item-by-nutritional-value" class="discrete">Use case: find Food item by nutritional value</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to find a Food item by any nutritional value of protein, carbohydrates, or fats</p>
-</li>
-<li>
-<p>Calgo shows a list of Food items in the Food records which has the same nutritional values</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="paragraph">
-<p><strong>The Food record is empty.</strong><br>
-A message indicating that no such Food item exists is shown.<br>
+<p><strong>The <code>FoodRecord</code> is empty</strong><br>
+A message indicating that zero matching <code>Food</code> items exist is shown.<br>
 Use case ends.</p>
 </div>
-<h3 id="use-case-export-current-food-records" class="discrete">Use case: export current Food records</h3>
+<h3 id="use-case-code-find-code-code-food-code-item-by-nutritional-value" class="discrete">Use case: <code>find</code> <code>Food</code> item by nutritional value</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to export the current Food records at a target location</p>
+<p>User requests to <code>find</code> a <code>Food</code> item by a single nutritional value of <code>Protein</code>, <code>Carbohydrate</code>, or <code>Fat</code> (indicated by the prefix).</p>
 </li>
 <li>
-<p>Calgo creates a human-readable text file containing all Food item details at the target location</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<h3 id="use-case-list-current-food-records" class="discrete">Use case: list current Food records</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to list the current Food records</p>
-</li>
-<li>
-<p>Calgo shows a list of all Food items in the current Food records</p>
+<p><code>Calgo</code> shows a list of <code>Food</code> items in the <code>FoodRecord</code> which has the same nutritional values.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -951,95 +946,136 @@ Use case ends.</p>
 <p><strong>Extensions</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>The Food record is empty.</strong><br>
-A message indicating that the Food records are currently empty is shown.<br>
+<p><strong>The <code>FoodRecord</code> is empty.</strong><br>
+<code>Calgo</code> shows a message indicating that 0 matching <code>Food</code> items exist.<br>
 Use case ends.</p>
 </div>
-<h3 id="use-case-update-current-food-record-with-new-food-item" class="discrete">Use case: update current Food record with new Food Item</h3>
+<h3 id="use-case-code-export-code-current-code-foodrecord-code" class="discrete">Use case: <code>export</code> current <code>FoodRecord</code></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to add a new Food Item in the Food Records</p>
+<p>User requests to <code>export</code> the current <code>FoodRecord</code>.</p>
 </li>
 <li>
-<p>Calgo creates and saves a new Food Item in the Food Records with nutritional information specified by user.</p>
+<p>Calgo creates a user-friendly text file <code>FoodRecord.txt</code> containing all <code>Food</code> item details in the <code>exports</code> folder.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
 </div>
-<h3 id="use-case-update-an-existing-food-item-in-current-food-record" class="discrete">Use case: update an existing Food Item in current Food record</h3>
+<h3 id="use-case-code-list-code-all-current-code-food-code-entries" class="discrete">Use case: <code>list</code> all current <code>Food</code> entries</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to edit an existing Food Item in the Food Records</p>
+<p>User requests to <code>list</code> all current <code>FoodRecord</code> entries.</p>
 </li>
 <li>
-<p>Calgo replaces the existing Food Item&#8217;s nutritional value with the new nutritional information in the Food Records.</p>
+<p><code>Calgo</code> shows a list of all <code>Food</code> items in the current <code>FoodRecord</code>.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
 </div>
-<h3 id="use-case-delete-an-existing-food-item-in-current-food-record" class="discrete">Use case: delete an existing Food Item in current Food record</h3>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>The <code>FoodRecord</code> is empty.</strong><br>
+<code>Calgo</code> shows a message indicating that the <code>FoodRecord</code> is currently empty.<br>
+Use case ends.</p>
+</div>
+<h3 id="use-case-code-update-code-current-code-foodrecord-code-with-a-new-code-food-code-item" class="discrete">Use case: <code>update</code> current <code>FoodRecord</code> with a new <code>Food</code> item</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to delete an existing Food Item from the Food Records</p>
+<p>User requests to add a new <code>Food</code> item in the <code>FoodRecord</code>.</p>
 </li>
 <li>
-<p>Calgo deletes the existing Food Item in the Food Records.</p>
+<p><code>Calgo</code> creates and saves a new <code>Food</code> item in the <code>FoodRecord</code> with nutritional information specified by user.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
 </div>
-<h3 id="use-case-set-a-dietary-goal" class="discrete">Use case: set a dietary goal.</h3>
+<h3 id="use-case-code-update-code-an-existing-code-food-code-item-in-current-code-foodrecord-code" class="discrete">Use case: <code>update</code> an existing <code>Food</code> item in current <code>FoodRecord</code></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User sets a dietary goal for the daily number of calorie to be consumed.</p>
+<p>User requests to edit an existing <code>Food</code> item in the <code>FoodRecord</code>.</p>
 </li>
 <li>
-<p>Calgo stores this goal in user preferences and analyses food consumption with respect to this goal.</p>
+<p><code>Calgo</code> replaces the existing <code>Food</code> item&#8217;s nutritional values with the new information.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
 </div>
-<h3 id="use-case-generate-a-report-on-a-specific-day" class="discrete">Use case: generate a report on a specific day.</h3>
+<h3 id="use-case-code-delete-code-an-existing-code-food-code-item-in-current-code-foodrecord-code" class="discrete">Use case: <code>delete</code> an existing <code>Food</code> item in current <code>FoodRecord</code></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to obtain a report on his or her food consumption pattern on a particular day.</p>
+<p>User requests to delete an existing <code>Food</code> item from the <code>FoodRecord</code></p>
 </li>
 <li>
-<p>Calgo analyses food consumed on that day and generates a document with actionable insights for the user.</p>
+<p><code>Calgo</code> deletes the existing <code>Food</code> item in the <code>FoodRecord</code>.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
 </div>
+<h3 id="use-case-set-a-dietary-code-goal-code" class="discrete">Use case: set a dietary <code>goal</code></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User uses <code>goal</code> command to set a dietary <code>DailyGoal</code> for the daily number of <code>Calorie</code> s to be consumed.</p>
+</li>
+<li>
+<p><code>Calgo</code> stores this <code>DailyGoal</code> in user preferences and analyses <code>Food</code> consumption with respect to this <code>goal</code>.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="use-case-generate-a-code-report-code-on-a-specific-day" class="discrete">Use case: generate a <code>report</code> on a specific day.</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to obtain a <code>report</code> on his or her <code>Food</code> consumption patterns on a particular day.</p>
+</li>
+<li>
+<p>Calgo analyses the <code>Food</code> consumed on that day and generates a document with actionable insights for the user.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -1061,7 +1097,7 @@ Use case ends.</p>
 <p>Calgo should work on both 32-bit and 64-bit environments.</p>
 </li>
 <li>
-<p>The product expects users to initially find out about Food items and their respective nutritional values for creating Food item entries.</p>
+<p>The product expects users to initially find out about Food items and their respective nutritional values for creating Food item entries for the first time.</p>
 </li>
 </ol>
 </div>
@@ -1072,13 +1108,17 @@ Use case ends.</p>
 <div class="sectionbody">
 <div class="dlist">
 <dl>
+<dt class="hdlist1"><a id="food"></a> Food</dt>
+<dd>
+<p><code>Food</code> items entered by the user to represent a real life Food. This contains nutritional values of each of their <code>Calorie</code> s, number of grams of <code>Protein</code> s, <code>Carbohydrate</code> s and <code>Fat</code> s.</p>
+</dd>
+<dt class="hdlist1"><a id="food-records"></a> Food Records</dt>
+<dd>
+<p>The accumulated list of all <code>Food</code> items entered by the user, containing nutritional values of each of their <code>Calorie</code> s, number of grams of <code>Protein</code> s, <code>Carbohydrate</code> s and <code>Fat</code> s.</p>
+</dd>
 <dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
 <dd>
 <p>Windows, Linux, Unix, OS-X</p>
-</dd>
-<dt class="hdlist1"><a id="food-records"></a> Food records</dt>
-<dd>
-<p>The accumulated list of all Food items entered by the user, containing nutritional values of calorie, number of grams of protein, carbohydrates and fats.</p>
 </dd>
 </dl>
 </div>
@@ -1125,7 +1165,7 @@ Use case ends.</p>
 <h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Given below are instructions to test the app manually.</p>
+<p>Given below are instructions to test the App manually.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1165,7 +1205,7 @@ Expected: Shows the GUI with a set of sample contacts. The window size may not b
 <p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
 </li>
 <li>
-<p>Re-launch the app by double-clicking the jar file.<br>
+<p>Re-launch the App by double-clicking the jar file.<br>
 Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
@@ -1178,7 +1218,7 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-food"><a class="link" href="#deleting-a-food">G.2. Deleting a food</a></h3>
+<h3 id="deleting-a-code-food-code"><a class="link" href="#deleting-a-code-food-code">G.2. Deleting a <code>Food</code></a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1210,7 +1250,28 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">G.3. Saving data</a></h3>
+<h3 id="listing-all-code-food-code-entries"><a class="link" href="#listing-all-code-food-code-entries">G.3. Listing all <code>Food</code> entries</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Listing down all entries, regardless of previous commands</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Launch <code>Calgo</code> successfully.</p>
+</li>
+<li>
+<p>Test case: <code>list</code><br>
+Expected: The GUI will show all <code>Food</code> entries existing in the <code>FoodRecord</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">G.4. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1230,4 +1291,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-24 09:03:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-25 09:00:38 UTC</div></div></div></body></html>
