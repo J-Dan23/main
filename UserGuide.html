@@ -384,7 +384,7 @@ Format: <code>exit</code></p>
 <h3 id="exporting-the-current-code-food-record-code-into-a-reference-sheet-code-export-code"><a class="link" href="#exporting-the-current-code-food-record-code-into-a-reference-sheet-code-export-code">3.7. Exporting the current <code>Food Record</code> into a reference sheet : <code>export</code></a></h3>
 <div class="paragraph">
 <p>Obtaining a copy of the <code>Food Record</code> entries may be useful for situations like sharing or printing.
-Should you feel the need to obtain a portable version of the current <code>Food</code> entries inside the <code>Food Record</code>, the <code>export</code> command provides an editable text file (FoodRecords.txt) in the <code>data/exports</code> folder.<br></p>
+While your entries are automatically saved in <strong>Calgo</strong>, the <code>export</code> command provides an editable text file (FoodRecords.txt) in the <code>data/exports</code> folder should you feel the need to obtain a portable version of the current <code>Food</code> entries inside the <code>Food Record</code>.<br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -400,7 +400,7 @@ Should you feel the need to obtain a portable version of the current <code>Food<
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The <code>export</code> command allows users to manually track their diet with a reference sheet of the <code>Food</code> entries previously entered. You can freely edit this reference sheet to include information outside of the App.<br>
+This lets you manually track your diet using a reference sheet of your past <code>Food</code> entries. You can freely edit this reference sheet to include information outside of the App.<br>
 </td>
 </tr>
 </table>
@@ -412,7 +412,7 @@ The <code>export</code> command allows users to manually track their diet with a
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<strong>Calgo</strong>'s session data is saved in the application automatically. There is no need to save manually for each session.
+Certain <code>Food</code> names and nutritional values may be too long to fit into the given space. The reference sheet allows the storage of these entries by wrapping-around onto the next line. While some entries may be misaligned, fear not as your information will still be captured and separated by spaces. Individual entries will also appear on separate lines.
 </td>
 </tr>
 </table>
@@ -437,7 +437,7 @@ The <code>export</code> command allows users to manually track their diet with a
 <p>Please note that the <code>find</code> command takes in one and only 1 parameter.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>find [n/NAME] [cal/CALORIES] [p/PROTEINS] [c/CARBS] [f/FATS] [t/TAG]</code> (choose only 1 parameter)</p>
+<p>Format: <code>find [n/NAME] [cal/CALORIES] [p/PROTEINS] [c/CARBOHYDRATES] [f/FATS] [t/TAG]</code> (choose only 1 parameter)</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -487,7 +487,7 @@ e.g. <code>find t/Gre</code> can give 'Kiwi' and 'Sugarcane' which are tagged <c
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can search for multiple <code>Name</code> keywords by separating them with space(s).<br>
+You can search for multiple <code>Name</code> keywords by using a single <code>n/</code> prefix, separating them with space(s).<br>
 e.g. <code>find n/Ki Jui</code> results can give 'Kiwi Ice Cream' (which contains 'Ki'), 'Orange Juice' (which contains 'Jui'), and so on.
 </td>
 </tr>
@@ -508,7 +508,7 @@ Returns <code>chocolate protein powder shake</code> and <code>vanilla protein mi
 </li>
 <li>
 <p><code>find n/food_item_not_in_food_record</code><br>
-Returns a message showing 0 <code>Food</code> entries listed.</p>
+Returns a message indicating that 0 <code>Food</code> entries are listed.</p>
 </li>
 </ul>
 </div>
@@ -517,8 +517,11 @@ Returns a message showing 0 <code>Food</code> entries listed.</p>
 <div class="sect2">
 <h3 id="generating-insights-code-report-code"><a class="link" href="#generating-insights-code-report-code">3.9. Generating insights : <code>report</code></a></h3>
 <div class="paragraph">
-<p>Given a date, the command generates a document (in pdf format) of relevant insights about the user&#8217;s food consumption
-pattern of the same date.</p>
+<p>Given a date, the command generates a document (in txt format) of relevant insights about the user&#8217;s food consumption
+pattern of the same date. This file is stored in the <code>data/reports</code> folder.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>report d/DATE</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -533,6 +536,9 @@ pattern of the same date.</p>
 <div class="ulist">
 <ul>
 <li>
+<p>The name of the <code>Food</code> item.</p>
+</li>
+<li>
 <p>Quantity consumed, for instance 3 servings.</p>
 </li>
 <li>
@@ -542,9 +548,6 @@ pattern of the same date.</p>
 </div>
 </li>
 <li>
-<p>The user&#8217;s most eaten <code>Food</code> in the past seven days.</p>
-</li>
-<li>
 <p>The total number of calories consumed in that day.</p>
 </li>
 <li>
@@ -552,7 +555,7 @@ pattern of the same date.</p>
 </li>
 <li>
 <p>A curated Food plan that includes a healthy quantity of the user&#8217;s favourite <code>Foods</code>,
-while ensuring it meets user&#8217;s daily calorie goal.</p>
+while ensuring it meets user&#8217;s daily calorie goal. (Coming in v1.4)</p>
 </li>
 </ul>
 </div>
@@ -568,7 +571,7 @@ while ensuring it meets user&#8217;s daily calorie goal.</p>
 <ul>
 <li>
 <p>report <code>27-03-2020</code><br>
-This generates a pdf containing the above-mentioned insights made on the consumption of  Food by the user, on 27th of March 2020.</p>
+This generates a txt file containing the above-mentioned insights made on the consumption of  Food by the user, on 27th of March 2020.</p>
 </li>
 </ul>
 </div>
@@ -576,7 +579,7 @@ This generates a pdf containing the above-mentioned insights made on the consump
 <div class="sect2">
 <h3 id="listing-all-code-food-code-in-current-code-food-record-code-code-list-code"><a class="link" href="#listing-all-code-food-code-in-current-code-food-record-code-code-list-code">3.10. Listing all <code>Food</code> in current <code>Food Record</code> : <code>list</code></a></h3>
 <div class="paragraph">
-<p>To view a list of all <code>Foods</code> in the current <code>Food Record</code>, you can simply use the <code>list</code> command.<br></p>
+<p>To view a list of all <code>Food</code> s in the current <code>Food Record</code>, you can simply use the <code>list</code> command.<br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -683,7 +686,7 @@ Displays a list of <code>Food</code> the user has consumed today.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Format: <code>update n/NAME cal/CALORIES p/PROTEINS] c/CARB] f/FATS [t/TAGS]</code></p>
+<p>Format: <code>update n/NAME cal/CALORIES p/PROTEINS c/CARBOHYDRATES f/FATS [t/TAGS]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -695,9 +698,9 @@ Displays a list of <code>Food</code> the user has consumed today.</p>
 This command adds a new <code>Food</code>, pizza into the user’s food presets with nutritional details of 200 <code>Calorie</code> s, 10g of <code>Protein</code> s, 200g of <code>Carbohydrate</code> s and 200g of <code>Fat</code> s.</p>
 </li>
 <li>
-<p><code>update n/pizza cal/100 p/10 c/100 f/30 tags/Italiano</code><br>
+<p><code>update n/pizza cal/100 p/10 c/100 f/30 t/Italiano t/Favourite</code><br>
 As pizza is already in the user’s <code>Food Record</code>, this command overrides the nutritional details of pizza with 200 <code>Calorie</code> s, 10g of <code>Protein</code> s, 200g of <code>Carbohydrate</code> s and 20g of <code>Fat</code> s.
-The pizza is also tagged with the <code>Tag</code> "Italiano".</p>
+The pizza is also tagged with the <code>Tag</code> s "Italiano" and "Favourite" .</p>
 </li>
 </ul>
 </div>
@@ -708,8 +711,7 @@ The pizza is also tagged with the <code>Tag</code> "Italiano".</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Whenever you begin to key in the name of the <code>Food</code>, Calgo automatically filters the display for you so that only <code>Food</code> s with
-the same name are suggested. This helps you to easily refer to any existing <code>Food</code> you maybe updating.
+Whenever you begin to key in the name of the <code>Food</code>, Calgo shows you the existing <code>Food</code> items in <code>Food Record</code> with similar names, if any.
 </td>
 </tr>
 </table>
@@ -735,14 +737,14 @@ the same name are suggested. This helps you to easily refer to any existing <cod
 <p><strong>Clear</strong> : <code>clear</code></p>
 </li>
 <li>
-<p><strong>Update</strong> : <code>update n/NAME cal/CALORIES [p/PROTEINS] [p/PROTEINS] [c/CARBS] [f/FATS]</code></p>
+<p><strong>Update</strong> : <code>update n/NAME cal/CALORIES p/PROTEINS c/CARBOHYDRATES f/FATS [t/TAGS]</code></p>
 </li>
 <li>
 <p><strong>Delete</strong> : <code>delete n/NAME</code><br>
 e.g. <code>delete pizza</code></p>
 </li>
 <li>
-<p><strong>Find</strong> : <code>find [n/NAME] [cal/CALORIES] [p/PROTEINS] [c/CARBS] [f/FATS]</code><br>
+<p><strong>Find</strong> : <code>find [n/NAME] [cal/CALORIES] [p/PROTEINS] [c/CARBOHYDRATES] [f/FATS]</code><br>
 e.g. <code>find cal/100</code> <strong>OR</strong><br>
  <code>find n/Kiwi Chilli</code></p>
 </li>
@@ -768,7 +770,7 @@ eg. <code>vomit num/chicken d/2020-03-04 portion/3</code> <strong>OR</strong><br
 e.g <code>goal 2000</code></p>
 </li>
 <li>
-<p><strong>Report</strong> : <code>report [Date in dd-mm-yyyy]</code>
+<p><strong>Report</strong> : <code>report Date in YYYY-MM-DD</code>
 eg. <code>report 2020-03-27</code></p>
 </li>
 <li>
@@ -777,4 +779,4 @@ eg. <code>report 2020-03-27</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-02 17:18:25 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-07 18:18:38 UTC</div></div></div></body></html>
