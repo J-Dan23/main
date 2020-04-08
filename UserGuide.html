@@ -37,7 +37,7 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Have you always wanted to live a healthy lifestyle, but never got to the stage where you would do it willingly yourself? Is it too troublesome to remember nutritional values, or too expensive to hire a personal assistant to keep track of your diet?</p>
+<p>Have you always wanted to live a healthy lifestyle, but never managed to reach the stage where you would actively track your consumption? Is it too troublesome to remember nutritional values, or too absurd and expensive to hire a personal assistant to keep track of your diet?</p>
 </div>
 <div class="paragraph">
 <p>Fear not!</p>
@@ -54,15 +54,15 @@
 <p><strong>Hassle-Free Convenience:</strong> optimise your experience with features that tolerate incomplete search inputs, produce fast responses and suggestions, and smartly manage entry conflicts</p>
 </li>
 <li>
-<p><strong>Flexibility:</strong> generate a portable copy of your <code>Food Record</code> or personalised reports so you can continue eating healthily even without the App</p>
+<p><strong>Flexibility:</strong> generate a portable copy of your <code>Food Record</code> or personalised consumption reports so you can continue eating healthily even without the App</p>
 </li>
 <li>
-<p><strong>Performance:</strong> enjoy a smooth and fast workflow as <strong>Calgo</strong> uses the power and convenience of a <strong>desktop application</strong> which combines the robustness of our Command Line Interface (CLI) with an objective and clear Graphical User Interface (GUI).<br></p>
+<p><strong>Performance:</strong> enjoy a smooth and fast workflow as <strong>Calgo</strong> uses the power and convenience of a <strong>desktop application</strong> which combines the robustness of our Command Line Interface (CLI) together with an objective and clear Graphical User Interface (GUI).<br></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Beginners, fast typists, and health enthusiasts would therefore benefit alike from the plethora of features <strong>Calgo</strong> offers, be it convenience, speed, or portability.</p>
+<p>Beginners, fast typists, and health enthusiasts alike would therefore benefit from the plethora of features <strong>Calgo</strong> offers - centred about a convenient and smooth user experience.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -101,20 +101,8 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </li>
 <li>
-<p>Try experimenting with the commands yourself! Here are some examples:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><code>update</strong>n/kiwi cal/125 p/1 c/20 f/3</code> : adds <code>kiwi</code> to the <code>Food Record</code> if there is currently no <code>Food</code> called 'kiwi' inside it, with its details saved as: 125 calorie, 1 gram of protein, 20 grams of carbohydrates, and 3 grams of fats.</p>
-</li>
-<li>
-<p><strong><code>find</code></strong><code>n/banana</code>: finds the entry banana in the <code>Food Record</code> and returns its nutritional details if such a <code>Food</code> exists.</p>
-</li>
-<li>
-<p><strong><code>list</code></strong> : lists all <code>Foods</code> currently recorded in the <code>Food Record</code>.</p>
-</li>
-</ul>
-</div>
+<p>What are you waiting for? Your healthy lifestyle begins now!<br>
+Start experimenting with the commands yourself and experience the convenience <strong>Calgo</strong> brings.</p>
 </li>
 </ol>
 </div>
@@ -187,7 +175,7 @@ Format: <code>clear</code></p>
 <p>The <code>nom</code> command allows you to keep track of your consumption on certain date.<br></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>nom [n/NAME] [d/DATE] [portion/PORTION][r/RATING]</code></p>
+<p>Format: <code>nom n/NAME [d/DATE] [portion/PORTION][r/RATING]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -273,7 +261,7 @@ Deletes pizza from the <code>Food Record</code>.</p>
 <p>Deletes a <code>Food</code> that a user has previously added to the log tracking consumption on that day.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>vomit [num/INDEX_OF_FOOD] [d/DATE] [portion/PORTION]</code></p>
+<p>Format: <code>vomit num/INDEX_OF_FOOD [d/DATE] [portion/PORTION]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -383,15 +371,27 @@ Format: <code>exit</code></p>
 <div class="sect2">
 <h3 id="exporting-the-current-code-food-record-code-into-a-reference-sheet-code-export-code"><a class="link" href="#exporting-the-current-code-food-record-code-into-a-reference-sheet-code-export-code">3.7. Exporting the current <code>Food Record</code> into a reference sheet : <code>export</code></a></h3>
 <div class="paragraph">
-<p>Obtaining a copy of the <code>Food Record</code> entries may be useful for situations like sharing or printing.
-While your entries are automatically saved in <strong>Calgo</strong>, the <code>export</code> command provides an editable text file (FoodRecords.txt) in the <code>data/exports</code> folder should you feel the need to obtain a portable version of the current <code>Food</code> entries inside the <code>Food Record</code>.<br></p>
+<p>(by Eugene)<br></p>
 </div>
+<div class="paragraph">
+<p>Obtaining a portable copy of the current <code>Food Record</code> may be useful for various purposes. For instance, you can conveniently share your <code>Food</code> entries with friends, print the <code>Food Record</code> for future reference, or even adapt it to suit your personal cooking needs in the kitchen.<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>export</code> command comes in handy for situations like these. It provides you with a neatly formatted, editable file that reflects all entries in the current <code>Food Record</code>. This file (FoodRecord.txt) will be created in the <code>data/exports</code> folder.<br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>FoodRecords.txt shows the <code>Food Record</code> in alphabetical order of names, and includes the corresponding details of each <code>Food</code> neatly in a table.</p>
+<p>FoodRecord.txt shows the <code>Food Record</code> in alphabetical order of <code>Food</code> names, and includes the corresponding details of each <code>Food</code> neatly in a table.</p>
+</li>
+<li>
+<p>If a previous FoodRecord.txt file exists, do close any instances of the file (if previously opened) before running the <code>export</code> command. The file will be replaced by an updated version representing your latest <code>Food Record</code>.</p>
 </li>
 </ul>
+</div>
+</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -412,7 +412,7 @@ This lets you manually track your diet using a reference sheet of your past <cod
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Certain <code>Food</code> names and nutritional values may be too long to fit into the given space. The reference sheet allows the storage of these entries by wrapping-around onto the next line. While some entries may be misaligned, fear not as your information will still be captured and separated by spaces. Individual entries will also appear on separate lines.
+Certain <code>Food</code> names and nutritional values may be too long to fit into the given columns. The reference sheet allows the storage of these values by going beyond the columns originally intended. While some entries may be misaligned, rest assured that all the information will still be captured and separated by space(s). Individual entries will also appear on separate lines.
 </td>
 </tr>
 </table>
@@ -420,48 +420,34 @@ Certain <code>Food</code> names and nutritional values may be too long to fit in
 <div class="paragraph">
 <p>Format: <code>export</code></p>
 </div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="finding-a-code-food-code-by-nutritional-value-or-keyword-s-code-find-code"><a class="link" href="#finding-a-code-food-code-by-nutritional-value-or-keyword-s-code-find-code">3.8. Finding a <code>Food</code> by nutritional value or keyword(s) : <code>find</code></a></h3>
 <div class="paragraph">
-<p>With many <code>Food</code> entries in the <code>Food Record</code>, it may be difficult to search for a particular <code>Food</code> you want. This is where the <code>find</code> command comes in nicely.</p>
+<p>(by Eugene)<br></p>
 </div>
 <div class="paragraph">
-<p>The <code>find</code> command shows all the <code>Food</code> items with a nutritional value matching what you specify (either in terms of the number of <code>Calories</code>, or grams of <code>Proteins</code>/<code>Carbohydrates</code>/<code>Fat</code>).</p>
+<p>With many <code>Food</code> entries in the <code>Food Record</code>, it may be quite difficult to search for a particular <code>Food</code> entry you want. This is where the <code>find</code> command comes in nicely.</p>
 </div>
 <div class="paragraph">
-<p>Alternatively, you can choose to search for a keyword which may appear in, or as the actual <code>Name</code> of a <code>Food</code> or a particular <code>Tag</code> associated with it.</p>
+<p>The <code>find</code> command shows all <code>Food</code> entries that have a nutritional value matching what you specify. This can be the number of <code>Calories</code>, or the number of grams of <code>Proteins</code>/<code>Carbohydrates</code>/<code>Fats</code>.</p>
 </div>
 <div class="paragraph">
-<p>Please note that the <code>find</code> command takes in one and only 1 parameter.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>find [n/NAME] [cal/CALORIES] [p/PROTEINS] [c/CARBOHYDRATES] [f/FATS] [t/TAG]</code> (choose only 1 parameter)</p>
+<p>Alternatively, you can choose to search for a keyword which appears in the <code>Name</code> or <code>Tag</code> associated with a particular <code>Food</code>.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>In finding <code>Food</code> via nutritional value, only <code>Food</code> with exact matching values will be shown.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>e.g. <code>find cal/50</code> results will only contain <code>Food</code> entries with 50 <code>Calorie</code> s.</p>
-</li>
-</ul>
-</div>
+<p>The <code>find</code> command takes in one, and only 1 parameter.</p>
 </li>
 <li>
-<p>Finding via <code>Name</code> or <code>Tag</code> is case insensitive.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>e.g <code>find n/Kiwi</code> results can contain both 'kiwi' and 'Kiwi'.</p>
-</li>
-</ul>
-</div>
+<p>For finding via nutritional value, only <code>Food</code> matching the same exact value will be shown.</p>
 </li>
 </ul>
 </div>
@@ -474,8 +460,19 @@ Certain <code>Food</code> names and nutritional values may be too long to fit in
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You don&#8217;t actually have to type out the entire keyword. Incomplete keywords will be matched to <code>Food</code> items containing them in the specified parameter.<br>
-e.g. <code>find t/Gre</code> can give 'Kiwi' and 'Sugarcane' which are tagged <code>Green</code>
+You don&#8217;t have to capitalise each keyword. The search is always case insensitive when searching for keyword(s) via <code>Name</code> or <code>Tag</code>.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You don&#8217;t actually have to type out the entire keyword. Incomplete keywords will be matched to <code>Food</code> entries containing them in the specified parameter of <code>Name</code> or <code>Tag</code>.<br>
 </td>
 </tr>
 </table>
@@ -488,27 +485,46 @@ e.g. <code>find t/Gre</code> can give 'Kiwi' and 'Sugarcane' which are tagged <c
 </td>
 <td class="content">
 You can search for multiple <code>Name</code> keywords by using a single <code>n/</code> prefix, separating them with space(s).<br>
-e.g. <code>find n/Ki Jui</code> results can give 'Kiwi Ice Cream' (which contains 'Ki'), 'Orange Juice' (which contains 'Jui'), and so on.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Format: <code>find [n/NAME] [cal/CALORIES] [p/PROTEINS] [c/CARBOHYDRATES] [f/FATS] [t/TAG]</code><br>
+(Reminder: choose only 1 parameter)</p>
+</div>
+<div class="paragraph">
+<p>Examples:<br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find n/kIWi</code><br>
-Returns <code>kiwi</code> and <code>kiwi juice</code></p>
+<p><code>find cal/150</code><br>
+Returns 'Bandung' and 'Hot Dog Bun' which both have 150 <code>Calories</code>. This works for <code>Calories</code>, <code>Proteins</code>, <code>Carbohydrates</code>, and <code>Fats</code> - all of which take on non-negative integer values within 5 digits.<br></p>
 </li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p><code>find p/25</code><br>
-Returns <code>chocolate protein powder shake</code> and <code>vanilla protein milkshake</code> which both have 25 grams of protein.</p>
+<p><code>find n/Chees</code><br>
+Returns 'Cheeseburger' and 'Cheesy Bites' which both contain the <code>Chees</code> keyword in their <code>Name</code>. Note that the keyword is an incomplete word but it still works.<br></p>
 </li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p><code>find n/food_item_not_in_food_record</code><br>
-Returns a message indicating that 0 <code>Food</code> entries are listed.</p>
+<p><code>find t/swe</code><br>
+Returns 'Bandung', 'Pineapple Chicken Rice', 'Strawberry Milk` which are tagged <code>Sweet</code>, and also 'Sambal Chilli' which is tagged <code>sweet</code>. Note that like the above, searches for <code>Tags</code> can also be incomplete keywords. Finding via keywords in <code>Name</code> or <code>Tag</code> is always case insensitive.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find n/Black Oyster</code><br>
+Returns 'Black Forest Slice Cake' (which contains keyword <code>Black</code>) and 'Stirfried Kai Lan in Oyster Sauce' (which contains keyword <code>Oyster</code>).</p>
 </li>
 </ul>
 </div>
@@ -570,7 +586,7 @@ while ensuring it meets user&#8217;s daily calorie goal. (Coming in v1.4)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>report <code>27-03-2020</code><br>
+<p><code>report d/27-03-2020</code><br>
 This generates a txt file containing the above-mentioned insights made on the consumption of  Food by the user, on 27th of March 2020.</p>
 </li>
 </ul>
@@ -579,14 +595,24 @@ This generates a txt file containing the above-mentioned insights made on the co
 <div class="sect2">
 <h3 id="listing-all-code-food-code-in-current-code-food-record-code-code-list-code"><a class="link" href="#listing-all-code-food-code-in-current-code-food-record-code-code-list-code">3.10. Listing all <code>Food</code> in current <code>Food Record</code> : <code>list</code></a></h3>
 <div class="paragraph">
-<p>To view a list of all <code>Food</code> s in the current <code>Food Record</code>, you can simply use the <code>list</code> command.<br></p>
+<p>(by Eugene)<br></p>
 </div>
+<div class="paragraph">
+<p>With a large number of entries in the <code>Food Record</code>, we can use the <code>find</code> command to narrow down our search. However, this filtered information is only useful for a short amount of time and we will usually want to view all entries in the <code>Food Record</code> again.<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>list</code> command resets the display accordingly to show all entries in the current <code>Food Record</code>. These will be neatly sorted in alphabetical order, just as the <code>Food Record</code> previously appeared.<br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><code>Foods</code> will be listed in alphabetical order with their corresponding details.<br></p>
+<p><code>Food</code> entries will once again be listed with all their corresponding details.<br></p>
 </li>
 </ul>
+</div>
+</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -595,7 +621,8 @@ This generates a txt file containing the above-mentioned insights made on the co
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This resets the display to show all <code>Food</code> entries in the current <code>Food Record</code>, and is most useful after successfully executing a <code>find</code> command.<br>
+You can think of this as the undo of a <code>find</code> command.
+After a <code>find</code> command, you are advised to complete your intended actions first, before using the <code>list</code> command. This allows for a smoother workflow as you will now avoid the need to perform the same <code>find</code> command again.
 </td>
 </tr>
 </table>
@@ -607,7 +634,27 @@ This resets the display to show all <code>Food</code> entries in the current <co
 <div class="sect2">
 <h3 id="setting-a-daily-code-calorie-code-target-code-goal-code"><a class="link" href="#setting-a-daily-code-calorie-code-target-code-goal-code">3.11. Setting a daily <code>Calorie</code> target : <code>goal</code></a></h3>
 <div class="paragraph">
-<p>This goal will be used to provide helpful insights for users.<br></p>
+<p>What is the point of tracking your meals if you do not have an objective benchmark?</p>
+</div>
+<div class="paragraph">
+<p>This command will help you to set a numerical goal for yourself, which is essentially the number of calories you want
+to consume each day. Note that this goal must be a positive whole number.</p>
+</div>
+<div class="paragraph">
+<p>Your goal will also be used to provide helpful insights regarding your consumption patterns.<br></p>
+</div>
+<div class="paragraph">
+<p>The range of acceptable values are:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Minimum acceptable value: 1<br></p>
+</li>
+<li>
+<p>Maximum acceptable value: 2147483647</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Format: <code>goal GOAL</code></p>
@@ -731,52 +778,103 @@ Whenever you begin to key in the name of the <code>Food</code>, Calgo shows you 
 <div class="sect1">
 <h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Clear</strong> : <code>clear</code></p>
-</li>
-<li>
-<p><strong>Update</strong> : <code>update n/NAME cal/CALORIES p/PROTEINS c/CARBOHYDRATES f/FATS [t/TAGS]</code></p>
-</li>
-<li>
-<p><strong>Delete</strong> : <code>delete n/NAME</code><br>
-e.g. <code>delete pizza</code></p>
-</li>
-<li>
-<p><strong>Find</strong> : <code>find [n/NAME] [cal/CALORIES] [p/PROTEINS] [c/CARBOHYDRATES] [f/FATS]</code><br>
-e.g. <code>find cal/100</code> <strong>OR</strong><br>
- <code>find n/Kiwi Chilli</code></p>
-</li>
-<li>
-<p><strong>List</strong> : <code>list</code></p>
-</li>
-<li>
-<p><strong>Stomach</strong> : stomach [d/DATE]<br>
-eg. <code>stomach</code> <strong>OR</strong> <code>stomach d/</code> <strong>OR</strong> <code>stomach d/2020-03-04</code>+</p>
-</li>
-<li>
-<p><strong>Nom</strong> : nom [n/NAME] [d/DATE] [portion/PORTION]<br>
-eg. <code>nom n/chicken d/2020-03-04 portion/1.5 r/6</code> <strong>OR</strong>
-<code>nom n/chicken</code> <strong>OR</strong> <code>nom n/chicken d/ portion/ r/</code></p>
-</li>
-<li>
-<p><strong>Vomit</strong> : <code>vomit [index/INDEX_OF_FOOD] [d/DATE] [portion/PORTION]</code><br>
-eg. <code>vomit num/chicken d/2020-03-04 portion/3</code> <strong>OR</strong><br>
-<code>vomit num/chicken</code><strong>OR</strong> <code>vomit n/chicken d/ portion/</code></p>
-</li>
-<li>
-<p><strong>goal</strong> : <code>goal GOAL</code><br>
-e.g <code>goal 2000</code></p>
-</li>
-<li>
-<p><strong>Report</strong> : <code>report Date in YYYY-MM-DD</code>
-eg. <code>report 2020-03-27</code></p>
-</li>
-<li>
-<p><strong>Help</strong> : <code>help</code></p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all" style="width: 59%;">
+<colgroup>
+<col style="width: 17%;">
+<col style="width: 18%;">
+<col style="width: 20%;">
+<col style="width: 25%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command Category</th>
+<th class="tableblock halign-left valign-top">Command Name</th>
+<th class="tableblock halign-left valign-top">Usage</th>
+<th class="tableblock halign-left valign-top">Format</th>
+<th class="tableblock halign-left valign-top">Example (if applicable)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock">Navigate app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exits the app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Goal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets your daily caloric goal.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>goal GOAL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>goal 2500</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Help</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays a guide for all commands. Can also display only commands containing the given command word.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help [COMMAND_WORD]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code><strong>OR</strong><code>help nom</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock">Edit Food Record</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clears all <code>food</code> entries from the Food Record.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes the specified <code>Food</code> from the <code>Food Record</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete pizza</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Updates a <code>Food</code> in <code>Food Record</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>update n/NAME cal/CALORIES p/PROTEINS c/CARBOHYDRATES f/FATS [t/TAGS]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>update n/pizza cal/200 p/10 c/200 f/200</code><strong>OR</strong><code>update n/pizza cal/100 p/10 c/100 f/30 t/Italiano t/Favourite</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock">Navigate Food Record</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Find</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Searches for and displays a particular <code>Food</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find [n/NAME] [cal/CALORIES] [p/PROTEINS] [c/CARBOHYDRATES] [f/FATS] [t/TAG]</code> (choose only 1 parameter)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find n/Pizza</code><strong>OR</strong><code>find cal/110</code> etc</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays all <code>Food`s in `Food Record</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock">Edit Daily List</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nom</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a <code>Food</code> to a specific day&#8217;s <code>Daily List</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nom [n/NAME] [d/DATE] [portion/PORTION][r/RATING]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nom n/chicken d/2020-03-04 portion/1.5</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stomach</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all <code>Food</code> in a particular day&#8217;s <code>Daily List</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stomach [d/DATE]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stomach d/2020-03-04</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vomit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes a specific <code>Food</code> from the <code>Daily List</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>vomit num/INDEX_OF_FOOD [d/DATE] [portion/PORTION]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>vomit num/chicken d/2020-03-04 portion/3</code><strong>OR</strong><br>
+<code>vomit num/chicken</code><strong>OR</strong> <code>vomit n/chicken d/ portion/</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate Report</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Report</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate the report for a given date.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>report d/DATE in YYYY-MM-DD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>report d/2020-03-04</code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-07 18:18:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-08 21:20:19 UTC</div></div></div></body></html>
