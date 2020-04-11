@@ -428,6 +428,7 @@ Step 4: The <code>LogicManager</code> encapsulates the result as a <code>Command
 Step 5: The <code>MainWindow</code> executes the handleHelp() method, displaying the <code>HelpWindow</code> if it is not already being displayed.<br>
 Step 6: <code>HelpWindow</code> is displayed as a separate popup.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">4.2.2. Design considerations</a></h4>
@@ -1576,20 +1577,33 @@ The following activity diagram summarises what happens when a user enters a vali
 <div class="sect2">
 <h3 id="Implementation-CalorieGraph"><a class="link" href="#Implementation-CalorieGraph">4.9. Past seven days calorie data graph</a></h3>
 <div class="paragraph">
-<p>This feature displays to the user a summary of their past seven days' daily total calorie consumption in the form of a line graph.
-Specifically, the graph shows the calorie consumption for the date of the <code>DailyList</code>, and the six days before it.</p>
+<p>(by Janice)</p>
 </div>
 <div class="paragraph">
-<p>This functionality is automatic. The graph will always display the past seven days' data at the bottom of the app, and will update
+<p>This section addresses how the graph displaying the user&#8217;s past seven day&#8217;s daily total calorie consumption works.
+Note that the graph counts starting from the date on the current <code>Food Record</code>, and the six days prior to it.</p>
+</div>
+<div class="paragraph">
+<p>The graph will always display the past seven days' data at the bottom of the app, and will update
 whenever app data is changed.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If a command changes the date of the <code>Food Record</code> (such as <code>nom</code> or <code>stomach</code>), the graph will update to show data
+for the past seven days from that date, inclusive.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="implementation-8"><a class="link" href="#implementation-8">4.9.1. Implementation</a></h4>
 <div class="paragraph">
-<p>This feature is facilitated by the <code>GraphPanel</code> class in the <code>Ui</code> component.</p>
-</div>
-<div class="paragraph">
-<p><code>GraphPanel</code> contains a <code>LineChart</code> of <code>String</code> date against <code>Number</code> calories, and is populated with
+<p><code>GraphPanel</code> in the <code>Ui</code> component. It contains a <code>LineChart</code> of <code>String</code> date against <code>Number</code> calories, and is populated with
 data from an <code>XYChart.series</code>. The data is in turn obtained from the <code>Logic</code> component, which provides only the past seven days'
 of <code>DailyFoodLog</code>. The implementation of the <code>GraphPanel</code> class will be further explained.</p>
 </div>
@@ -1621,6 +1635,69 @@ most recent app data.</p>
 <div class="paragraph">
 <p>Calgo will display the past seven days' graph automatically, and likewise update automatically. It does so by having <code>MainWindow</code>
 call <code>GraphPanel#getGraph(Logic logic)</code> on startup and after execution of commands.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below demonstrates how the <code>Graph</code> feature works, such as upon loading of <code>MainWindow</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GraphSequenceDiagram.png" alt="GraphSequenceDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>Sequence Diagram for <code>Graph</code> feature.</p>
+</div>
+<div class="paragraph">
+<p>Step 1: <code>MainWindow</code> requests for an instance of <code>GraphPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p>If no instance exists, a new <code>GraphPanel</code> is created. Otherwise one is retrieved. This ensures that <code>GraphPanel</code>
+is a singleton.</p>
+</div>
+<div class="paragraph">
+<p>Step 2: <code>MainWindow</code> calls <code>GraphPanel</code> again to generate the graph and add it to the <code>GraphPanelPlaceholder</code> inside <code>MainWindow</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3: Inside <code>GraphPanel</code>, a wrapper method <code>makeGraph</code> calls three methods in a row:</p>
+</div>
+<div class="paragraph">
+<p>First, <code>initialiseTreeMap</code>, which has <code>Logic</code> call the <code>getPastWeekLogs</code> method onto <code>GraphPanel</code>, generating
+a <code>TreeMap</code> of <code>String</code> date mapped to <code>Double</code> calories using the past seven days' <code>DailyFoodLog</code>.
+Second, <code>initialiseGraph</code> method is called to generate the graph itself.
+Third, <code>updateSeries</code> method is called to ensure the data populating the graph is up to date.</p>
+</div>
+<div class="paragraph">
+<p>After which, the <code>GraphPanel</code> adds the graph to <code>MainWindow</code>.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.9.2. Design considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-choice-of-visuals-for-past-seven-days-summary"><a class="link" href="#aspect-choice-of-visuals-for-past-seven-days-summary">Aspect: Choice of visuals for past seven days summary</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Summary is represented using a line graph.</p>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Summary is represented in a table.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-when-graph-s-dates-are-based-on"><a class="link" href="#aspect-when-graph-s-dates-are-based-on">Aspect: When graph&#8217;s dates are based on</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Dates are based on past seven days starting from date of <code>Consumption Record</code>, inclusive.</p>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Dates are based on past seven days starting from today&#8217;s date, inclusive.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -2252,4 +2329,4 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 16:50:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 18:07:07 UTC</div></div></div></body></html>
