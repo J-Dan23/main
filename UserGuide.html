@@ -21,9 +21,9 @@
 <li><a href="#displaying-code-help-code-when-lost-code-help-code">4.5. Displaying <code>help</code> when lost : <code>help</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">4.6. Exiting the program : <code>exit</code></a></li>
 <li><a href="#exporting-the-current-code-food-record-code-into-a-reference-sheet-code-export-code">4.7. Exporting the current <code>Food Record</code> into a reference sheet : <code>export</code></a></li>
-<li><a href="#FindCommand">4.8. Finding a <code>Food</code> by nutritional value or keyword(s) : <code>find</code></a></li>
+<li><a href="#FindCommand">4.8. Finding a <code>Food</code> entry by nutritional value or keyword(s) : <code>find</code></a></li>
 <li><a href="#generating-insights-code-report-code">4.9. Generating insights : <code>report</code></a></li>
-<li><a href="#listing-all-code-food-code-in-current-code-food-record-code-code-list-code">4.10. Listing all <code>Food</code> in current <code>Food Record</code> : <code>list</code></a></li>
+<li><a href="#ListCommand">4.10. Listing all <code>Food</code> in current <code>Food Record</code> : <code>list</code></a></li>
 <li><a href="#setting-a-daily-code-calorie-code-target-code-goal-code">4.11. Setting a daily <code>Calorie</code> target : <code>goal</code></a></li>
 <li><a href="#showing-all-code-food-code-consumed-on-a-particular-day-code-stomach-code">4.12. Showing all <code>Food</code> consumed on a particular day : <code>stomach</code></a></li>
 <li><a href="#updating-the-current-code-food-record-code-code-update-code">4.13. Updating the current <code>Food Record</code> : <code>update</code></a></li>
@@ -216,7 +216,7 @@ Start experimenting with the commands yourself and experience the convenience <s
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-As you begin to key in the name of the <code>Food</code> for any of these commands: <code>update</code>, <code>delete</code>, or <code>nom</code>, Calgo shows you
+As you key in the name of the <code>Food</code> for any of these commands: <code>update</code>, <code>delete</code>, or <code>nom</code>, Calgo shows you
 <code>Food</code> with similar names that exists in the <code>Food Record</code>.
 </td>
 </tr>
@@ -226,7 +226,8 @@ As you begin to key in the name of the <code>Food</code> for any of these comman
 <h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">4.1. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all <code>Food</code> entries from the <code>Food Record</code>.<br>
-Format: <code>clear</code></p>
+Format: <code>clear</code><br>
+(any parameters entered are ignored)</p>
 </div>
 </div>
 <div class="sect2">
@@ -302,22 +303,56 @@ This consumption will be rated 7/10.</p>
 <p>(by Zhang Xian)</p>
 </div>
 <div class="paragraph">
-<p>If you no longer require Calgo to store a particular <code>Food</code> and its nutritional values for you, this <code>delete</code> command
-helps you with that.</p>
+<p>If you no longer require Calgo to store a particular <code>Food</code> and its nutritional values for you, this <code>delete</code> command removes
+the specified <code>Food</code> from your <code>Food Record</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>Food</code> that you wish to <code>delete</code> must already exist in the current <code>Food Record</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You don&#8217;t have to capitalise the <code>Name</code> of the <code>Food</code> that you wish to delete. For better efficiency, the <code>Name</code> field of your
+input for the <code>delete</code> command is case insensitive.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Format: <code>delete n/NAME</code></p>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p>Example: Say you want to remove a <code>Food</code>, <code>Pizza</code>, that already exists in your <code>Food Record</code>.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete n/pizza</code><br>
-Deletes pizza from the <code>Food Record</code>.</p>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleteCommandBefore.png" alt="DeleteCommandBefore" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>You should first enter <code>delete n/pizza</code> as input, and press enter. Note that <code>delete n/Pizza</code> also has the same effect.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleteCommandAfter.png" alt="DeleteCommandAfter" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the command has been entered, the <code>Result Display</code> shows the results of your command and the <code>Food Record</code> shows that
+the <code>Food</code>, <code>Pizza</code>,is no longer there.</p>
 </div>
 </div>
 <div class="sect2">
@@ -440,10 +475,13 @@ Format: <code>exit</code></p>
 <p>(by Eugene)<br></p>
 </div>
 <div class="paragraph">
-<p>Obtaining a portable copy of the current <code>Food Record</code> may be useful for various purposes. For instance, you can conveniently share your <code>Food</code> entries with friends, print the <code>Food Record</code> for future reference, or even adapt it to suit your personal cooking needs in the kitchen.<br></p>
+<p>Obtaining a portable copy of the current <code>Food Record</code> may be useful for various purposes. For instance, you can conveniently share your <code>Food</code> entries with friends, print the <code>Food Record</code> for future reference, or even adapt it to suit your personal cooking needs in the kitchen. Whatever the purpose, we have you covered with the <code>export</code> command.<br></p>
 </div>
 <div class="paragraph">
-<p>The <code>export</code> command comes in handy for situations like these. It provides you with a neatly formatted, editable file that reflects all entries in the current <code>Food Record</code>. This file (FoodRecord.txt) will be created in the <code>data/exports</code> folder.<br></p>
+<p>The <code>export</code> command provides you with a neatly formatted, editable file that reflects all entries in the current <code>Food Record</code>. This file (FoodRecord.txt) will be created in the <code>data/exports</code> folder.<br></p>
+</div>
+<div class="paragraph">
+<p>Here are some key pointers for using the command:</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -490,12 +528,32 @@ Certain <code>Food</code> names may be too long to fit into the given space. The
 <p>Format: <code>export</code></p>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p>Example:<br></p>
+</div>
+<div class="paragraph">
+<p>Say you wish to export the current <code>Food Record</code> so that you can print a copy for reference while cooking.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ExportCommandBefore.png" alt="ExportCommandBefore" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>You should first type in and enter the command, as seen above.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ExportCommandAfter.png" alt="ExportCommandAfter" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>Doing so, <strong>Calgo</strong>  will show you a result message indicating the copy has been successfully generated.
+You can find this copy (FoodRecord.txt) in the <code>data/exports</code> folder near the App.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="FindCommand"><a class="link" href="#FindCommand">4.8. Finding a <code>Food</code> by nutritional value or keyword(s) : <code>find</code></a></h3>
+<h3 id="FindCommand"><a class="link" href="#FindCommand">4.8. Finding a <code>Food</code> entry by nutritional value or keyword(s) : <code>find</code></a></h3>
 <div class="paragraph">
 <p>(by Eugene)<br></p>
 </div>
@@ -506,10 +564,10 @@ Certain <code>Food</code> names may be too long to fit into the given space. The
 <p>The <code>find</code> command shows all <code>Food</code> entries that have a nutritional value matching what you specify. This can be the number of <code>Calories</code>, or the number of grams of <code>Proteins</code>/<code>Carbohydrates</code>/<code>Fats</code>.</p>
 </div>
 <div class="paragraph">
-<p>Alternatively, you can choose to search for a keyword which appears in any part of the <code>Name</code>, or in any part of any one of the <code>Tag</code> associated with a particular <code>Food</code>.</p>
+<p>Alternatively, you can choose to search for a keyword which appears in any part of the <code>Name</code>, or in one of the <code>Tags</code> associated with a particular <code>Food</code> entry.</p>
 </div>
 <div class="paragraph">
-<p>Here is some key information about the command:</p>
+<p>Here are some key pointers:</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -522,7 +580,10 @@ Certain <code>Food</code> names may be too long to fit into the given space. The
 <p>For finding via nutritional value, only <code>Food</code> matching the same exact value will be shown.</p>
 </li>
 <li>
-<p>To facilitate the possibility of typing errors made by fast typists, any additional input typed without a preceding prefix (e.g. "n/", "p/") will be ignored.</p>
+<p>To facilitate the possibility of typing errors made by fast typists, any additional input (separated by spaces) typed without a preceding prefix (e.g. <code>n/</code>, <code>p/</code>) will be ignored.</p>
+</li>
+<li>
+<p>The GUI changes as a result of using the <code>find</code> command. We can reset the <code>Food Record</code> to show all entries once again using the <a href="#ListCommand"><code>list</code></a> command.</p>
 </li>
 </ul>
 </div>
@@ -571,37 +632,65 @@ You can search for multiple <code>Name</code> keywords by using a single <code>n
 <div class="paragraph">
 <p>Examples:<br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find cal/150</code><br>
-Returns 'Bandung' and 'Hot Dog Bun' which both have 150 <code>Calories</code>. This works for <code>Calories</code>, <code>Proteins</code>, <code>Carbohydrates</code>, and <code>Fats</code> - all of which take on non-negative integer values within 5 digits.<br></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Example 1: Say you wish to search for a <code>Food</code> entry with 150 <code>Calories</code> because you are looking for a snack.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find n/Chees</code><br>
-Returns 'Cheeseburger' and 'Cheesy Bites' which both contain the <code>Chees</code> keyword in their <code>Name</code>. Note that the keyword is an incomplete word but it still works.<br></p>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindCommandCalorieBefore.png" alt="FindCommandCalorieBefore" width="">
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find t/swe</code><br>
-Returns 'Bandung', 'Pineapple Chicken Rice', 'Strawberry Milk` which are tagged <code>Sweet</code>, and also 'Sambal Chilli' which is tagged <code>sweet</code>. Note that like the above, searches for <code>Tags</code> can also be incomplete keywords. Finding via keywords in <code>Name</code> or <code>Tag</code> is always case insensitive.</p>
-</li>
-</ul>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find n/Black Oyster</code><br>
-Returns 'Black Forest Slice Cake' (which contains keyword <code>Black</code>) and 'Stirfried Kai Lan in Oyster Sauce' (which contains keyword <code>Oyster</code>).</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>You should first enter <code>find cal/150</code> as input and press enter.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindCommandCalorieAfter.png" alt="FindCommandCalorieAfter" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the command has been entered, the <code>Result Display</code> shows the results of your command and the GUI&#8217;s <code>Food Record</code> shows the relevant entries with 150 <code>Calories</code>.</p>
+</div>
+<div class="paragraph">
+<p>Example 2: Say you wish to find entries which contain the keyword <code>Cheese</code> in their <code>Name</code>, but your hand slipped and the keyword only registered <code>Chees</code>.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindCommandSubstringBefore.png" alt="FindCommandSubstringBefore" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>You would therefore enter <code>find n/Chees</code> as the command input.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindCommandSubstringAfter.png" alt="FindCommandSubstringAfter" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the command has been entered, the <code>Result Display</code> shows the results of your command and the GUI&#8217;s <code>Food Record</code> shows the relevant entries which contain <code>Chees</code> in their <code>Name</code>. This is not too bad, as you still obtain entries that will be largely relevant.</p>
+</div>
+<div class="paragraph">
+<p>Example 3: Say you are lazy but wish to find entries containing the keyword <code>sweet</code> in their <code>Tag</code>.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindCommandTagBefore.png" alt="FindCommandTagBefore" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>You could first enter <code>find t/swe</code> as input and press enter.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindCommandTagAfter.png" alt="FindCommandTagAfter" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>As the <code>find</code> command allows you to search using substrings, <code>Food</code> entries with <code>swe</code> in any one of their <code>Tags</code> would appear in the <code>Food Record</code>. Therefore, your original search for <code>sweet</code> would also have its results shown.<br></p>
+</div>
+<div class="paragraph">
+<p>Please note that the search is case-insensitive, as seen from the <code>Sweet</code> <code>Tag</code> of the result <code>Sambal Chilli</code>. Moreover, as with Example 2, we allow for incomplete words to be used as search keywords.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -668,15 +757,15 @@ This generates a txt file containing the above-mentioned insights made on the co
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-code-food-code-in-current-code-food-record-code-code-list-code"><a class="link" href="#listing-all-code-food-code-in-current-code-food-record-code-code-list-code">4.10. Listing all <code>Food</code> in current <code>Food Record</code> : <code>list</code></a></h3>
+<h3 id="ListCommand"><a class="link" href="#ListCommand">4.10. Listing all <code>Food</code> in current <code>Food Record</code> : <code>list</code></a></h3>
 <div class="paragraph">
 <p>(by Eugene)<br></p>
 </div>
 <div class="paragraph">
-<p>With a large number of entries in the <code>Food Record</code>, we can use the <a href="#FindCommand"><code>find</code></a> command to narrow down our search. However, this filtered information is only useful for a short amount of time and we will usually want to view all entries in the <code>Food Record</code> again. This is where the <code>list</code> command comes in handy.<br></p>
+<p>With a large number of entries in the <code>Food Record</code>, you may remember that we can use the <a href="#FindCommand"><code>find</code></a> command to narrow down our search. However, this filtered information is only useful for a short amount of time and we will usually want to view all entries in the <code>Food Record</code> again. This is where the <code>list</code> command comes in handy.<br></p>
 </div>
 <div class="paragraph">
-<p>The <code>list</code> command resets the display accordingly to show all entries in the current <code>Food Record</code>. These will be neatly sorted in alphabetical order, just as the <code>Food Record</code> previously appeared.<br></p>
+<p>The <code>list</code> command resets the display accordingly to show all entries in the <code>Food Record</code>. These will be neatly sorted in alphabetical order, just as the <code>Food Record</code> previously appeared:</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -703,7 +792,27 @@ After a <code>find</code> command, you are advised to complete your intended act
 </table>
 </div>
 <div class="paragraph">
-<p>Format: <code>list</code></p>
+<p>Format: <code>list</code><br>
+(any parameters entered are ignored)</p>
+</div>
+<div class="paragraph">
+<p>Example: Say you want to view all entries again after performing a <code>find n/Chicken</code> command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ListCommandBefore.png" alt="ListCommandBefore" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>You should first enter <code>list</code> as input, and press enter.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ListCommandAfter.png" alt="ListCommandAfter" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>Doing so, you will see a result message displayed and the <code>Food Record</code> will now show all <code>Food</code> entries.</p>
 </div>
 </div>
 <div class="sect2">
@@ -797,68 +906,112 @@ Displays a list of <code>Food</code> the user has consumed today.</p>
 <p>(by Zhang Xian)</p>
 </div>
 <div class="paragraph">
-<p>Your <code>Food Record</code> stores all the nutritional information of all the <code>Food</code> that you consume frequently. This <code>update</code> command helps you <code>update</code> your <code>Food Record</code> with either
-a new <code>Food</code>  or <code>update</code> an existing <code>Food</code>  in the <code>Food Record</code>.</p>
+<p>Your <code>Food Record</code> stores all the nutritional values of all the <code>Food</code> that you consume frequently.
+This command helps you to either <code>update</code> a new <code>Food</code> into your <code>Food Record</code> or
+<code>update</code> an existing <code>Food</code> in your <code>Food Record</code> with new nutritional values.</p>
 </div>
 <div class="paragraph">
-<p>There is only two scenarios in which you will use this <code>update</code> command:</p>
+<p>Here are some key pointers:</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Scenario 1: You want to update a new <code>Food</code>  into <code>Food Record</code></p>
-<div class="ulist">
-<ul>
+<p>The <code>Name</code> value for the <code>update</code> command is case-insensitive. This means that inputting n/Apple or n/apple for the <code>Name</code> field means the same.</p>
+</li>
 <li>
-<p>The <code>Food</code> , along with the nutritional values that you inputted will be added into the <code>Food Record</code> as a new <code>Food</code> .</p>
+<p>Calgo automatically formats your <code>Name</code> value to title case. This means that updating the <code>Food Record</code>
+with a <code>Food</code> with <code>Name</code> <code>chicken nugget spicy</code> will result in the <code>Food</code> being saved as <code>Chicken Nugget Spicy</code> in the <code>Food Record</code></p>
+</li>
+<li>
+<p>You cannot <code>update</code> the <code>Food Record</code> with two <code>Food</code> of the same name.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Scenario 2: You want to update an existing <code>Food</code> item in the <code>Food Record</code> with nutritional values</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The existing <code>Food</code>  in the <code>Food Record</code> will be updated with new nutritional values that you have inputted.</p>
-</li>
-</ul>
 </div>
-</li>
-</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+As long as two <code>Food</code> items have the same name, they are deemed to be the same <code>Food</code> item! We suggest you to be as specific as possible in naming your <code>Food</code>.
+Instead of naming your <code>Food</code> "Chocolate", perhaps "White Chocolate" or "Dark Chocolate" would be a better idea!
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>In both scenarios, we have kept the format the same for you:<br>
-Format: <code>update n/NAME cal/CALORIES p/PROTEINS c/CARBOHYDRATES f/FATS [t/TAGS]</code></p>
+<p>Format: <code>update n/NAME cal/CALORIES p/PROTEINS c/CARBOHYDRATES f/FATS [t/TAGS]</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>update n/pizza cal/200 p/10 c/200 f/200</code><br>
-This command adds a new <code>Food</code>, pizza into the user’s food presets with nutritional values of 200 <code>Calorie</code>, 10g of <code>Protein</code>, 200g of <code>Carbohydrate</code> and 200g of <code>Fat</code>.</p>
-</li>
-<li>
-<p><code>update n/pizza cal/100 p/10 c/100 f/30 t/Italiano t/Favourite</code><br>
-As pizza already exists in the user’s <code>Food Record</code>, this command overrides the nutritional values of pizza with 200 <code>Calorie</code>, 10g of <code>Protein</code>, 200g of <code>Carbohydrate</code> and 20g of <code>Fat</code>.
-The pizza is also tagged with the <code>Tag</code> "Italiano" and "Favourite" .</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Example 1: Suppose you often eat Mee Goreng but see that your <code>Food Record</code> does not have a record for this <code>Food</code>. After searching online for the
+nutritional values for Mee Goreng, you found that Mee Goreng has 418 <code>Calories</code>, 8g of <code>Protein</code>, 58g of <code>Carbohydrate</code> and 17g of <code>Fat</code>.
+Here&#8217;s how you update your new <code>Food</code>, Mee Goreng, into your <code>Food Record</code>.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As long as two Food items have the same name, they are deemed to be the same Food item! We suggest you to be as specific in naming your Food
-item as much as possible. Instead of naming your Food "Chocolate", perhaps "White Chocolate" or "Dark Chocolate" would be a better idea!
-</td>
-</tr>
-</table>
+<div class="imageblock">
+<div class="content">
+<img src="images/UpdateCommandNewBefore.png" alt="UpdateCommandNewBefore" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>You should first enter <code>update n/Mee Goreng cal/418 p/8 c/58 f/17</code> as input and press enter.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UpdateCommandNewAfter.png" alt="UpdateCommandNewAfter" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the command has been entered, the <code>Result Display</code> shows the result of your command and the <code>Food Record</code> has been updated with a new <code>Food</code>, Mee Goreng.</p>
+</div>
+<div class="paragraph">
+<p>Example 2: Suppose you realise that there was an error with the nutritional values keyed in for an existing <code>Food</code>, Mee Goreng, inside your <code>Food Record</code>.
+You wish to <code>update</code> the <code>Protein</code> value for Mee Goreng to a new value of 10g</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UpdateCommandExistingFoodBefore.png" alt="UpdateCommandExistingFoodBefore" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>You should first enter <code>update n/Mee Goreng cal/418 p/10 c/58 f/17</code> as input and press enter</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UpdateCommandExistingFoodAfter.png" alt="UpdateCommandExistingFoodAfter" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the command has been entered, the <code>Result Display</code> shows the result of your command and the <code>Food</code>, Mee Goreng, in <code>Food Record</code> has been updated with a new <code>Protein</code>
+nutritional value of 10g.</p>
+</div>
+<div class="paragraph">
+<p>Example 3: Suppose you want to <code>update</code> a new <code>Food</code>, Char Kuay Teow, into the <code>Food Record</code>. However, you typed the name of the <code>Food</code> in hurry and did not capitalise some letters properly.
+Instead of <code>Char Kuay Teow</code>, you accidentally typed <code>char KUay TeoW</code> in the <code>Name</code> field.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UpdateCommandCapitaliseBefore.png" alt="UpdateCommandCapitaliseBefore" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>You would therefore enter <code>update n/char KUay TeoW cal/200 p/20 c/22 f/30 t/greasy</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UpdateCommandCapitaliseAfter.png" alt="UpdateCommandCapitaliseAfter" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>Calgo automatically formats the <code>Name</code> of your <code>Food</code> for you into proper title case into the <code>Food Record</code>. Hence, you see that instead of a hideous <code>char KUay TeoW</code>
+being updated into the <code>Food Record</code>, your new <code>Food</code> item is updated as <code>Char Kuay Teow</code>.</p>
 </div>
 </div>
 </div>
@@ -978,4 +1131,4 @@ item as much as possible. Instead of naming your Food "Chocolate", perhaps "Whit
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 13:57:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 16:30:19 UTC</div></div></div></body></html>

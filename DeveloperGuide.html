@@ -379,11 +379,6 @@ An example of how such a model may look like is given in the below diagram.<br>
 <div class="paragraph">
 <p>Certain properties of the App can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="Implementation-HelpGuide"><a class="link" href="#Implementation-HelpGuide">4.2. Command guide <code>help</code> command</a></h3>
-<div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">4.2.1. Implementation</a></h4>
 <div class="paragraph">
 <p>As with any application with a plethora of commands, it is useful to have an in-app and offline method by which users can view the purpose and usage format of each command.</p>
 </div>
@@ -395,10 +390,36 @@ An example of how such a model may look like is given in the below diagram.<br>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/HelpSequenceDiagram.png" alt="HelpSequenceDiagram">
+<img src="images/HelpSequenceDiagram.png" alt="]// tag::helpcommand[">
 </div>
 <div class="title">Figure 10. Sequence Diagram for Help Command</div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-HelpGuide"><a class="link" href="#Implementation-HelpGuide">4.2. Command guide <code>help</code> command</a></h3>
+<div class="paragraph">
+<p>This section addresses how the <code>help</code> command works.</p>
+</div>
+<div class="paragraph">
+<p>The <code>help</code> command allows us to reference a summarised version of the User Guide (called the command guide)
+containing the usages of the commands and their formats, arranged in alphabetical order. Users may enter an
+optional <code>Command_word</code> that filters the displayed command guide.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>Command_word</code> filters out only commands which contain the <code>Command_word</code> as a substring. If no commands contain it
+as a substring, an error message will be displayed at the top of the <code>HelpWindow</code> and the full command guide will be shown.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">4.2.1. Implementation</a></h4>
 <div class="paragraph">
 <p>Step 1: <code>LogicManager</code> takes in the user input of "help".<br>
 Step 2: <code>FoodRecordParser</code> is passed the String input and is parsed using <code>parseCommand</code>.<br>
@@ -415,14 +436,38 @@ Step 6: <code>HelpWindow</code> is displayed as a separate popup.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> <code>HelpWindow</code> is displayed as a self-contained popup.</p>
+<p><strong>Alternative 1 (current choice):</strong> <code>HelpWindow</code> is displayed as a separate popup.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: User can refer to the command guide in a window separately from the main app. Additionally, no internet access is required as all information on commands are stored offline.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>User can refer to the command guide in a window separately from Calgo, keeping it present as they use the App.</p>
 </li>
 <li>
-<p>Cons: As <code>help</code> does not redirect to a url containing the most up-to-date User Guide, any changes to command functionality or addition of new commands must be updated for local display.</p>
+<p>Command guide can give a more detailed description of command usage and format as it has more space to display in.</p>
+</li>
+<li>
+<p>No internet access is required as all information on commands is stored offline.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>help</code> does not redirect to a url containing the most up-to-date User Guide. Changes made to the User Guide
+must be updated in <code>HelpCommand</code> separately.</p>
+</li>
+<li>
+<p><code>HelpWindow</code> might obstruct view of the App upon initially loading it, causing annoyance.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -432,10 +477,28 @@ Step 6: <code>HelpWindow</code> is displayed as a separate popup.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: No possibility of a popup blocking the main app, and all information is contained within a single window.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>No possibility of a popup blocking the main app.</p>
 </li>
 <li>
-<p>Cons: User must use the <code>help</code> command every time they require a guide, as <code>ResultDisplay</code> will be overwritten after every command.</p>
+<p>All information is contained within a single window.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>User must use the <code>help</code> command every time they require a guide, as <code>ResultDisplay</code> will be
+overwritten after other commands.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -448,14 +511,32 @@ Step 6: <code>HelpWindow</code> is displayed as a separate popup.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> <code>help</code> displays all command guides by default. User can selectively filter to display only desired commands by entering an optional keyword after <code>help</code>.</p>
+<p><strong>Alternative 1 (current choice):</strong> <code>help</code> displays all command guides by default. User can selectively filter to
+display only desired commands by entering an optional keyword after <code>help</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: User can filter out command guides they know they aren&#8217;t looking for, thus having a more focused display.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Desired command can be more rapidly found.</p>
 </li>
 <li>
-<p>Cons: If user does not know the name of the command they want, the filtered <code>help</code> is not useful.</p>
+<p>Removes all unwanted commands from <code>HelpWindow</code>, reducing clutter.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Filtered <code>help</code> does not benefit users who don&#8217;t know the command they&#8217;re looking for.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -465,10 +546,27 @@ Step 6: <code>HelpWindow</code> is displayed as a separate popup.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: No possibility of user being unable to find their desired command after sufficient searching.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>No possibility of user being unable to find their desired command after sufficient searching.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: Can be very overwhelming and frustrating to search through, should an experienced user be using the app.</p>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Relatively large array of commands can be overwhelming to a new user, deterring them from using the App.</p>
+</li>
+<li>
+<p>Can be very frustrating to search through for experienced users.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2154,4 +2252,4 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 13:57:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 16:30:19 UTC</div></div></div></body></html>
