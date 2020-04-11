@@ -28,7 +28,7 @@
 <li><a href="#Implementation-FindList">4.3. Searching for specific <code>Food</code> via categories and substrings</a></li>
 <li><a href="#Implementation-ConsumptionManagement">4.4. <code>Food</code> consumption management</a></li>
 <li><a href="#Implementation-InsightsReport">4.5. Generate insights report</a></li>
-<li><a href="#Implementation-LexicographicOrder">4.6. Lexicographical <code>Food</code> order</a></li>
+<li><a href="#Implementation-LexicographicalOrder">4.6. Lexicographical <code>Food</code> order</a></li>
 <li><a href="#logging">4.7. Logging</a></li>
 <li><a href="#Implementation-SmartUpdate">4.8. Updating <code>FoodRecord</code></a></li>
 <li><a href="#Implementation-CalorieGraph">4.9. Past seven days calorie data graph</a></li>
@@ -42,13 +42,12 @@
 <li><a href="#use-cases">Appendix C: Use Cases</a></li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
-<li><a href="#product-survey">Appendix F: Product Survey</a></li>
-<li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
+<li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-code-food-code">G.2. Deleting a <code>Food</code></a></li>
-<li><a href="#listing-all-code-food-code-entries">G.3. Listing all <code>Food</code> entries</a></li>
-<li><a href="#saving-data">G.4. Saving data</a></li>
+<li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
+<li><a href="#deleting-a-code-food-code">F.2. Deleting a <code>Food</code></a></li>
+<li><a href="#listing-all-code-food-code-entries">F.3. Listing all <code>Food</code> entries</a></li>
+<li><a href="#saving-data">F.4. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -525,7 +524,7 @@ Step 6: <code>HelpWindow</code> is displayed as a separate popup.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For more information on lexicographical ordering, please refer to its relevant section <a href="#Implementation-LexicographicOrder">here</a>.
+For more information on lexicographical ordering, please refer to its relevant section <a href="#Implementation-LexicographicalOrder">here</a>.
 </td>
 </tr>
 </table>
@@ -580,7 +579,7 @@ The class diagram below shows the relevant <code>Predicate&lt;Food&gt;</code> us
 <p>The <code>find</code> command therefore searches through the existing <code>FoodRecord</code> and then displays the relevant search results in the GUI&#8217;s <code>Food Record</code>. To once again show all <code>Food</code> entries in the display, we use the <code>list</code> command.</p>
 </div>
 <div class="paragraph">
-<p>In constrast to the <code>FindCommand</code>, the <code>ListCommand</code> takes in no arguments and simply uses <code>Model.PREDICATE_SHOW_ALL_FOODS</code> defined in the <code>Model</code> interface, as it must always show all <code>Food</code> entries. This is described by the sequence diagram below:</p>
+<p>In constrast to the <code>FindCommand</code>, the <code>ListCommand</code> takes in no arguments (any arguments are ignored) and simply uses the predicate <code>Model.PREDICATE_SHOW_ALL_FOODS</code> defined in the <code>Model</code> interface, as it must always show all <code>Food</code> entries. This is described by the sequence diagram below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1021,7 +1020,7 @@ more memory than .txt files as well.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-LexicographicOrder"><a class="link" href="#Implementation-LexicographicOrder">4.6. Lexicographical <code>Food</code> order</a></h3>
+<h3 id="Implementation-LexicographicalOrder"><a class="link" href="#Implementation-LexicographicalOrder">4.6. Lexicographical <code>Food</code> order</a></h3>
 <div class="paragraph">
 <p>(by Eugene)</p>
 </div>
@@ -1101,10 +1100,16 @@ This allows us to specify the lexicographical order for sorting <code>Food</code
 </div>
 <div class="paragraph">
 <div class="title">Lexicographical Ordering Sequence Diagram for App Start-up</div>
-<p>Based on the above diagram, when Calgo starts:<br>
-Step 1: We initialise the <code>ModelManager</code>. For this, we use previously stored user data if available. Otherwise, we use the default Calgo <code>Food</code> entries.<br>
-Step 2: In creating a <code>ModelManager</code>, we require the creation of a <code>FoodRecord</code> which requires the creation of a <code>UniqueFoodList</code>.<br>
-Step 3: The next step in the creation of the <code>FoodRecord</code> is the introduction of the initialising data, into the <code>UniqueFoodList</code>. Here, the <code>sortInternalList</code> method sorts the <code>ObservableList&lt;Food&gt;</code> contained in <code>UniqueFoodList</code> according to the specified lexicographical order defined in the <code>Food</code> class.</p>
+<p>Based on the above diagram, when Calgo starts:<br></p>
+</div>
+<div class="paragraph">
+<p>Step 1: We initialise the <code>ModelManager</code>. For this, we use previously stored user data if available. Otherwise, we use the default Calgo <code>Food</code> entries.<br></p>
+</div>
+<div class="paragraph">
+<p>Step 2: In creating a <code>ModelManager</code>, we require the creation of a <code>FoodRecord</code> which requires the creation of a <code>UniqueFoodList</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>Step 3: The next step in the creation of the <code>FoodRecord</code> is the introduction of the initialising data, into the <code>UniqueFoodList</code>. Here, the <code>sortInternalList</code> method sorts the <code>ObservableList&lt;Food&gt;</code> contained in <code>UniqueFoodList</code> according to the specified lexicographical order defined in the <code>Food</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The sequence diagram below (a reference frame omitting irrelevant <code>update</code> command details) describes the main sorting process when <code>Food</code> objects are added or edited using the <code>update</code> command:</p>
@@ -1991,6 +1996,9 @@ Use case ends.</p>
 <li>
 <p>The product expects users to initially find out about <code>Food</code> items and their respective nutritional values for creating <code>Food</code> item entries for the first time.</p>
 </li>
+<li>
+<p>The minimum screen size for the App window to fully display its GUI is 1250 x 600.</p>
+</li>
 </ol>
 </div>
 </div>
@@ -2006,61 +2014,24 @@ Use case ends.</p>
 This contains nutritional values of each of their <code>Calorie</code> s, number of grams of <code>Protein</code> s, <code>Carbohydrate</code> s and <code>Fat</code> s.
 They can also contains a series of <code>Tag</code> s.</p>
 </dd>
-<dt class="hdlist1"><a id="food-records"></a> Food Records</dt>
+<dt class="hdlist1"><a id="food-records"></a> FoodRecord</dt>
 <dd>
 <p>The accumulated list of all <code>Food</code> items entered by the user, containing nutritional values of each of their <code>Calorie</code> s, number of grams of <code>Protein</code> s, <code>Carbohydrate</code> s and <code>Fat</code> s.</p>
+</dd>
+<dt class="hdlist1"><a id="gui-food-records"></a> Food Record</dt>
+<dd>
+<p>The GUI&#8217;s <code>Food Record</code> box.</p>
 </dd>
 <dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
 <dd>
 <p>Windows, Linux, Unix, OS-X</p>
-</dd>
-<dt class="hdlist1"><a id="food-records"></a> Food records</dt>
-<dd>
-<p>The accumulated list of all Food items entered by the user, containing nutritional values of calorie, number of grams of protein, carbohydrates and fats.</p>
 </dd>
 </dl>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Product Name</strong></p>
-</div>
-<div class="paragraph">
-<p>Author: &#8230;&#8203;</p>
-</div>
-<div class="paragraph">
-<p>Pros:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Cons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a></h2>
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Given below are instructions to test the App manually.</p>
@@ -2078,7 +2049,7 @@ These instructions only provide a starting point for testers to work on; testers
 </table>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">G.1. Launch and Shutdown</a></h3>
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">F.1. Launch and Shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2113,7 +2084,7 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-code-food-code"><a class="link" href="#deleting-a-code-food-code">G.2. Deleting a <code>Food</code></a></h3>
+<h3 id="deleting-a-code-food-code"><a class="link" href="#deleting-a-code-food-code">F.2. Deleting a <code>Food</code></a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2142,7 +2113,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-code-food-code-entries"><a class="link" href="#listing-all-code-food-code-entries">G.3. Listing all <code>Food</code> entries</a></h3>
+<h3 id="listing-all-code-food-code-entries"><a class="link" href="#listing-all-code-food-code-entries">F.3. Listing all <code>Food</code> entries</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2163,7 +2134,7 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">G.4. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.4. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2183,4 +2154,4 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 10:26:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 13:22:26 UTC</div></div></div></body></html>

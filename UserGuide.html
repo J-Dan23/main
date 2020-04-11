@@ -21,7 +21,7 @@
 <li><a href="#displaying-code-help-code-when-lost-code-help-code">4.5. Displaying <code>help</code> when lost : <code>help</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">4.6. Exiting the program : <code>exit</code></a></li>
 <li><a href="#exporting-the-current-code-food-record-code-into-a-reference-sheet-code-export-code">4.7. Exporting the current <code>Food Record</code> into a reference sheet : <code>export</code></a></li>
-<li><a href="#finding-a-code-food-code-by-nutritional-value-or-keyword-s-code-find-code">4.8. Finding a <code>Food</code> by nutritional value or keyword(s) : <code>find</code></a></li>
+<li><a href="#FindCommand">4.8. Finding a <code>Food</code> by nutritional value or keyword(s) : <code>find</code></a></li>
 <li><a href="#generating-insights-code-report-code">4.9. Generating insights : <code>report</code></a></li>
 <li><a href="#listing-all-code-food-code-in-current-code-food-record-code-code-list-code">4.10. Listing all <code>Food</code> in current <code>Food Record</code> : <code>list</code></a></li>
 <li><a href="#setting-a-daily-code-calorie-code-target-code-goal-code">4.11. Setting a daily <code>Calorie</code> target : <code>goal</code></a></li>
@@ -232,7 +232,8 @@ Format: <code>clear</code></p>
 <div class="sect2">
 <h3 id="consuming-code-food-code-consumed-on-a-certain-day-code-nom-code"><a class="link" href="#consuming-code-food-code-consumed-on-a-certain-day-code-nom-code">4.2. Consuming <code>Food</code> consumed on a certain day : <code>nom</code></a></h3>
 <div class="paragraph">
-<p>The <code>nom</code> command allows you to keep track of your consumption on certain date.<br></p>
+<p>(by Ruicong)
+The <code>nom</code> command allows you to keep track of your consumption on certain date.<br></p>
 </div>
 <div class="paragraph">
 <p>Format: <code>nom n/NAME [d/DATE] [portion/PORTION][r/RATING]</code></p>
@@ -322,7 +323,8 @@ Deletes pizza from the <code>Food Record</code>.</p>
 <div class="sect2">
 <h3 id="deleting-code-food-code-consumed-on-a-certain-day-code-vomit-code"><a class="link" href="#deleting-code-food-code-consumed-on-a-certain-day-code-vomit-code">4.4. Deleting <code>Food</code> consumed on a certain day : <code>vomit</code></a></h3>
 <div class="paragraph">
-<p>Deletes a <code>Food</code> that a user has previously added to the log tracking consumption on that day.</p>
+<p>(by Ruicong)
+Deletes a <code>Food</code> that a user has previously added to the log tracking consumption on that day.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>vomit num/INDEX_OF_FOOD [d/DATE] [portion/PORTION]</code></p>
@@ -493,7 +495,7 @@ Certain <code>Food</code> names may be too long to fit into the given space. The
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="finding-a-code-food-code-by-nutritional-value-or-keyword-s-code-find-code"><a class="link" href="#finding-a-code-food-code-by-nutritional-value-or-keyword-s-code-find-code">4.8. Finding a <code>Food</code> by nutritional value or keyword(s) : <code>find</code></a></h3>
+<h3 id="FindCommand"><a class="link" href="#FindCommand">4.8. Finding a <code>Food</code> by nutritional value or keyword(s) : <code>find</code></a></h3>
 <div class="paragraph">
 <p>(by Eugene)<br></p>
 </div>
@@ -504,17 +506,23 @@ Certain <code>Food</code> names may be too long to fit into the given space. The
 <p>The <code>find</code> command shows all <code>Food</code> entries that have a nutritional value matching what you specify. This can be the number of <code>Calories</code>, or the number of grams of <code>Proteins</code>/<code>Carbohydrates</code>/<code>Fats</code>.</p>
 </div>
 <div class="paragraph">
-<p>Alternatively, you can choose to search for a keyword which appears in the <code>Name</code> or <code>Tag</code> associated with a particular <code>Food</code>.</p>
+<p>Alternatively, you can choose to search for a keyword which appears in any part of the <code>Name</code>, or in any part of any one of the <code>Tag</code> associated with a particular <code>Food</code>.</p>
+</div>
+<div class="paragraph">
+<p>Here is some key information about the command:</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The <code>find</code> command takes in one, and only 1 parameter.</p>
+<p>The <code>find</code> command takes in one, and only one parameter.</p>
 </li>
 <li>
 <p>For finding via nutritional value, only <code>Food</code> matching the same exact value will be shown.</p>
+</li>
+<li>
+<p>To facilitate the possibility of typing errors made by fast typists, any additional input typed without a preceding prefix (e.g. "n/", "p/") will be ignored.</p>
 </li>
 </ul>
 </div>
@@ -665,7 +673,7 @@ This generates a txt file containing the above-mentioned insights made on the co
 <p>(by Eugene)<br></p>
 </div>
 <div class="paragraph">
-<p>With a large number of entries in the <code>Food Record</code>, we can use the <code>find</code> command to narrow down our search. However, this filtered information is only useful for a short amount of time and we will usually want to view all entries in the <code>Food Record</code> again.<br></p>
+<p>With a large number of entries in the <code>Food Record</code>, we can use the <a href="#FindCommand"><code>find</code></a> command to narrow down our search. However, this filtered information is only useful for a short amount of time and we will usually want to view all entries in the <code>Food Record</code> again. This is where the <code>list</code> command comes in handy.<br></p>
 </div>
 <div class="paragraph">
 <p>The <code>list</code> command resets the display accordingly to show all entries in the current <code>Food Record</code>. These will be neatly sorted in alphabetical order, just as the <code>Food Record</code> previously appeared.<br></p>
@@ -675,7 +683,7 @@ This generates a txt file containing the above-mentioned insights made on the co
 <div class="ulist">
 <ul>
 <li>
-<p><code>Food</code> entries will once again be listed with all their corresponding details.<br></p>
+<p><code>Food</code> entries will once again be listed with all their corresponding details.</p>
 </li>
 </ul>
 </div>
@@ -740,6 +748,9 @@ Sets the desired number of <code>Calorie</code> to be consumed to be 2580.</p>
 </div>
 <div class="sect2">
 <h3 id="showing-all-code-food-code-consumed-on-a-particular-day-code-stomach-code"><a class="link" href="#showing-all-code-food-code-consumed-on-a-particular-day-code-stomach-code">4.12. Showing all <code>Food</code> consumed on a particular day : <code>stomach</code></a></h3>
+<div class="paragraph">
+<p>(by Ruicong)</p>
+</div>
 <div class="paragraph">
 <p>Displays a list of <code>Food</code> entries along side how many portions have been consumed on that day.
 For a more detailed statistical report with nutritional values of <code>Food</code> consumed, see the <code>report</code> command.</p>
@@ -967,4 +978,4 @@ item as much as possible. Instead of naming your Food "Chocolate", perhaps "Whit
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 10:26:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-11 13:22:26 UTC</div></div></div></body></html>
