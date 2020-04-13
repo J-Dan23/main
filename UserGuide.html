@@ -30,11 +30,11 @@
 <li><a href="#Commands">5. Commands</a>
 <ul class="sectlevel2">
 <li><a href="#code-clear-code-clearing-all-entries">5.1. <code>clear</code> : Clearing all entries</a></li>
-<li><a href="#code-delete-code-deleting-a-code-food-code-from-current-code-food-record-code">5.2. <code>delete</code> : Deleting a <code>Food</code> from current <code>Food Record</code>:</a></li>
+<li><a href="#code-delete-code-deleting-a-code-food-code-from-current-code-food-record-code">5.2. <code>delete</code> : Deleting a <code>Food</code> from current <code>Food Record</code></a></li>
 <li><a href="#code-exit-code-closing-calgo">5.3. <code>exit</code>: Closing Calgo</a></li>
 <li><a href="#code-export-code-exporting-the-current-code-food-record-code-into-a-reference-sheet">5.4. <code>export</code> : Exporting the current <code>Food Record</code> into a reference sheet</a></li>
 <li><a href="#FindCommand">5.5. <code>find</code> : Finding a <code>Food</code> entry by nutritional value or keyword(s)</a></li>
-<li><a href="#code-goal-code-setting-a-daily-calorie-target">5.6. <code>goal</code> : Setting a daily calorie target</a></li>
+<li><a href="#goal">5.6. <code>goal</code> : Setting a daily calorie target</a></li>
 <li><a href="#code-help-code-displaying-code-help-code-when-lost">5.7. <code>help</code> : Displaying <code>help</code> when lost</a></li>
 <li><a href="#ListCommand">5.8. <code>list</code> : Listing all <code>Food</code> in current <code>Food Record</code></a></li>
 <li><a href="#code-nom-code-adding-code-food-code-to-code-consumption-record-code">5.9. <code>nom</code> : Adding <code>Food</code> to <code>Consumption Record</code></a></li>
@@ -176,10 +176,10 @@ Start experimenting with the commands yourself and experience the convenience Ca
 <div class="ulist">
 <ul>
 <li>
-<p>Learn specific details about the various commands Calgo offers by referring to <a href="#Commands">Section 5, &#8220;Commands&#8221;</a>.</p>
+<p>Learn specific details about the various commands Calgo offers by referring to <a href="#Commands">this section</a>.</p>
 </li>
 <li>
-<p>If you need a complete summary of all commands, refer to <a href="#command-summary">Section 8, &#8220;Command Summary&#8221;</a>.</p>
+<p>If you need a complete summary of all commands, refer to <a href="#command-summary">this table</a>.</p>
 </li>
 </ul>
 </div>
@@ -426,6 +426,31 @@ Never make spelling mistakes again!
 <div class="paragraph">
 <p>If you want to clear all the <code>Food</code> entries currently stored in your <code>Food Record</code>, this command will be useful to you.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The data in your <code>Consumption Record</code> and <code>Graph Display</code> will not be affected from executing the <code>clear</code> command.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To cater to fast typists who are more likely to make typing mistakes, Calgo will still execute this command even if there are
+other parameters or words that are typed after <code>clear</code>.<br>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Format: <code>clear</code><br></p>
 </div>
@@ -434,8 +459,8 @@ Never make spelling mistakes again!
 </div>
 <div class="paragraph">
 <p>Suppose that you want to drastically improve your diet. You decide to take a look at all of your <code>Food</code> entries
-currently in the <code>Food Record</code> but none of them fit into your new diet.
-So instead of deleting each <code>Food</code> entry one by one, you decide to <code>clear</code> them. This is what you need to do:</p>
+currently in the <code>Food Record</code> but realise none of them fit into your new diet.
+To avoid the hassle of deleting each <code>Food</code> entry one by one, you decide to <code>clear</code> them. This is what you need to do:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -443,7 +468,7 @@ So instead of deleting each <code>Food</code> entry one by one, you decide to <c
 </div>
 </div>
 <div class="paragraph">
-<p>First, type <code>clear</code> and press <kbd>enter</kbd>, as shown in the above diagram.</p>
+<p>First, type <code>clear</code> and then press <kbd>enter</kbd>, as shown in the above diagram.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -451,18 +476,12 @@ So instead of deleting each <code>Food</code> entry one by one, you decide to <c
 </div>
 </div>
 <div class="paragraph">
-<p>Upon entering the command, all your <code>Food</code> entries in the  <code>Food Record</code> will be deleted. This will result in an empty <code>Food Record</code>, as shown above.</p>
-</div>
-<div class="paragraph">
-<p>Note that your <code>Consumption Record</code> and <code>Graph Display</code> data is not affected from executing the <code>clear</code> command as shown by the above diagram.</p>
-</div>
-<div class="paragraph">
-<p>To cater to fast typists who are more likely to make typing mistakes, Calgo will still execute <code>clear</code> even if there are
-other parameters or words that are typed after <code>clear</code>.<br></p>
+<p>Upon entering the command, all your <code>Food</code> entries in the  <code>Food Record</code> will be deleted. This will result in an empty <code>Food Record</code>, as shown above.
+As mentioned previously, your data in the <code>Consumption Record</code> and <code>Graph Display</code> is left unchanged.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="code-delete-code-deleting-a-code-food-code-from-current-code-food-record-code"><a class="link" href="#code-delete-code-deleting-a-code-food-code-from-current-code-food-record-code">5.2. <code>delete</code> : Deleting a <code>Food</code> from current <code>Food Record</code>:</a></h3>
+<h3 id="code-delete-code-deleting-a-code-food-code-from-current-code-food-record-code"><a class="link" href="#code-delete-code-deleting-a-code-food-code-from-current-code-food-record-code">5.2. <code>delete</code> : Deleting a <code>Food</code> from current <code>Food Record</code></a></h3>
 <div class="paragraph">
 <p>(by Zhang Xian)</p>
 </div>
@@ -525,8 +544,20 @@ a <code>Food</code> entry for <code>Pizza</code>.</p>
 <div class="sect2">
 <h3 id="code-exit-code-closing-calgo"><a class="link" href="#code-exit-code-closing-calgo">5.3. <code>exit</code>: Closing Calgo</a></h3>
 <div class="paragraph">
-<p>If you want to exit the App, you can use the <code>exit</code> command. All your data is automatically saved upon
-exiting Calgo.</p>
+<p>If you want to exit the App, you can use the <code>exit</code> command.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+All your data is automatically saved upon
+exiting Calgo.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Format: <code>exit</code></p>
@@ -576,7 +607,7 @@ of each <code>Food</code> neatly in a table.</p>
 </td>
 <td class="content">
 This lets you manually track your diet using a reference sheet of your past <code>Food</code> entries. You can freely edit this
-reference sheet to include information outside of the App.<br>
+reference sheet to include information outside of Calgo.<br>
 </td>
 </tr>
 </table>
@@ -603,7 +634,7 @@ Individual entries will also appear on separate lines.
 <p>Example:<br></p>
 </div>
 <div class="paragraph">
-<p>Say you wish to export the current <code>Food Record</code> so that you can print a copy for reference while cooking. Here&#8217;s how you can do it:</p>
+<p>Let&#8217;s suppose you wish to export the current <code>Food Record</code> so that you can print a copy for reference while cooking. Here&#8217;s how you can do it:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -652,14 +683,14 @@ associated with a particular <code>Food</code> entry.</p>
 <p>The <code>find</code> command takes in one, and only one parameter.</p>
 </li>
 <li>
-<p>For finding via nutritional value, only <code>Food</code> matching the same exact value will be shown.</p>
+<p>For finding via nutritional value, only <code>Food</code> entries with the same value will be shown.</p>
 </li>
 <li>
-<p>You don&#8217;t have to capitalise each keyword. The search is always case insensitive when searching for keyword(s) via name or tag.<br></p>
+<p>You don&#8217;t have to capitalise keywords. The search is always case insensitive when searching for keyword(s) via name or tag.<br></p>
 </li>
 <li>
 <p>You don&#8217;t actually have to type out the entire keyword either. For your convenience, incomplete keywords will be matched
-to <code>Food</code> entries containing them in the specified parameter of name or tag.<br></p>
+to <code>Food</code> entries containing them in any part of the specified parameter of name or tag.<br></p>
 </li>
 <li>
 <p>You can search for multiple name keywords by using a single <code>n/</code> <code>Prefix</code>, separating them with space(s).<br></p>
@@ -732,7 +763,7 @@ the keyboard only typed <code>Chees</code>. This is what happens:<br></p>
 </div>
 </div>
 <div class="paragraph">
-<p>You are therefore likely to enter <code>find n/Chees</code> as the command input.<br></p>
+<p>You are likely to enter <code>find n/Chees</code> as the command input.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -754,7 +785,7 @@ with incomplete keywords.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You should type <code>find t/swe</code> as input, and then press <kbd>enter</kbd>.<br></p>
+<p>You can type <code>find t/swe</code> as input, and then press <kbd>enter</kbd>.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -766,18 +797,18 @@ with incomplete keywords.</p>
 their tags. As you can search using incomplete keywords, the intended search for the <code>sweet</code> tag will also have its result shown.<br></p>
 </div>
 <div class="paragraph">
-<p>Please note that the search is case-insensitive, an example being the <code>Sweet</code> tag of <code>Bandung</code>. Moreover,
+<p>Please note that the search is case-insensitive, an example being the resulting <code>Sweet</code> tag of <code>Bandung</code>. Moreover,
 as with Example 2, we allow for incomplete words to be used as search keywords.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="code-goal-code-setting-a-daily-calorie-target"><a class="link" href="#code-goal-code-setting-a-daily-calorie-target">5.6. <code>goal</code> : Setting a daily calorie target</a></h3>
+<h3 id="goal"><a class="link" href="#goal">5.6. <code>goal</code> : Setting a daily calorie target</a></h3>
 <div class="paragraph">
 <p>(by Vineeth)</p>
 </div>
 <div class="paragraph">
 <p>A healthy lifestyle is not achieved overnight. Calgo understands the importance of keeping the end in mind with regards to achieving your healthy lifestyle.
-Thus, to motivate you to put in consistent effort, you can set daily caloric goals for yourself using the <code>goal</code> command.</p>
+Thus, to motivate you to put in consistent effort, you can set daily calorie goals for yourself using the <code>goal</code> command.</p>
 </div>
 <div class="paragraph">
 <p>Here are some key pointers:</p>
@@ -787,10 +818,10 @@ Thus, to motivate you to put in consistent effort, you can set daily caloric goa
 <div class="ulist">
 <ul>
 <li>
-<p>After setting a daily calorie goal, you can still update it subsequently!</p>
+<p>The goal that you set will be used to generate insights in your consumption report. For more information related to that, you check out the <code>report</code> command <a href="#report">here</a>.</p>
 </li>
 <li>
-<p>The goal that you set will be used to generate insights in the <code>report</code> command. (Add hyperlink to report)</p>
+<p>After setting a daily calorie goal, you can still change it whenever you want to. All Calgo insights will subsequently update so that they are based on your most current goal.</p>
 </li>
 </ul>
 </div>
@@ -815,18 +846,26 @@ Acceptable values are positive integers, ranging from 1 to 99999.
 <p>Example:</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s suppose you are a young adult who is trying to lose weight to fit into those tight jeans. You want to lose weight
-so you search online for the ideal number of calories you should take to meet your goal. A credible online source states
-it should be 1900 calories. You can update your daily goal by doing the following:</p>
+<p>Let&#8217;s suppose you are a young adult who is trying to lose weight because your favourite jeans have become too tight.
+You search online for the ideal number of calorie you should consume daily to lose weight. A credible online source states
+it should be 1900 calories. Now, you want to reflect that daily calorie goal in Calgo. You can do that by following this simple step:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GoalCommandBefore.png" alt="GoalCommandBefore" width="">
+</div>
 </div>
 <div class="paragraph">
-<p>Screenshot</p>
+<p>Type in <code>goal 1900</code> and press <kbd>enter</kbd>, as shown above.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GoalCommandAfter.png" alt="GoalCommandAfter" width="">
+</div>
 </div>
 <div class="paragraph">
-<p>Type in <code>goal 1900</code> and press <kbd>enter</kbd>.<br></p>
-</div>
-<div class="paragraph">
-<p>Screenshot</p>
+<p>As you can see, the <code>Daily Goal Display</code> has updated to reflect your daily calorie goal. You can now track your meals
+and get immediate updates on the remaining amount of calories you have to consume for that day to achieve your goal.</p>
 </div>
 </div>
 <div class="sect2">
@@ -914,7 +953,7 @@ command to display only the relevant <code>Food</code> entries. Once we are done
 view all entries again. This is where the <code>list</code> command comes in handy.<br></p>
 </div>
 <div class="paragraph">
-<p>The <code>list</code> command resets the display accordingly to show all entries in the <code>Food Record</code>. These will be neatly sorted,
+<p>The <code>list</code> command resets the display accordingly to show all entries in the <code>Food Record</code>. These entries will be neatly sorted,
 just as the <code>Food Record</code> previously appeared:</p>
 </div>
 <div class="sidebarblock">
@@ -969,7 +1008,7 @@ reset the display. This allows for a smoother workflow as you will now avoid the
 </div>
 </div>
 <div class="paragraph">
-<p>You will then see a result message displayed, and the <code>Food Record</code> will now show all <code>Food</code> entries.</p>
+<p>The <code>Result Display</code> will then indicate the result of your command, and the <code>Food Record</code> will now show all <code>Food</code> entries once again.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1090,20 +1129,40 @@ The <code>Consumption Record</code> panel and <code>Graph Display</code> are upd
 </div>
 <div class="paragraph">
 <p>Why stop at keeping track of your meals? Go a step further and use your past consumption patterns
-to learn how to improve your eating habits? Moreover, won&#8217;t it be convenient if you can automatically generate tips on how to improve?
+to learn how to improve your eating habits. Moreover, won&#8217;t it be convenient if you can automatically generate tips on how to improve?
 This is exactly what the <code>report</code> command can help you with!</p>
 </div>
 <div class="paragraph">
-<p>The <code>report</code> command analyses your <code>Consumption Record</code> to generate
-helpful insights for improving your diet.</p>
+<p>Given a date, the <code>report</code> command analyses your consumption pattern in that day to generate relevant statistics and
+helpful insights for improving your diet. You no longer have to tediously calculate the total amount of calories you consumed in a day. Calgo does it for you, instantly!</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The document generated by the <code>report</code> command is stored in the <code>data/reports</code> folder. This document is named after the given date in this format: yyyy-mm-dd_report.txt. For instance, if you generate a report on 27th of April 2020, the generated document is 2020-04-27_report.txt.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To generate more insightful suggestions, do set a daily calorie goal before generating the report. To learn how to do that,
+check out the <code>goal</code> command <a href="#goal">here</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Given a date, the command generates a document that contains relevant insights related to your food consumption
-pattern on that day. This document is stored in the <code>data/reports</code> folder. The name of this document
-is yyyy-mm-dd_report.txt. For instance, if you generate a report on 27th of April 2020, the generated document is 2020-04-27_report.txt.</p>
-</div>
-<div class="paragraph">
-<p>Refer to the list below for the information generated by the <code>report</code> command.</p>
+<p>Refer to the list below for the various types of insights that you can easily obtain from the <code>report</code> command.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1117,10 +1176,10 @@ is yyyy-mm-dd_report.txt. For instance, if you generate a report on 27th of Apri
 <p>The name of the <code>Food</code>.</p>
 </li>
 <li>
-<p>Quantity consumed. For instance, 3 portions.</p>
+<p>Quantity consumed. For instance, 1.5 portions.</p>
 </li>
 <li>
-<p>Number of calories consumed from each <code>Food</code> entry.</p>
+<p>Number of calories consumed.</p>
 </li>
 </ul>
 </div>
@@ -1148,20 +1207,92 @@ is yyyy-mm-dd_report.txt. For instance, if you generate a report on 27th of Apri
 <p>Example:</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s suppose you had a buffet on 27th of March 2020 and you managed to <code>nom</code> lots of exciting <code>Food</code> into your
+<p>Let&#8217;s suppose you had a buffet on 27th of April 2020 and you managed to <code>nom</code> lots of exciting <code>Food</code> into your
 <code>Consumption Record</code>. It is now the end of the day and you want to look back and find out how you fared. This is what you can do:</p>
 </div>
-<div class="paragraph">
-<p>image here</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReportCommandBefore.png" alt="ReportCommandBefore" width="">
+</div>
 </div>
 <div class="paragraph">
-<p>Type <code>report d/27-03-2020</code> and press <kbd>enter</kbd>, as shown above.</p>
+<p>First, type <code>report d/2020-04-27</code> and press <kbd>enter</kbd>, as shown above.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SampleReport.png" alt="SampleReport" width="">
+</div>
 </div>
 <div class="paragraph">
-<p>Explain step by step what each section refers to.</p>
+<p>Second, go to the <code>data/reports</code> folder and open 2020-04-27_report.txt. You will
+see a report that looks similar to the one in the above screenshot.</p>
 </div>
 <div class="paragraph">
-<p>Add screenshots with labels.</p>
+<p>The following steps breakdown what information is included in each section of the report.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReportHeader.png" alt="ReportHeader" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>The first section is the <code>Report Header</code>, which states the date of your consumption pattern that is being analysed in the report. In this case,
+your food consumption pattern on the 27th of April 2020 is analysed in the displayed report screenshot.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReportGoalInfo.png" alt="ReportGoalInfo" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>The second section is <code>Your Goal Information</code>. This section reminds you of the daily calorie goal that you have set for yourself.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReportFoodwiseStatistics.png" alt="ReportFoodwiseStatistics" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>The third section is <code>Food-wise Statistics</code>. As the name suggests, this section provides you with relevant statistics for every <code>Food</code> entry in your <code>Consumption Record</code> of the given day.
+In this case, you can see a variety of <code>Food</code> entries that you have tracked from your buffet experience. For each <code>Food</code> entry, the report displays the name of the <code>Food</code>, the total number of portions you consumed and the total amount of calories from that <code>Food</code>.
+You can use this information to realise what <code>Food</code> you may be over-consuming.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReportAggregateStatistics.png" alt="ReportAggregateStatistics" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>The fourth section is <code>Aggregate Statistics</code>, which shows you the total amount of calories, protein, carbohydrates and fat that you have consumed on the given day.
+This section could be particularly helpful if you are interested in tracking your total nutritional intake each day.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReportInsights.png" alt="ReportInsights" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>The fifth section is called <code>Insights for You</code>. In this section, Calgo uses your daily calorie goal to explain how close you were to achieving it.
+For you to continually improve your eating habits, Calgo, like any other friend, pushes you with motivating messages and congratulates you if you achieved the goal.
+In this case, as you exceeded the daily calorie goal by 959 calories, Calgo provides you with some reassurance that you can do better the next day to ensure that you do not give up.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReportSuggestions.png" alt="ReportSuggestions" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>The penultimate section is <code>Suggestions for You</code>. In this section, Calgo analyses your <code>Consumption Record</code> of the past week from the given date to find out what you can do to improve your eating habits.
+Calgo does this by using a mix of your ratings and quantity consumed of each <code>Food</code> to intelligently infer what your favourite <code>Food</code> is. It then analyses if you can continue to keep your favourite <code>Food</code> in the past week in your diet based on your daily calorie goal.
+Over time, through Calgo&#8217;s smart suggestions, you will eventually have a diet consisting of your favourite <code>Food</code> entries that are compatible with your goal. How awesome is that!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReportFooter.png" alt="ReportFooter" width="">
+</div>
+</div>
+<div class="paragraph">
+<p>The final section is the <code>Report Footer</code>, which informs you that the report has concluded. This is the part where you realise that Calgo provides you with so many key insights in such a neatly organised and compact document.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1478,7 +1609,7 @@ It can also contain optional tags.</p>
 <p><strong>Food Record</strong>: GUI component that shows Food entries and their respective nutritional information</p>
 </div>
 <div class="paragraph">
-<p><strong>Goal</strong>: Daily caloric goal set by the user.</p>
+<p><strong>Goal</strong>: Daily calorie goal set by the user.</p>
 </div>
 <div class="paragraph">
 <p><strong>Graphical User Interface (GUI)</strong>: A visual interface by which users can interact with Calgo with.</p>
@@ -1542,7 +1673,7 @@ It can also contain optional tags.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Goal</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets your daily caloric goal.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets your daily calorie goal.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>goal GOAL</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>goal 2500</code></p></td>
 </tr>
@@ -1647,4 +1778,4 @@ It can also contain optional tags.</p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 04:46:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 05:01:35 UTC</div></div></div></body></html>

@@ -608,15 +608,15 @@ The lifeline for the both of the <code>FindCommandParser</code> objects, and bot
 <p>From the above, it is clear that both categorical search and substring search of the <code>find</code> command have similar steps:<br></p>
 </div>
 <div class="paragraph">
-<p>Step 1: <code>LogicManager</code> executes the user input, uses <code>CalgoParser</code> to realise this is a <code>find</code> command, and creates a new <code>FindCommandParser</code> object.<br></p>
+<p>Step 1: <code>LogicManager</code> executes the user input, using <code>CalgoParser</code> to realise this is a <code>find</code> command, and a new <code>FindCommandParser</code> object is then created.<br></p>
 </div>
 <div class="paragraph">
-<p>Step 2: The <code>FindCommandParser</code> object parses the user-entered arguments that match the <code>Prefix</code>, creating a <code>Predicate&lt;Food&gt;</code> object based on which <code>Food</code> attribute the <code>Prefix</code> represents.</p>
+<p>Step 2: The <code>FindCommandParser</code> object parses the user-entered arguments that come with the <code>Prefix</code>, creating a <code>Predicate&lt;Food&gt;</code> object based on which <code>Food</code> attribute the <code>Prefix</code> represents.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>In the above diagram examples, a <code>ProteinContainsKeywordsPredicate</code> object is created for the categorical search via <code>Protein</code> while a <code>NameContainsKeywordPredicate</code> object is created for the substring search via <code>Name</code>.<br></p>
+<p>In the above diagram examples, a <code>ProteinContainsKeywordsPredicate</code> object is created for the categorical search via <code>Protein</code> while a <code>NameContainsKeywordsPredicate</code> object is created for the substring search via <code>Name</code>.<br></p>
 </li>
 </ul>
 </div>
@@ -654,13 +654,13 @@ The lifeline for the <code>ListCommand</code> object should end at the destroy m
 <p>How the <code>list</code> command works:</p>
 </div>
 <div class="paragraph">
-<p>Step 1: <code>LogicManager</code> executes the user input, uses <code>CalgoParser</code> to realise this is a <code>list</code> command and thereby create a new <code>ListCommand</code> object.<br></p>
+<p>Step 1: <code>LogicManager</code> executes the user input, using <code>CalgoParser</code> to realise this is a <code>list</code> command, and a new <code>ListCommand</code> object is created.<br></p>
 </div>
 <div class="paragraph">
 <p>Step 2: <code>LogicManager</code> then calls the <code>execute</code> method of this <code>ListCommand</code>, which uses <code>Model.PREDICATE_SHOW_ALL_FOODS</code> to evaluate to true for all <code>Food</code> objects in the <code>FoodRecord</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 3: The GUI&#8217;s <code>Food Record</code> reflects the above changes to show all <code>Food</code> entries.</p>
+<p>Step 3:  <code>LogicManager</code> then returns a new <code>CommandResult</code> object to reflect the status of the execution, in the GUI. The GUI&#8217;s <code>Food Record</code> reflects the above changes to show all <code>Food</code> entries once again.</p>
 </div>
 </div>
 <div class="sect3">
@@ -960,7 +960,7 @@ This allows us to specify the lexicographical order for sorting <code>Food</code
 <p>Step 3: Once <code>UniqueFoodList</code> is constructed, we introduce the initialising data into it using the <code>setFoods</code> method. This calls the <code>sortInternalList</code> method, which sorts the newly added <code>Food</code> objects in the <code>ObservableList&lt;Food&gt;</code> contained in <code>UniqueFoodList</code>, according to the specified lexicographical order (defined in the <code>Food</code> class).</p>
 </div>
 <div class="paragraph">
-<p>Moving on, the sequence diagram below (which is a reference frame omitting irrelevant <code>update</code> command details) describes the lexicographical sorting process when <code>Food</code> objects are added (note: not when they are edited) using the <code>update</code> command:</p>
+<p>Moving on, the sequence diagram below (which is a reference frame omitting irrelevant <code>update</code> command details) describes the lexicographical sorting process when <code>Food</code> objects are added (not edited) using the <code>update</code> command:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1002,7 +1002,7 @@ During an <code>update</code> command, we do not perform sorting if the user ent
 </table>
 </div>
 <div class="paragraph">
-<p>Any re-ordering will eventually be reflected in the GUI, facilitated by the following (in the case of a <code>list</code> command) or otherwise something similar:</p>
+<p>Any re-ordering will eventually be reflected in the GUI, facilitated by the following (in the case of an <code>update</code> command) or otherwise something similar:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1243,7 +1243,7 @@ The lifeline for the <code>ExportCommand</code> object and that of the <code>Exp
 <p>From the above, creating FoodRecord.txt involves the following steps:</p>
 </div>
 <div class="paragraph">
-<p>Step 1: <code>LogicManager</code> executes the user input, uses <code>CalgoParser</code> to realise this is a <code>export</code> command, and thereby creates a new <code>ExportCommand</code> object.<br></p>
+<p>Step 1: <code>LogicManager</code> executes the user input, using <code>CalgoParser</code> to realise this is a <code>export</code> command, and a new <code>ExportCommand</code> object is created.<br></p>
 </div>
 <div class="paragraph">
 <p>Step 2: LogicManager then calls the <code>execute</code> method of this <code>ExportCommand</code> object. This results in a call to the <code>Model</code> to get the current <code>FoodRecord</code>, which is used to construct a new <code>ExportGenerator</code> object. The <code>ExportGenerator</code> is responsible for creating the FoodRecord.txt file and writing to it.</p>
@@ -1252,7 +1252,7 @@ The lifeline for the <code>ExportCommand</code> object and that of the <code>Exp
 <p>Step 3: <code>ExportCommand</code> then calls the <code>generateExport</code> method of <code>ExportGenerator</code>, writing the required parts to the file. This returns a boolean indicating whether the file creation and writing are successful.</p>
 </div>
 <div class="paragraph">
-<p>Step 4: A new <code>CommandResult</code> object indicating the status of the execution is then constructed and reflected in the GUI.</p>
+<p>Step 4: A new <code>CommandResult</code> object indicating the result of the execution is then constructed and reflected in the GUI.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1270,7 +1270,7 @@ The lifeline for the <code>ExportCommand</code> object and that of the <code>Exp
 <div class="ulist">
 <ul>
 <li>
-<p>Satisfies user requirements: able to edit the file to include custom entries.</p>
+<p>Satisfies user requirements by allowing editing of the file to include custom entries.</p>
 </li>
 </ul>
 </div>
@@ -1449,10 +1449,10 @@ The lifeline for the <code>ExportCommand</code> object and that of the <code>Exp
 <div class="sect3">
 <h4 id="summary-4"><a class="link" href="#summary-4">4.5.3. Summary</a></h4>
 <div class="paragraph">
-<p>This section addresses how users are able to obtain an editable copy of the current <code>FoodRecord</code> using the <code>export</code> command.</p>
+<p>In short, this section addresses how users are able to obtain an editable copy of the current <code>FoodRecord</code> using the <code>export</code> command.</p>
 </div>
 <div class="paragraph">
-<p>The <code>export</code> command largely relies on the <code>ExportGenerator</code> class. This facilitates creating the file and writing to it.</p>
+<p>The <code>export</code> command largely relies on the <code>ExportGenerator</code> class, which facilitates creating the file and writing to it.</p>
 </div>
 <div class="paragraph">
 <p>The above can be summarised in the activity diagram below:</p>
@@ -1893,7 +1893,7 @@ This feature is then facilitated by an operation <code>getSimilarfood</code> in 
 <p>This section addresses how the <code>help</code> command works.</p>
 </div>
 <div class="paragraph">
-<p>The <code>help</code> command allows us to reference a summarised version of the User Guide (called the command guide)
+<p>The <code>help</code> command allows users to reference a summarised version of the User Guide (called the command guide)
 containing the usages of the commands and their formats, arranged in alphabetical order. Users may enter an
 optional <code>command word</code> that filters the displayed command guide.</p>
 </div>
@@ -1913,11 +1913,11 @@ as a substring, an error message will be displayed at the top of the <code>HelpW
 <div class="sect3">
 <h4 id="implementation-9"><a class="link" href="#implementation-9">4.9.1. Implementation</a></h4>
 <div class="paragraph">
-<p>To generate a command guide using the <code>help</code> command, a <code>HelpCommand</code> object helps to generate the relevant command guides
+<p>To generate a command guide using the <code>help</code> command, a <code>HelpCommand</code> object generates the relevant command guides
 based on the provided <code>command word</code> in the input.</p>
 </div>
 <div class="paragraph">
-<p>The sequence diagram below demonstrates how teh <code>help</code> command works, should a <code>command word</code> of "nom" be provided.</p>
+<p>The sequence diagram below demonstrates how the <code>help</code> command works, should a <code>command word</code> of "nom" be provided.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -3045,4 +3045,4 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 04:46:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 05:01:35 UTC</div></div></div></body></html>
