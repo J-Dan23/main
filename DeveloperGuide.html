@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="index.html">Calgo</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Calgo</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S2-CS2103T-F11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Calgo - Developer Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team F11-1</code>      Since: <code>March 2020</code>      Licence: <code>MIT</code></p>
+<p>By: <code>Team F11-1</code>      Since: <code>March 2020</code>      Licence: <code>MIT</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Table of Contents</strong>:</p>
@@ -26,8 +26,8 @@
 </li>
 <li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#Implementation-InsightsReport">4.1. Generate insights report</a></li>
-<li><a href="#Implementation-GoalFeature">4.2. Setting Goal Feature</a></li>
+<li><a href="#Implementation-InsightsReport">4.1. Generating consumption statistics and insights report<br></a></li>
+<li><a href="#Implementation-GoalFeature">4.2. Setting daily calorie goals for motivation</a></li>
 <li><a href="#Implementation-FindList">4.3. Searching for specific <code>Food</code> via categories and substrings</a></li>
 <li><a href="#Implementation-LexicographicalOrder">4.4. Lexicographical <code>Food</code> order</a></li>
 <li><a href="#Implementation-Export">4.5. Exporting the current <code>FoodRecord</code> into a portable file</a></li>
@@ -51,9 +51,20 @@
 <li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-code-food-code">F.2. Deleting a <code>Food</code></a></li>
-<li><a href="#listing-all-code-food-code-entries">F.3. Listing all <code>Food</code> entries</a></li>
-<li><a href="#saving-data">F.4. Saving data</a></li>
+<li><a href="#getting-help">F.2. Getting help</a></li>
+<li><a href="#creating-a-code-food-code">F.3. Creating a <code>Food</code></a></li>
+<li><a href="#editing-a-code-food-code">F.4. Editing a <code>Food</code></a></li>
+<li><a href="#deleting-a-code-food-code">F.5. Deleting a <code>Food</code></a></li>
+<li><a href="#listing-all-code-food-code-entries">F.6. Listing all <code>Food</code> entries</a></li>
+<li><a href="#navigating-code-food-record-code">F.7. Navigating <code>Food record</code></a></li>
+<li><a href="#adding-code-food-code-to-consumption-record">F.8. Adding <code>Food</code> to consumption record</a></li>
+<li><a href="#removing-a-portion-of-code-food-code-from-consumption-record">F.9. Removing a portion of <code>Food</code> from consumption record</a></li>
+<li><a href="#navigating-code-consumption-record-code">F.10. Navigating <code>Consumption Record</code></a></li>
+<li><a href="#setting-a-goal">F.11. Setting a goal</a></li>
+<li><a href="#generating-report-for-the-day">F.12. Generating report for the day</a></li>
+<li><a href="#generating-a-copy-of-your-code-food-record-code">F.13. Generating a copy of your <code>Food Record</code></a></li>
+<li><a href="#clearing-code-food-record-code-data">F.14. Clearing <code>Food Record</code> data</a></li>
+<li><a href="#saving-data">F.15. Saving data</a></li>
 </ul>
 </li>
 <li><a href="#effort">Appendix G: Effort</a>
@@ -290,7 +301,7 @@ The lifeline for <code>DeleteCommandParser</code> and <code>DeleteCommand</code>
 </div>
 <div class="sect2">
 <h3 id="Design-Model"><a class="link" href="#Design-Model">3.4. Model component</a></h3>
-<div class="imageblock">
+<div id="Model-Component" class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
 </div>
@@ -305,10 +316,10 @@ The lifeline for <code>DeleteCommandParser</code> and <code>DeleteCommand</code>
 <p><code>Model</code> stores user&#8217;s preferences in a <code>UserPref</code> object.</p>
 </li>
 <li>
-<p><code>Model</code> also stores Food Record data.</p>
+<p><code>Model</code> also stores Food Record and Consumption Record data.</p>
 </li>
 <li>
-<p>This component exposes both <code>ObservableList&lt;Food&gt;</code> and <code>ObservableList&lt;ConsumedFood&gt;</code>. The data stored in
+<p>This component exposes both <code>ObservableList&lt;Food&gt;</code> and <code>ObservableList&lt;DisplayFood&gt;</code>. The data stored in
 these two list objects is reflected in UI. Therefore, any changes made to the data in these lists are shown in the UI in
 real-time.</p>
 </li>
@@ -392,53 +403,77 @@ An example of how such a model may look like is given in the below diagram.<br>
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="Implementation-InsightsReport"><a class="link" href="#Implementation-InsightsReport">4.1. Generate insights report</a></h3>
+<h3 id="Implementation-InsightsReport"><a class="link" href="#Implementation-InsightsReport">4.1. Generating consumption statistics and insights report<br></a></h3>
 <div class="paragraph">
-<p>This feature allows a user to generate a report that contains statistics and deliverable insights based on
-personal food consumption patterns.</p>
+<p>(by Vineeth)</p>
 </div>
 <div class="paragraph">
-<p>The functionality can be invoked by entering the <code>report d/DATE</code> command.
-This command generates a report that is based on the food consumed by
-the user on the specified date.</p>
-</div>
-<div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">4.1.1. Implementation</a></h4>
-<div class="paragraph">
-<p>The specified feature is facilitated by <code>ReportGenerator</code> class in the <code>Storage</code> component.
-In this section, the implementation features of the <code>ReportGenerator</code> class will be further explained.</p>
+<p>This feature allows a user to automatically generate a report that contains statistics and personalised insights based on
+his or her food consumption pattern on a given date. Do note that the generated report is a .txt file.</p>
 </div>
 <div class="paragraph">
-<p><code>ReportGenerator</code> class implements the following operation:</p>
+<p>The user can invoke this functionality by entering the <code>report</code> command, which follows the following format: <code>report d/DATE</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>This section explains:<br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ReportGenerator#generateReport()</code> - Creates report containing an analysis of all food consumed by user on the
-given date when inputting the <code>report</code> command.</p>
+<p>how the <code>report</code> command works and the crucial method it invokes during execution (In the Implementation subsection).</p>
+</li>
+<li>
+<p>the various aspects that were deliberated over when coming up with the design of the statistics and insights report feature (In the Design Considerations subsection).</p>
+</li>
+<li>
+<p>a summary that shows a simplified Activity Diagram that captures the essential logic in the execution of the  <code>report</code> command (In the Summary subsection).</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Whenever the <code>report d/DATE</code> command is given by the user, the <code>ReportGenerate#generateReport()</code> operation is called.</p>
+<p>Before moving on to learn how the feature works, if you want to see what the report includes, you can refer to our <a href="UserGuide.html">User Guide</a>.</p>
 </div>
-<div style="page-break-after: always;"></div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">4.1.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The following sequence diagram illustrates the top-level execution of the <code>generateReport()</code> operation:</p>
+<p>The specified feature is facilitated by a <code>ReportGenerator</code> object. If you are interested in how <code>ReportGenerator</code> fits into the architecture of Calgo,
+refer to this <a href="#Design-Storage">section</a>.</p>
+</div>
+<div class="paragraph">
+<p>To learn how the <code>report</code> command works, the most important method that you need to know is the <code>generateReport()</code> method from the <code>ReportGenerator</code> class.</p>
+</div>
+<div class="paragraph">
+<p>Refer to the sequence diagram below to understand the top-level execution of the <code>generateReport()</code> operation after the user enters a valid <code>report</code> command.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ReportFeatureSequenceDiagram.png" alt="ReportFeatureSequenceDiagram">
 </div>
+<div class="title">Figure 10. Sequence Diagram for <code>report</code> command: generating 2020-03-27_report.txt</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifelines for the <code>ReportCommandParser</code> object, <code>ReportCommand</code> object, <code>ReportGenerator</code> object should end at their destroy markers (X) but due to a limitation of PlantUML, the lifelines reach the end of diagram.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Step 1: User inputs <code>report d/2020-03-27</code> to generate the insights report based on food consumption of 27 March 2020.<br></p>
+<p>From the above diagram, creating a report for the consumption patterns on 27th of March 2020 involves the following steps:</p>
+</div>
+<div class="paragraph">
+<p>Step 1: User inputs <code>report d/2020-03-27</code> to generate the insights report based on food consumption of the abovementioned date.<br></p>
 </div>
 <div class="paragraph">
 <p>Step 2: This input is saved as a <code>String</code> and passed into the <code>LogicManager</code>.<br></p>
 </div>
 <div class="paragraph">
-<p>Step 3: The <code>String</code> input is parsed by <code>CalgoParser</code>, which removes the "d/" prefix tag and sends
+<p>Step 3: The <code>String</code> input is parsed by <code>CalgoParser</code>, which removes the "d/" <code>Prefix</code> and sends
 the date input to <code>ReportCommandParser</code>.<br></p>
 </div>
 <div class="paragraph">
@@ -449,57 +484,60 @@ returns it to <code>LogicManager</code>.</p>
 <p>Step 5: <code>LogicManager</code> then executes the <code>ReportCommand</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 6: From <code>Model</code>, <code>ReportCommand</code> retrieves the <code>DailyFoodLog</code> object that stores all <code>Food</code> consumed on the input date.</p>
+<p>Step 6: From <code>Model</code>, <code>ReportCommand</code> retrieves the required objects to construct an instance of <code>ReportGenerator</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 7: From <code>Model</code>, <code>ReportCommand</code> also retrieves <code>DailyGoal</code> object, which stores the daily number of calories the user wants to consume.</p>
-</div>
-<div class="paragraph">
-<p>Step 8: With the relevant objects retrieved from Steps 6 and 7, <code>ReportCommand</code> constructs a
+<p>Step 7: With the relevant objects retrieved from Steps 6, <code>ReportCommand</code> constructs a
 <code>ReportGenerator</code> object.</p>
 </div>
 <div class="paragraph">
-<p>Step 9: Using the <code>ReportGenerator</code> object, <code>ReportCommand</code> calls <code>#generateInsights()</code>, which prints metainformation
-, food-wise statistics, aggregate statistics and insights based on the <code>DailyFoodLog</code> of the input date.</p>
+<p>Step 8: Using the <code>ReportGenerator</code> object, <code>ReportCommand</code> invokes the <strong>crucial</strong> method <code>generateInsights()</code>, which prints
+neatly organised sections of analysed data based on the <code>DailyFoodLog</code> of the input date. For the section that gives insights related to
+the user&#8217;s favourite <code>Food</code>, the past seven days of <code>DailyFoodLog</code> objects are analysed.</p>
 </div>
 <div class="paragraph">
-<p>Step 10: This newly generated report is saved in the <code>/reports</code> folder. If the report is successfully generated,
+<p>Step 9: This newly generated report is saved in the <code>data/reports</code> folder. If the report is successfully generated,
 the <code>CommandResult</code> is true. Otherwise, it is false. This <code>CommandResult</code> object is finally returned to <code>LogicManager</code>,
-to signify the end of the command.</p>
+to signify the end of the command and GUI shows a result message to the user.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design considerations</a></h4>
+<div class="paragraph">
+<p>Many of the design considerations made for <code>report</code> command are similar to that of the <code>export</code> command. You can check
+out the similar design considerations over <a href="#Design-Export">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>In addition to those design considerations, the following consideration is specific to the functionality of the <code>report</code> command.</p>
+</div>
 <div class="sect4">
-<h5 id="aspect-how-generate-report-executes"><a class="link" href="#aspect-how-generate-report-executes">Aspect: How generate report executes</a></h5>
+<h5 id="aspect-how-many-days-of-past-data-should-be-used-to-analyse-user-s-favourite-code-food-code-for-the-suggestions-section-of-the-report"><a class="link" href="#aspect-how-many-days-of-past-data-should-be-used-to-analyse-user-s-favourite-code-food-code-for-the-suggestions-section-of-the-report">Aspect: How many days of past data should be used to analyse user&#8217;s favourite <code>Food</code> for the suggestions section of the report.</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Print insights into a .txt file.</p>
+<p><strong>Alternative 1 (current choice): Analyse past seven days of consumption data</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: The implementation allows users to easily edit the contents of the report should they have realised they
-did not log in certain food items on that day.</p>
+<p>Pros: This implementation is more efficient as it does not have to churn out all existing consumption data produced by the user so far.</p>
 </li>
 <li>
-<p>Cons: Users could cheat by modifying values in the report. This defeats the purpose of the report to improve their
-self-awareness of their food consumption patterns.</p>
+<p>Cons: The reliability of the suggestions may be impacted due to certain special events such as buffet celebrations, in which the user may consume
+<code>Food</code> that he or she does not usually eat.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Print insights into a pdf file.</p>
+<p><strong>Alternative 2: Analyse all data</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: The insights appear more legitimate and neatly formatted.</p>
+<p>Pros: The insights will be much more reliable and more tolerant of outlier data points.</p>
 </li>
 <li>
-<p>Cons: Requires use of external libraries, which occupy memory of the App. PDF files generally require
-more memory than .txt files as well.</p>
+<p>Cons: The efficiency of the <code>report</code> command gets worse over time and may cause dissatisfaction to the user.</p>
 </li>
 </ul>
 </div>
@@ -511,19 +549,202 @@ more memory than .txt files as well.</p>
 <div class="sect3">
 <h4 id="summary"><a class="link" href="#summary">4.1.3. Summary</a></h4>
 <div class="paragraph">
-<p>The following activity diagram summarizes what happens when user executes a <code>report d/DATE</code> command:<br></p>
+<p>The following activity diagram summarizes what happens when user executes a <code>report d/DATE</code> command with a correctly formatted date:<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ReportActivityDiagram.png" alt="ReportActivityDiagram">
 </div>
-<div class="title">Figure 10. Activity Diagram for Report command</div>
+<div class="title">Figure 11. Activity Diagram for Report command</div>
+</div>
+<div class="paragraph">
+<p>You can check out this code snippet to see how the <code>ReportCommand</code> object determines if there are no <code>Food</code> entries present
+in the given date:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>// if there is no food consumed on the given date, do not execute command
+if (!model.hasLogWithSameDate(queryDate) || model.getLogByDate(queryDate).getFoods().size() == 0) {
+   throw new CommandException(MESSAGE_REPORT_FAILURE + "\n" + String.format(NO_SUCH_DATE, queryDate))
+}</pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-GoalFeature"><a class="link" href="#Implementation-GoalFeature">4.2. Setting Goal Feature</a></h3>
+<h3 id="Implementation-GoalFeature"><a class="link" href="#Implementation-GoalFeature">4.2. Setting daily calorie goals for motivation</a></h3>
+<div class="paragraph">
+<p>(by Vineeth)</p>
+</div>
+<div class="paragraph">
+<p>This feature helps a user chunk his or her long term goal of developing a healthy lifestyle into smaller daily goals.
+Psychologically, this helps to motivate them as the perceived difficulty of achieving the long term goal reduces.</p>
+</div>
+<div class="paragraph">
+<p>The user can set a daily calorie goal with the <code>goal</code> command, which follows the following format: <code>goal GOAL</code>.</p>
+</div>
+<div class="paragraph">
+<p>This section addresses how the <code>goal</code> command works.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">4.2.1. Implementation</a></h4>
+<div class="paragraph">
+<p>In addition to the <code>GoalCommandParser</code>, the <code>goal</code> command relies heavily on the <code>DailyGoal</code> class, which is part of the
+<code>Model</code> component. Refer to the <code>Model</code> component diagram <a href="#Model-Component">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>To address the issue where a user does not want to set up a daily calorie goal, Calgo places a <code>DUMMY_VALUE</code> of 0 calories,
+as shown in the code snippet below, from <code>DailyGoal</code> class. To cater to a wide range of users, it also has a broad range of acceptable
+values, ranging from 1 to 99999. However, to guide users towards a healthy lifestyle, the App does display a warning
+message whenever a user sets a goal below the <code>MINIMUM_HEALTHY_CALORIES</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    // Values used for GoalCommandParser when parsing user inputted goals.
+    public static final int MINIMUM_HEALTHY_CALORIES = 1200;
 
+    public static final int MINIMUM_ACCEPTABLE_CALORIES = 1;
+
+    public static final int MAXIMUM_ACCEPTABLE_CALORIES = 99999;
+
+    // Default value, when user does not input a goal.
+    public static final int DUMMY_VALUE = 0;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Refer to the sequence diagram below to understand how a <code>goal</code> command is executed.
+.Sequence Diagram for <code>goal</code> command: updating daily calorie goal to 2000 calories.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GoalSequenceDiagram.png" alt="GoalSequenceDiagram">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifelines of the <code>GoalCommandParser</code> object, <code>GoalCommand</code> object and <code>DailyGoal</code> object should end at their destroy markers (X) but due to a limitation of PlantUML, the lifelines reach the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following steps explain the sequence diagram:<br></p>
+</div>
+<div class="paragraph">
+<p>Step 1: User inputs <code>goal 2000</code> to update his or her goal to 2000 calories.<br></p>
+</div>
+<div class="paragraph">
+<p>Step 2: This input is saved as a <code>String</code> and passed into the <code>LogicManager</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>Step 3: The <code>String</code> input is parsed by <code>CalgoParser</code>, which sends the <code>goal</code> value input to <code>GoalCommandParser</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>Step 4: Once the <code>GoalCommandParser</code> checks that the given value is valid, it converts the input to an <code>Integer</code> and creates a <code>GoalCommand</code> object and
+returns it to <code>LogicManager</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 5: <code>LogicManager</code> then executes the <code>GoalCommand</code>, which in turn invokes <code>updateDailyGoal</code> method of <code>Model</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 6: In <code>Model</code>, the <code>updateDailyGoal</code> method is a static method that generates a new <code>DailyGoal</code> object with the corresponding input. This <code>DailyGoal</code> object is returned to <code>Model</code>
+, which replaces the existing <code>DailyGoal</code> attribute of the <code>ModelManager</code> with the newly generated <code>DailyGoal</code> object.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-type-of-user-input-data-that-is-required-for-goal-command"><a class="link" href="#aspect-type-of-user-input-data-that-is-required-for-goal-command">Aspect: Type of user input data that is required for goal command</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a simple goal feature that accepts the user&#8217;s inputted value.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The user is not daunted by the large amount of information he or she needs to provide to set a goal.</p>
+</li>
+<li>
+<p>The user will not feel paranoid as Calgo does not ask for personal data such as height, weight, gender and age.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The goal may not be effective unless the user diligently checks online for a appropriate goal and then enters it into Calgo.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a scientific method to calculate the basal metabolic rate of the user.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>The goal is very effective because it matches their body type.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A lot of data is required to be inputted by the user.</p>
+</li>
+<li>
+<p>May cause users to avoid setting goals because of the large amount of personal data they need to store in Calgo.</p>
+</li>
+<li>
+<p>User feeling uncomfortable about setting a goal will also affect effectiveness of <code>report</code> command.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="summary-2"><a class="link" href="#summary-2">4.2.3. Summary</a></h4>
+<div class="paragraph">
+<p>In essence, the <code>goal</code> command is a fun feature that is used to motivate the user and generate specific insights if the
+user were to invoke the <code>report</code> command after setting a daily calorie goal.</p>
+</div>
+<div class="paragraph">
+<p>Refer to the Activity Diagram below for a visual summary of the logic behind the execution of the <code>goal</code> command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/GoalActivityDiagram.png" alt="GoalActivityDiagram">
+</div>
+<div class="title">Figure 12. Activity Diagram for <code>goal</code> command.</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="Implementation-FindList"><a class="link" href="#Implementation-FindList">4.3. Searching for specific <code>Food</code> via categories and substrings</a></h3>
@@ -567,7 +788,7 @@ For more information on lexicographical ordering, please refer to its relevant s
 <p>The above commands rely on the <code>FindCommand</code> and <code>ListCommand</code> objects respectively. Objects of both classes use a <code>Predicate&lt;Food&gt;</code> object to filter through the current <code>Food</code> objects, where <code>Food</code> objects will be displayed in the GUI&#8217;s <code>Food Record</code> should they evaluate these predicates to be true.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">4.3.1. Implementation</a></h4>
+<h4 id="implementation-4"><a class="link" href="#implementation-4">4.3.1. Implementation</a></h4>
 <div class="paragraph">
 <p>To search via a particular <code>Food</code> attribute, we use a <code>FindCommandParser</code> to create the corresponding <code>Predicate&lt;Food&gt;</code> based on which <code>Food</code> attribute the <code>Prefix</code> entered represents. This predicate is then used to construct a new <code>FindCommand</code> object, which changes the GUI display when executed.<br></p>
 </div>
@@ -578,7 +799,7 @@ For more information on lexicographical ordering, please refer to its relevant s
 <div class="content">
 <img src="images/FindListCommandPredicateClassDiagram.png" alt="FindListCommandPredicateClassDiagram">
 </div>
-<div class="title">Figure 11. Class Diagram showing the relevant predicates used in constructing <code>FindCommand</code> objects</div>
+<div class="title">Figure 13. Class Diagram showing the relevant predicates used in constructing <code>FindCommand</code> objects</div>
 </div>
 <div class="paragraph">
 <p>As seen in the above class diagram, each <code>Predicate&lt;Food&gt;</code> is indeed representative of either <code>Name</code>, <code>Calorie</code>, <code>Protein</code>, <code>Carbohydrate</code>, <code>Fat</code>, or <code>Tag</code>. Moreover, it should be noted that each of these predicates test against a <code>Food</code> object, and therefore have a dependency on <code>Food</code>.</p>
@@ -590,7 +811,7 @@ For more information on lexicographical ordering, please refer to its relevant s
 <div class="content">
 <img src="images/FindSequenceDiagram.png" alt="FindSequenceDiagram">
 </div>
-<div class="title">Figure 12. Sequence Diagram for <code>find</code> command: Categorical Search and Substring Search</div>
+<div class="title">Figure 14. Sequence Diagram for <code>find</code> command: Categorical Search and Substring Search</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -636,7 +857,7 @@ The lifeline for the both of the <code>FindCommandParser</code> objects, and bot
 <div class="content">
 <img src="images/ListSequenceDiagram.png" alt="ListSequenceDiagram">
 </div>
-<div class="title">Figure 13. Sequence Diagram for <code>list</code> command</div>
+<div class="title">Figure 15. Sequence Diagram for <code>list</code> command</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -664,7 +885,7 @@ The lifeline for the <code>ListCommand</code> object should end at the destroy m
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.2. Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.2. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-predicate-construction-source"><a class="link" href="#aspect-predicate-construction-source">Aspect: Predicate construction source.</a></h5>
 <div class="ulist">
@@ -843,7 +1064,7 @@ The lifeline for the <code>ListCommand</code> object should end at the destroy m
 </div>
 </div>
 <div class="sect3">
-<h4 id="summary-2"><a class="link" href="#summary-2">4.3.3. Summary</a></h4>
+<h4 id="summary-3"><a class="link" href="#summary-3">4.3.3. Summary</a></h4>
 <div class="paragraph">
 <p>In essence, this section focuses on searching which is implemented via <code>find</code> and <code>list</code> commands.<br></p>
 </div>
@@ -860,7 +1081,7 @@ The lifeline for the <code>ListCommand</code> object should end at the destroy m
 <div class="content">
 <img src="images/FindListCommandActivityDiagram.png" alt="FindListCommandActivityDiagram">
 </div>
-<div class="title">Figure 14. Activity Diagram for Searching</div>
+<div class="title">Figure 16. Activity Diagram for Searching</div>
 </div>
 </div>
 </div>
@@ -905,7 +1126,7 @@ Although the the <code>list</code> command changes the GUI <code>Food Record</co
 </table>
 </div>
 <div class="sect3">
-<h4 id="implementation-4"><a class="link" href="#implementation-4">4.4.1. Implementation</a></h4>
+<h4 id="implementation-5"><a class="link" href="#implementation-5">4.4.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The <code>UniqueFoodList</code> is able to sort <code>Food</code> objects because the <code>Food</code> class implements the <code>Comparable&lt;Food&gt;</code> interface.
 This allows us to specify the lexicographical order for sorting <code>Food</code> objects via their <code>Name</code>, using the following compareTo method in the <code>Food</code> class:</p>
@@ -945,7 +1166,7 @@ This allows us to specify the lexicographical order for sorting <code>Food</code
 <div class="content">
 <img src="images/LexicographicalOrderingStartupSequenceDiagram.png" alt="LexicographicalOrderingStartupSequenceDiagram">
 </div>
-<div class="title">Figure 15. Lexicographical Ordering Sequence Diagram for App Start-up</div>
+<div class="title">Figure 17. Lexicographical Ordering Sequence Diagram for App Start-up</div>
 </div>
 <div class="paragraph">
 <p>Based on the above diagram, when Calgo starts:<br></p>
@@ -966,7 +1187,7 @@ This allows us to specify the lexicographical order for sorting <code>Food</code
 <div class="content">
 <img src="images/LexicographicalOrderingUpdateSequenceDiagram.png" alt="LexicographicalOrderingUpdateSequenceDiagram">
 </div>
-<div class="title">Figure 16. Lexicographical Ordering Sequence Diagram for Updating</div>
+<div class="title">Figure 18. Lexicographical Ordering Sequence Diagram for Updating</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1012,7 +1233,7 @@ During an <code>update</code> command, we do not perform sorting if the user ent
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.4.2. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-frequency-of-sorting-operation"><a class="link" href="#aspect-frequency-of-sorting-operation">Aspect: Frequency of sorting operation.</a></h5>
 <div class="ulist">
@@ -1162,7 +1383,7 @@ During an <code>update</code> command, we do not perform sorting if the user ent
 </div>
 </div>
 <div class="sect3">
-<h4 id="summary-3"><a class="link" href="#summary-3">4.4.3. Summary</a></h4>
+<h4 id="summary-4"><a class="link" href="#summary-4">4.4.3. Summary</a></h4>
 <div class="paragraph">
 <p>The <code>UniqueFoodList</code> facilitates the lexicographical ordering of <code>Food</code> objects and hence how their respective entries appear in the GUI <code>Food Record</code>. This can be summarised in the activity diagram below:</p>
 </div>
@@ -1170,7 +1391,7 @@ During an <code>update</code> command, we do not perform sorting if the user ent
 <div class="content">
 <img src="images/LexicographicalOrderingActivityDiagram.png" alt="LexicographicalOrderingActivityDiagram">
 </div>
-<div class="title">Figure 17. Activity Diagram for Lexicographical Ordering</div>
+<div class="title">Figure 19. Activity Diagram for Lexicographical Ordering</div>
 </div>
 </div>
 </div>
@@ -1198,7 +1419,7 @@ You may find the <code>report</code> command similar as they both create a new f
 </table>
 </div>
 <div class="sect3">
-<h4 id="implementation-5"><a class="link" href="#implementation-5">4.5.1. Implementation</a></h4>
+<h4 id="implementation-6"><a class="link" href="#implementation-6">4.5.1. Implementation</a></h4>
 <div class="paragraph">
 <p>Most of the work in generating the file is done by the <code>generateExport</code> method of <code>ExportGenerator</code>. You can access the class to view its methods for writing the header and footer components, which are relatively easily to understand.</p>
 </div>
@@ -1225,7 +1446,7 @@ Meanwhile, <code>VALUE_COLUMN_SIZE</code> represents the allowed space for each 
 <div class="content">
 <img src="images/ExportSequenceDiagram.png" alt="ExportSequenceDiagram">
 </div>
-<div class="title">Figure 18. Sequence Diagram for <code>export</code> command: Generating FoodRecord.txt</div>
+<div class="title">Figure 20. Sequence Diagram for <code>export</code> command: Generating FoodRecord.txt</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1256,7 +1477,7 @@ The lifeline for the <code>ExportCommand</code> object and that of the <code>Exp
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.2. Design considerations</a></h4>
+<h4 id="Design-Export"><a class="link" href="#Design-Export">4.5.2. Design considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-type-of-file-to-create"><a class="link" href="#aspect-type-of-file-to-create">Aspect: Type of file to create.</a></h5>
 <div class="ulist">
@@ -1447,7 +1668,7 @@ The lifeline for the <code>ExportCommand</code> object and that of the <code>Exp
 </div>
 </div>
 <div class="sect3">
-<h4 id="summary-4"><a class="link" href="#summary-4">4.5.3. Summary</a></h4>
+<h4 id="summary-5"><a class="link" href="#summary-5">4.5.3. Summary</a></h4>
 <div class="paragraph">
 <p>In short, this section addresses how users are able to obtain an editable copy of the current <code>FoodRecord</code> using the <code>export</code> command.</p>
 </div>
@@ -1461,7 +1682,7 @@ The lifeline for the <code>ExportCommand</code> object and that of the <code>Exp
 <div class="content">
 <img src="images/ExportActivityDiagram.png" alt="ExportActivityDiagram">
 </div>
-<div class="title">Figure 19. Activity Diagram for Searching</div>
+<div class="title">Figure 21. Activity Diagram for Searching</div>
 </div>
 </div>
 </div>
@@ -1471,33 +1692,132 @@ The lifeline for the <code>ExportCommand</code> object and that of the <code>Exp
 <p>(by Ruicong)</p>
 </div>
 <div class="paragraph">
-<p>In Calgo, you will find that there is a date associated with each list of <code>ConsumedFood</code>.
-When adding food to be consumed, removing food, or displaying food consumed on certain days,
-a <code>FilteredList</code> will be populated with relevant <code>ConsumedFood</code>.</p>
+<p>This section addresses how <code>nom</code>, <code>vomit</code>, and <code>stomach</code> commands work. They are the 3 commands that you will use
+to interact with <code>ConsumptionRecord</code>. <code>nom</code> allows you to add <code>Food</code>, <code>vomit</code> allows you to remove <code>Food</code>, and <code>stomach</code>
+gives you a way to browse a list of <code>Food</code> within the <code>ConsumptionRecord</code> at a different date. <code>ConsumptionRecord</code> is an important
+component because it serves as a backend for features such as <code>goal</code>, <code>report</code> and <code>graph</code>.</p>
+</div>
+<div class="paragraph">
+<p>The high level idea of how <code>Food</code> consumption is managed is that <code>ConsumptionRecord</code> stores all the <code>Food</code> consumed.
+Whenever <code>nom</code>, <code>vomit</code>, or <code>stomach</code> is used, a list will be retrieve and sent to a FilteredList. Such a list consists of <code>DisplayFood</code> objects,
+for the purpose of displaying information compiled from each <code>Food</code>.
+The FilteredList is an observable, so whenever it is updated, the GUI will be informed and display the contents accordingly.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-6"><a class="link" href="#implementation-6">4.6.1. Implementation</a></h4>
+<h4 id="implementation-7"><a class="link" href="#implementation-7">4.6.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The <code>nom</code>, <code>vomit</code> and <code>stomach</code> commands are facilitated by the <code>FoodRecord</code>. <br>
-<code>FoodRecord</code> contains a <code>UniqueDateToLogMap</code>, which maps a <code>LocalDate</code> to a <code>DailyFoodLog</code>.<br>
-<code>DailyFoodLog</code> contains a <code>LinkedHashMap</code> storing <code>Food</code> in the sequence that they were consumed and maps those <code>Food</code> to a <code>Double</code> portion.</p>
+<p>In this section, I will be walking you through the implementation of the <code>ConsumptionRecord</code>, what happens on App startup,
+and what happens when a consumption related command is called. I will be talking about the <code>nom</code> command more specifically.
+This is because <code>vomit</code> and <code>stomach</code> work very similarly, and you will see that it&#8217;s easy to understand once you have read through this
+section.</p>
+</div>
+<div id="ConsumptionRecord-desc" class="paragraph">
+<p>In Calgo, you will find that the GUI <code>ConsumptionRecord</code> use a <code>uniqueDateToLogMap</code> to map each <code>LocalDate</code> to a <code>DailyFoodLog</code>.
+As you can guess, <code>LocalDate</code> keys are unique.<br>
+Each <code>DailyFoodLog</code> is related to a <code>LocalDate</code> object and contains 2 <code>LinkedHashMap</code>, one to map <code>Food</code> consumed to their portion,
+another to map <code>Food</code> to an <code>ArrayList</code> of <code>Integer</code>, which represents the ratings given to that <code>Food</code> item consumed on that day.</p>
 </div>
 <div class="paragraph">
-<p>This section covers how the <code>nom</code> command is implemented. The <code>vomit</code> and <code>stomach</code> commands work in very similar way, hence their implementation is omitted for brevity.</p>
+<p>On App startup, <code>initModelManager</code> of <code>MainApp</code> class is invoked. This will cause <code>storage</code> to read consumption record data from a <code>.json</code> file
+which stores App data. The <code>.json</code> file stores <code>JsonAdaptedDailyFoodLog</code>, which is similar to <code>DailyFoodLog</code> in every way,
+but deals with <code>JsonAdaptedFood</code> class instead of <code>Food</code>. Notice that there are a chain of <code>toModelType</code> commands
+called as we dive deeper into the method call stack. <code>toModelType</code> is actually the method to return a working counterpart of <code>JsonSerializable</code> and <code>JsonAdapted</code> classes
+that will be delivered to the model of Calgo.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+So you might ask, what does <code>JsonAdapted</code> mean? Well, <code>JsonAdapted</code> classes are specially formatted versions
+of their counterparts that makes it easy for the <code>Jackson</code> API to read and write to.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>A top-level illustration of the execution of a <code>nom</code> command is given in the sequence diagram below:</p>
+<p>Here is what happens when different classes call <code>toModelType</code>:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>JsonSerializableConsumptionRecord</code> returns its equivalent copy of <code>ConsumptionRecord.</code></p>
+</li>
+<li>
+<p><code>JsonAdaptedDailyFoodLog</code> returns its equivalent copy of <code>DailyFoodLog</code>.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="images/NomSequenceDiagram.png" alt="NomSequenceDiagram"></span></p>
+<p>Below shows the high level view of the initialization process:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ConsumptionRecordSequenceDiagram.png" alt="ConsumptionRecordSequenceDiagram">
+</div>
+<div class="title">Figure 22. Sequence Diagram for loading of Consumption Record</div>
 </div>
 <div class="paragraph">
-<p>Step 1: User enters a command, which is saved as a <code>String</code> and passed into the <code>LogicManager</code>.<br>
-Step 2: The <code>String</code> cascades down the layers of abstraction until <code>NomCommandParser</code> handles it and creates a
-<code>DailyFoodLog</code> which reflects the consumption.<br>
-Step 3: A <code>NomCommand</code> is created and executed, updating both <code>ModelManager</code> and <code>FoodRecord</code> about the consumed food.<br>
-Step 4: A <code>FilteredList</code> in <code>ModelManger</code> will then check with <code>FoodRecord</code> to create <code>ConsumedFood</code> items to display in the Graphical User Interface (GUI).<br>
-Step 5: The GUI automatically detects changes in <code>FilteredList</code> and refreshes to display updated content.</p>
+<p>Now that the <code>ConsumptionRecord</code> has been initialized, the App can start interacting with the user.</p>
+</div>
+<div class="paragraph">
+<p>Whenever the user enters a <code>nom</code> command into the GUI, a sequence of events occur.
+Here is a a step-by-step guide to what happens in such a scenario:<br></p>
+</div>
+<div class="paragraph">
+<p>Step 1: <code>UI</code> component <code>MainWindow</code> receives the input as a <code>String</code>. That <code>String</code> is then passed into LogicManager,
+which calls the <code>parseCommand</code> of <code>CalgoParser</code>. Suppose the <code>String</code> is "nom n/Apple d/2020-04-12 portion/2 r/7"
+<code>CalgoParser</code> detects that this is a <code>nom</code> command. <code>CalgoParser</code> then delegates this job by creating
+a new <code>NomCommandParser</code> object which will parse this <code>String</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>Step 2: <code>NomCommandParser</code> gets relevant values from <code>Prefixes</code> of input <code>String</code>, and then checks with the <code>ModelManager</code>.
+It specifically checks if there exists a <code>DailyFoodLog</code> with the same <code>LocalDate</code> as what was parsed so that it can use existing information if
+they are already present. From all these information, a <code>DailyFoodLog</code> object representing the result of consuming a <code>Food</code> is created, and supplied to create
+<code>NomCommand</code>. The diagram below shows how this happens:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For the subsequent sequence diagrams in the section,
+the lifelines for objects should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NomCommandParserSequenceDiagram.png" alt="NomCommandParserSequenceDiagram">
+</div>
+<div class="title">Figure 23. Sequence Diagram for parsing of Nom command</div>
+</div>
+<div class="paragraph">
+<p>Step 3: <code>NomCommand</code> updates the <code>ModelManager</code> with the <code>DailyFoodLog</code> obtained during its execution by <code>LogicManager</code>.
+Such information cascades down the layers of abstraction until it reaches <code>ConsumptionRecord</code>,
+which updates its underlying 'uniqueDateToLogMap' aforementioned <a href="#ConsumptionRecord-desc">here</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NomCommandSequenceDiagram.png" alt="NomCommandSequenceDiagram">
+</div>
+<div class="title">Figure 24. Sequence Diagram of how Nom command executes</div>
+</div>
+<div class="paragraph">
+<p>Step 4: <code>NomCommand</code> then informs the <code>ModelManager</code> to update its <code>FilteredList</code>, which gets information from the updated <code>ConsumptionRecord</code>.
+Since the <code>FilteredList</code> is a wrapper of <code>ObservableList</code>, its update will inform the UI components that utilise JavaFx of changes.
+This results in the GUI automatically updating to reflect the changes.</p>
+</div>
+<div class="paragraph">
+<p>Step 5: A new <code>commandResult</code> object is created an passed back to <code>MainWindow</code>, and displayed in <code>Result Display</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 6: Finally, the changes in <code>ConsumptionRecord</code> are saved to <code>StorageManager</code>.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1508,11 +1828,21 @@ Step 5: The GUI automatically detects changes in <code>FilteredList</code> and r
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Create a new <code>DailyFoodLog</code> to pass into <code>ModelManager</code> and <code>FoodRecord</code>.</p>
+<p><strong>Alternative 1 (current choice):</strong> Create a new <code>DailyFoodLog</code> to pass into <code>ModelManager</code> and then <code>ConsumptionRecord</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Maintain comprehensive layers of abstraction and allows code to be easily testable.</p>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Maintain comprehensive layers of abstraction</p>
+</li>
+<li>
+<p>Allows code to be easily testable.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>Cons: Difficult for newcomers or even existing users to trace because of long execution path.</p>
@@ -1521,12 +1851,12 @@ Step 5: The GUI automatically detects changes in <code>FilteredList</code> and r
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Bypass <code>ModelManager</code> or even not use <code>FoodRecord</code> for storage of data during runtime by allowing everything to be done
+<p><strong>Alternative 2:</strong> Bypass <code>ModelManager</code> or even not use <code>ConsumptionRecord</code> for storage of data during runtime by allowing everything to be done
 from parser.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Reduce dependencies on <code>ModelManager</code> and <code>FoodRecord</code>, and make code contained in a single class file easier to navigate.</p>
+<p>Pros: Reduce dependencies on <code>ModelManager</code> and <code>ConsumptionRecord</code>, and make code contained in a single class file easier to navigate.</p>
 </li>
 <li>
 <p>Cons: Violates layers of abstraction set in place by previous structure of AddressBook3. Violates Single Responsibility Principle and reduce
@@ -1573,17 +1903,72 @@ in <code>DailyFoodLog</code> for each <code>LocalDate</code>.</p>
 </ul>
 </div>
 </div>
+<div class="sect4">
+<h5 id="aspect-selecting-items-to-delete-from-code-consumptionrecord-code-using-code-vomit-code-command"><a class="link" href="#aspect-selecting-items-to-delete-from-code-consumptionrecord-code-using-code-vomit-code-command">Aspect: Selecting items to delete from <code>ConsumptionRecord</code> using <code>Vomit</code> command</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use index to select item to delete.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: When the list is short, user can quickly identify the entry to delete.</p>
+</li>
+<li>
+<p>Pros: Convenient for user as he is required to type less.</p>
+</li>
+<li>
+<p>Pros: User need not spend effort remembering names.</p>
+</li>
+<li>
+<p>Cons: When there are too many records, user is required to scroll through records.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use name to select item to delete</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Can utilise the <code>Result Display</code> suggestion to improve user experience.</p>
+</li>
+<li>
+<p>Cons: User face the hassle of memorising names and typing more.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="summary-5"><a class="link" href="#summary-5">4.6.3. Summary</a></h4>
+<h4 id="summary-6"><a class="link" href="#summary-6">4.6.3. Summary</a></h4>
 <div class="paragraph">
-<p>The <code>nom</code> command adds a <code>Food</code> item consumed by the user into the <code>stomach</code>. The following activity diagram summarizes what happens when the user executes a <code>nom</code> command.</p>
+<p>This section is a summary on all the above discussed. I would do so with the aid of a few activity diagrams so that you
+are clear about the flow of the processes covered.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/NomActivityDiagram.png" alt="NomActivityDiagram">
+<img src="images/OverallConsumptionActivityDiagram.png" alt="OverallConsumptionActivityDiagram">
 </div>
-<div class="title">Figure 20. Activity Diagram for Nom</div>
+<div class="title">Figure 25. Activity Diagram for the 3 consumption related command</div>
+</div>
+<div class="paragraph">
+<p>The 2 diagrams below serves as (rakes), which shows more details.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/NomActiivityDiagram.png" alt="NomActiivityDiagram">
+</div>
+<div class="title">Figure 26. Activity Diagram for Nom command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/VomitCommandActivityDiagram.png" alt="VomitCommandActivityDiagram">
+</div>
+<div class="title">Figure 27. Activity Diagram for Vomit command</div>
 </div>
 </div>
 </div>
@@ -1630,7 +2015,7 @@ This command takes in the <code>Name</code> of the <code>Food</code> entry to be
 the same <code>Food</code> entry with <code>Name</code> stored as <code>Apple</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-7"><a class="link" href="#implementation-7">4.7.1. Implementation</a></h4>
+<h4 id="implementation-8"><a class="link" href="#implementation-8">4.7.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The modification of the <code>FoodRecord</code> is facilitated by <code>UniqueFoodList</code>, which is responsible for storing all the <code>Food</code> entries in the <code>FoodRecord</code>.
 Additional abstractions were used by <code>Model</code> and <code>Logic</code> for any operations that results in a modification of the <code>UniqueFoodList</code>.</p>
@@ -1656,7 +2041,7 @@ edits the nutritional values of an existing <code>Food</code> in the <code>Uniqu
 <div class="content">
 <img src="images/UpdateSequenceDiagram.png" alt="UpdateSequenceDiagram">
 </div>
-<div class="title">Figure 21. Sequence Diagram for <code>update</code> command</div>
+<div class="title">Figure 28. Sequence Diagram for <code>update</code> command</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1744,7 +2129,7 @@ deleted exists in the <code>UniqueFoodList</code>.</p>
 <div class="content">
 <img src="images/DeleteSequenceDiagram.png" alt="DeleteSequenceDiagram">
 </div>
-<div class="title">Figure 22. Sequence Diagram for <code>delete</code> command</div>
+<div class="title">Figure 29. Sequence Diagram for <code>delete</code> command</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1854,7 +2239,7 @@ checks if there is such <code>Food</code> in the <code>UniqueFoodList</code>.</p
 </div>
 </div>
 <div class="sect3">
-<h4 id="summary-6"><a class="link" href="#summary-6">4.7.3. Summary</a></h4>
+<h4 id="summary-7"><a class="link" href="#summary-7">4.7.3. Summary</a></h4>
 <div class="paragraph">
 <p>In summary, this section explains how commands related to modifying the <code>FoodRecord</code> is implemented.</p>
 </div>
@@ -1867,7 +2252,7 @@ The following activity diagram summarises what happens when a user enters a vali
 <div class="content">
 <img src="images/UpdateActivityDiagram.png" alt="UpdateActivityDiagram">
 </div>
-<div class="title">Figure 23. Activity Diagram for <code>update</code> command</div>
+<div class="title">Figure 30. Activity Diagram for <code>update</code> command</div>
 </div>
 <div class="paragraph">
 <p>The <code>delete</code> command allows the user to remove a <code>Food</code> entry from the <code>FoodRecord</code> by specifying it&#8217;s <code>Name</code> as an parameter.
@@ -1877,7 +2262,7 @@ The following activity diagram summarises what happens when a user enters a vali
 <div class="content">
 <img src="images/DeleteActivityDiagram.png" alt="DeleteActivityDiagram">
 </div>
-<div class="title">Figure 24. Activity Diagram for <code>delete</code> command</div>
+<div class="title">Figure 31. Activity Diagram for <code>delete</code> command</div>
 </div>
 </div>
 </div>
@@ -1911,7 +2296,7 @@ The <code>Name</code> parameter is case-insensitive and searches the <code>Food<
 </table>
 </div>
 <div class="sect3">
-<h4 id="implementation-8"><a class="link" href="#implementation-8">4.8.1. Implementation</a></h4>
+<h4 id="implementation-9"><a class="link" href="#implementation-9">4.8.1. Implementation</a></h4>
 <div class="paragraph">
 <p>To be able to process user&#8217;s input in real-time, we set a <code>listener</code> in the <code>CommandBox</code> to listen for the input of any of the three commands: <code>update</code>, <code>delete</code> or <code>nom</code>
 This feature is then facilitated by different objects, mainly <code>MainWindow</code> and <code>UniqueFoodList</code>. <code>MainWindow</code> interacts with <code>LogicManager</code> 's method of <code>getSimilarFood</code> which exposes
@@ -1953,7 +2338,7 @@ back to the <code>LogicManager</code> to be displayed by the GUI. The <code>test
 <div class="content">
 <img src="images/RealTimeSuggestionSequenceDiagram.png" alt="RealTimeSuggestionSequenceDiagram">
 </div>
-<div class="title">Figure 25. Real-time Suggestion Feature Sequence Diagram</div>
+<div class="title">Figure 32. Real-time Suggestion Feature Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>Based on the above diagram, when a user has already entered any of the <code>CommandWord</code>: <code>update</code>, <code>delete</code> or <code>nom</code>, and also the Prefix <code>n/</code>:</p>
@@ -2118,7 +2503,7 @@ back to the <code>LogicManager</code> to be displayed by the GUI. The <code>test
 </div>
 </div>
 <div class="sect3">
-<h4 id="summary-7"><a class="link" href="#summary-7">4.8.3. Summary</a></h4>
+<h4 id="summary-8"><a class="link" href="#summary-8">4.8.3. Summary</a></h4>
 <div class="paragraph">
 <p><code>CommandBox</code> listens for any of the three commands as mentioned, allowing <code>LogicManager</code> and <code>FoodRecord</code> to facilitate
 the suggestions of similar <code>Food</code> entries from the <code>UniqueFoodList</code> to display in the GUI&#8217;s <code>Result Display</code>. This can be summarised
@@ -2128,7 +2513,7 @@ in the activity diagram below:</p>
 <div class="content">
 <img src="images/RealTimeSuggestionActivityDiagram.png" alt="RealTimeSuggestionActivityDiagram">
 </div>
-<div class="title">Figure 26. Real-time Suggestion Feature Activity Diagram</div>
+<div class="title">Figure 33. Real-time Suggestion Feature Activity Diagram</div>
 </div>
 </div>
 </div>
@@ -2156,7 +2541,7 @@ as a substring, an error message will be displayed at the top of the GUI compone
 </table>
 </div>
 <div class="sect3">
-<h4 id="implementation-9"><a class="link" href="#implementation-9">4.9.1. Implementation</a></h4>
+<h4 id="implementation-10"><a class="link" href="#implementation-10">4.9.1. Implementation</a></h4>
 <div class="paragraph">
 <p>To generate a command guide using the <code>help</code> command, a <code>HelpCommand</code> object generates the relevant command guides
 based on the provided <code>command word</code> in the input.</p>
@@ -2168,7 +2553,7 @@ based on the provided <code>command word</code> in the input.</p>
 <div class="content">
 <img src="images/HelpSequenceDiagram.png" alt="HelpSequenceDiagram">
 </div>
-<div class="title">Figure 27. Sequence Diagram for Help</div>
+<div class="title">Figure 34. Sequence Diagram for Help</div>
 </div>
 <div class="paragraph">
 <p>Step 1: <code>LogicManager</code> executes the user input, using <code>CalgoParser</code> to realise it is a <code>help</code> command, and thus creates
@@ -2343,7 +2728,7 @@ display only desired commands by entering an optional keyword after <code>help</
 </div>
 </div>
 <div class="sect3">
-<h4 id="summary-8"><a class="link" href="#summary-8">4.9.3. Summary</a></h4>
+<h4 id="summary-9"><a class="link" href="#summary-9">4.9.3. Summary</a></h4>
 <div class="paragraph">
 <p><code>help</code> will produce a popup, displaying a guide on the App&#8217;s available commands' purposes and usage format.</p>
 </div>
@@ -2351,7 +2736,7 @@ display only desired commands by entering an optional keyword after <code>help</
 <div class="content">
 <img src="images/HelpActivityDiagram.png" alt="HelpActivityDiagram">
 </div>
-<div class="title">Figure 28. Activity Diagram for Help</div>
+<div class="title">Figure 35. Activity Diagram for Help</div>
 </div>
 <div style="page-break-after: always;"></div>
 <div style="page-break-after: always;"></div>
@@ -2385,7 +2770,7 @@ for the past seven days from that date, inclusive.
 </table>
 </div>
 <div class="sect3">
-<h4 id="implementation-10"><a class="link" href="#implementation-10">4.10.1. Implementation</a></h4>
+<h4 id="implementation-11"><a class="link" href="#implementation-11">4.10.1. Implementation</a></h4>
 <div class="paragraph">
 <p><code>GraphPanel</code> in the <code>Ui</code> component. It contains a <code>LineChart</code> of <code>String</code> date against <code>Number</code> calories, and is populated with
 data from an <code>XYChart.series</code>. The data is in turn obtained from the <code>Logic</code> component, which provides only the past seven days'
@@ -2427,7 +2812,7 @@ most recent app data.</p>
 <div class="content">
 <img src="images/GraphSequenceDiagram.png" alt="GraphSequenceDiagram">
 </div>
-<div class="title">Figure 29. Sequence Diagram for GraphPanel</div>
+<div class="title">Figure 36. Sequence Diagram for GraphPanel</div>
 </div>
 <div class="paragraph">
 <p>Sequence Diagram for <code>Graph</code> feature.</p>
@@ -2486,7 +2871,7 @@ Third, <code>updateSeries</code> method is called to ensure the data populating 
 </div>
 </div>
 <div class="sect3">
-<h4 id="summary-9"><a class="link" href="#summary-9">4.10.3. Summary</a></h4>
+<h4 id="summary-10"><a class="link" href="#summary-10">4.10.3. Summary</a></h4>
 <div class="paragraph">
 <p>In summary, this section addresses how the graph obtains information on the past seven <code>DailyFoodLog</code>, and correspondingly
 produces a visual graph output onto Calgo&#8217;s <code>Main Window</code> GUI component viewable by the user.</p>
@@ -2588,7 +2973,7 @@ to the user.</p>
 <p>Manages a significant number of <code>Food</code> items</p>
 </li>
 <li>
-<p>Prefers desktop Apps over other types</p>
+<p>Prefers desktop Apps over other types of Apps (such as mobile or tablet)</p>
 </li>
 <li>
 <p>Prefers typing over mouse input</p>
@@ -3067,7 +3452,7 @@ Steps 1a1 and 1a2 are repeated until user enters a valid input.<br></p>
 </div>
 <div class="paragraph">
 <p><strong>1b. Inputted <code>date</code> in wrong format.</strong><br>
-1b1. Calgo shows a message indicating the correct format for the <code>date</code>.
+1b1. Calgo shows a message indicating the correct format for the <code>date</code>.<br>
 1b2. User enters <code>report</code> command with the <code>date</code> in the correct format.<br></p>
 </div>
 <div class="paragraph">
@@ -3079,6 +3464,41 @@ Steps 1a1 and 1a2 are repeated until user enters a valid input.<br></p>
 </div>
 <div class="paragraph">
 <p>Use case ends.</p>
+</div>
+<h3 id="use-case-consuming-food-on-a-on-a-specific-day-with-code-nom-code" class="discrete">Use case: consuming food on a on a specific day with <code>nom</code>.</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User wants to record their <code>Food</code> consumption on a particular day.</p>
+</li>
+<li>
+<p>User enters <code>nom</code> command with the appropriate <code>Prefixes</code> and values.</p>
+</li>
+<li>
+<p>Calgo processes the command and update display.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>2a. User misspells the command or <code>Prefix</code></strong><br>
+2a1. A message prompting the user to enter a valid input is shown.<br>
+Use case resumes from Step 2.</p>
+</div>
+<div class="paragraph">
+<p><strong>2b. The <code>Food</code> does not exist in <code>FoodRecord</code></strong><br>
+2b1. A message prompting the user to enter a valid input is shown.<br>
+Use case resumes from Step 2.</p>
+</div>
+<div class="paragraph">
+<p><strong>2c. User enters invalid value for particular <code>Prefix</code></strong><br>
+2c1. A message prompting the user to enter a valid input is shown.<br>
+Use case resumes from Step 2.</p>
 </div>
 </div>
 </div>
@@ -3100,19 +3520,20 @@ Steps 1a1 and 1a2 are repeated until user enters a valid input.<br></p>
 <p>Calgo should work on both 32-bit and 64-bit environments.</p>
 </li>
 <li>
-<p>The product expects users to initially find out about <code>Food</code> items and their respective nutritional values for creating <code>Food</code> item entries for the first time.</p>
-</li>
-<li>
 <p>The minimum screen size for the App window to fully display its GUI is 1250 x 600.</p>
 </li>
 <li>
-<p>The product should be for a single-user.</p>
+<p>Calgo should be designed for a single-user (i.e. Calgo should not be a multi-user App).</p>
 </li>
 <li>
 <p>The product should be developed incrementally over the project duration.</p>
 </li>
 <li>
-<p>The software should follow the OOP.</p>
+<p>The software&#8217;s codebase should adhere to OOP.</p>
+</li>
+<li>
+<p>The product should have minimal network usage. Therefore, it is expected that users will find out about the
+respective nutritional values of a <code>Food</code> entry whenever they want to <code>update</code> it into the <code>FoodRecord</code> for the first time.</p>
 </li>
 </ol>
 </div>
@@ -3123,6 +3544,10 @@ Steps 1a1 and 1a2 are repeated until user enters a valid input.<br></p>
 <div class="sectionbody">
 <div class="dlist">
 <dl>
+<dt class="hdlist1"><a id="application-user-interface"></a> Application User Interface (API)</dt>
+<dd>
+<p>A set of tools for building software application.</p>
+</dd>
 <dt class="hdlist1"><a id="command-line-interface"></a> Command Line Interface (CLI)</dt>
 <dd>
 <p>Text-based user interface used to view and manage computer files.</p>
@@ -3193,8 +3618,7 @@ These instructions only provide a starting point for testers to work on; testers
 <ol class="arabic">
 <li>
 <p>Initial launch</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+</li>
 <li>
 <p>Download the jar file and copy into an empty folder</p>
 </li>
@@ -3202,13 +3626,9 @@ These instructions only provide a starting point for testers to work on; testers
 <p>Double-click the jar file<br>
 Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
 </li>
-</ol>
-</div>
-</li>
 <li>
 <p>Saving window preferences</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+</li>
 <li>
 <p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
 </li>
@@ -3218,12 +3638,97 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
+</div>
+<div class="sect2">
+<h3 id="getting-help"><a class="link" href="#getting-help">F.2. Getting help</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Displays a guide for all commands. Can also display only commands containing the given command word.</p>
+</li>
+<li>
+<p>Prerequisites: Launch <code>Calgo</code> succesfully.</p>
+</li>
+<li>
+<p>Test case: <code>help</code><br>
+Expected: A help window pops up and shows you how to use each command.</p>
+</li>
+<li>
+<p>Test case: <code>help abcd</code><br>
+Expected: A help window pops up and shows you how to use each command anyway, but tells you abcd does not exist.</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-code-food-code"><a class="link" href="#deleting-a-code-food-code">F.2. Deleting a <code>Food</code></a></h3>
+<h3 id="creating-a-code-food-code"><a class="link" href="#creating-a-code-food-code">F.3. Creating a <code>Food</code></a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a <code>Food</code> item to the <code>FoodRecord</code></p>
+</li>
+<li>
+<p>Prerequisites: Launch <code>Calgo</code> successfully</p>
+</li>
+<li>
+<p>Test case <code>update n/Apple cal/50 p/3 c/2 f/45</code></p>
+</li>
+<li>
+<p>Expected: Updated all foods into Food Record:
+Apple Calories: 50 Proteins (g): 3 Carbohydrates (g): 2 Fats (g): 45</p>
+</li>
+<li>
+<p>Test case: <code>update x</code></p>
+</li>
+<li>
+<p>Expected:<br>
+Invalid command format. update: Updates the food entered into the Food Record. If the food entered already exists, it will be overwritten by input values.
+Parameters: n/NAME cal/CALORIES p/PROTEIN c/CARBOHYDRATE f/FAT [t/TAG]&#8230;&#8203;
+Example: update n/Kiwi cal/150 p/2 c/25 f/3 t/Green t/Sweet</p>
+</li>
+<li>
+<p>Other incorrect commands to try: <code>update n/Apple c/2 f/45</code> (where parameters are missing)<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-code-food-code"><a class="link" href="#editing-a-code-food-code">F.4. Editing a <code>Food</code></a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Editing a <code>Food</code> item in the <code>FoodRecord</code></p>
+</li>
+<li>
+<p>Prerequisites: Launch <code>Calgo</code> successfully and <code>Food</code> already exists in <code>FoodRecord</code>.</p>
+</li>
+<li>
+<p>Test case <code>update n/Apple cal/53 p/3 c/3 f/45</code></p>
+</li>
+<li>
+<p>Expected:<br>
+Updated all foods into Food Record: Updated existing food item in Food Record:
+Apple Calories: 50 Proteins (g): 3 Carbohydrates (g): 3 Fats (g): 45</p>
+</li>
+<li>
+<p>Test case: <code>update x</code></p>
+</li>
+<li>
+<p>Expected: Invalid command format.
+update: Updates the food entered into the Food Record. If the food entered already exists, it will be overwritten by input values.
+Parameters: n/NAME cal/CALORIES p/PROTEIN c/CARBOHYDRATE f/FAT [t/TAG]&#8230;&#8203;
+Example: update n/Kiwi cal/150 p/2 c/25 f/3 t/Green t/Sweet</p>
+</li>
+<li>
+<p>Other incorrect commands to try: <code>update n/Apple c/2 f/45</code> (where parameters are missing)<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-code-food-code"><a class="link" href="#deleting-a-code-food-code">F.5. Deleting a <code>Food</code></a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3234,8 +3739,10 @@ Expected: The most recent window size and location is retained.</p>
 <p>Prerequisites: Launch Calgo successfully and a <code>Food</code> item Apple already exists in <code>FoodRecord</code></p>
 </li>
 <li>
-<p>Test case: <code>delete n\Apple</code><br>
-Expected: <code>Food</code> item Apple is deleted from <code>FoodRecord</code>. Details of the deleted <code>Food</code> shown in the status message.</p>
+<p>Test case: <code>delete n\Apple</code><br></p>
+</li>
+</ol>
+</div>
 </li>
 <li>
 <p>Test case: <code>delete 0</code><br>
@@ -3247,20 +3754,16 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-</li>
-</ol>
-</div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-code-food-code-entries"><a class="link" href="#listing-all-code-food-code-entries">F.3. Listing all <code>Food</code> entries</a></h3>
+<h3 id="listing-all-code-food-code-entries"><a class="link" href="#listing-all-code-food-code-entries">F.6. Listing all <code>Food</code> entries</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>Listing down all entries, regardless of previous commands</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+</li>
 <li>
-<p>Prerequisites: Launch Calgo successfully.</p>
+<p>Prerequisites: Launch <code>Calgo</code> successfully.</p>
 </li>
 <li>
 <p>Test case: <code>list</code><br>
@@ -3268,28 +3771,197 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 </li>
 </ol>
 </div>
+</div>
+<div class="sect2">
+<h3 id="navigating-code-food-record-code"><a class="link" href="#navigating-code-food-record-code">F.7. Navigating <code>Food record</code></a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Searches through the Calgo’s Food entries and displays relevant ones based on the specifications entered.</p>
+</li>
+<li>
+<p>Prerequisite: Launch <code>Calgo</code> succesfully, and <code>Food</code> being searched exists in <code>Food Record</code></p>
+</li>
+<li>
+<p>Test case: <code>find n/Apple</code><br>
+Expected: <code>Food</code> having name that partially match "Apple" will be displayed</p>
+</li>
+<li>
+<p>Test case: <code>find t/sWeet<br>
+Expected: `Food</code> having tag that partially match "sweet" will be displayed</p>
+</li>
+<li>
+<p>Test case: <code>find t/swEeT n/Apple</code><br>
+Expected: Please specify 1 and only 1 correct parameter for filtering using the find command.</p>
+</li>
+<li>
+<p>Other incorrect commands to try: <code>find n/</code><br>
+Expected: Names should only contain alphanumeric characters and spaces, and it should not be blank.</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.4. Saving data</a></h3>
+<h3 id="adding-code-food-code-to-consumption-record"><a class="link" href="#adding-code-food-code-to-consumption-record">F.8. Adding <code>Food</code> to consumption record</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Dealing with missing/corrupted data files</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>Adds a Food to a specific day’s Consumption Record.</p>
+</li>
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>Prerequisite: Launch <code>Calgo</code> succesfully, and <code>Food</code> being consumed exists in <code>Food Record</code></p>
+</li>
+<li>
+<p>Test case: <code>nom n/chicken d/2020-03-04 portion/1.5 r/8</code><br>
+Expected: Successfully consumed Chicken Calories: 32 Proteins (g): 20 Carbohydrates (g): 1 Fats (g): 11</p>
+</li>
+<li>
+<p>Test case: <code>nom n/chickn d/2020-03-04 portion/1.5 r/8</code><br>
+Expected: You can&#8217;t eat that because it does not exist in food record.</p>
+</li>
+<li>
+<p>Other incorrect commands to try: <code>nom n/chicken d/2020-03-04 portion/-1 r/8</code><br>
+Expected: Portion should be a positive number.</p>
 </li>
 </ol>
 </div>
+</div>
+<div class="sect2">
+<h3 id="removing-a-portion-of-code-food-code-from-consumption-record"><a class="link" href="#removing-a-portion-of-code-food-code-from-consumption-record">F.9. Removing a portion of <code>Food</code> from consumption record</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deletes a portion of a specific Food from the Consumption Record.</p>
+</li>
+<li>
+<p>Prerequisite: Launch <code>Calgo</code> succesfully, and <code>Food</code> being consumed exists in <code>Consumption Record</code></p>
+</li>
+<li>
+<p>Test case: <code>vomit num/1 d/2020-03-04</code><br>
+Expected: Successfully throw up Chicken Calories: 32 Proteins (g): 20 Carbohydrates (g): 1 Fats (g): 11</p>
+</li>
+<li>
+<p>Test case: <code>vomit num/</code><br>
+Expected: Position should be a positive integer!</p>
+</li>
+<li>
+<p>Other incorrect commands to try: <code>vomit num/-1</code><br>
+Expected: Position required an integer within range of list!</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+<div class="sect2">
+<h3 id="navigating-code-consumption-record-code"><a class="link" href="#navigating-code-consumption-record-code">F.10. Navigating <code>Consumption Record</code></a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deletes a portion of a specific Food from the Consumption Record.</p>
+</li>
+<li>
+<p>Prerequisite: Launch <code>Calgo</code> succesfully, and have eaten something on the day you want to browse.</p>
+</li>
+<li>
+<p>Test case: <code>stomach d/</code><br>
+Expected: Display all food consumed. (As long as you ate on that day before, applies even if your record is empty due to using vomit)</p>
+</li>
+<li>
+<p>Test case: <code>stomach d/1930-04-01</code><br>
+Expected: Your consumption record is empty because you have not consumed food on 1930-04-01 before</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setting-a-goal"><a class="link" href="#setting-a-goal">F.11. Setting a goal</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sets your daily calorie goal.</p>
+</li>
+<li>
+<p>Prerequisite: Launch <code>Calgo</code> succesfully.</p>
+</li>
+<li>
+<p>Test case: <code>goal 69</code><br>
+   Expected: That is a really low goal to set. Warning: You may suffer from malnutrition.
+We&#8217;ll accept this now because Calgo will eventually help you to reach a daily calorie count of
+1200, which is the minimum calories you should eat to stay moderately healthy.</p>
+</li>
+<li>
+<p>Test case: <code>goal 0</code><br>
+Expected: Please key in a whole number that is at least 1 calorie and at most 99999 calories.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generating-report-for-the-day"><a class="link" href="#generating-report-for-the-day">F.12. Generating report for the day</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Generates consumption report for a given date.</p>
+</li>
+<li>
+<p>Prerequisite: Launch <code>Calgo</code> succesfully, and have eaten something on the day you want to generate report on.</p>
+</li>
+<li>
+<p>Test case: <code>report d/</code><br>
+Expected: Successfully generated a report in the data/reports folder for the following date: 2020-04-13.</p>
+</li>
+<li>
+<p>Test case: <code>report d/2070-04-12</code><br>
+Expected: Did not manage to generate report. There was no food consumed on 2070-04-12.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generating-a-copy-of-your-code-food-record-code"><a class="link" href="#generating-a-copy-of-your-code-food-record-code">F.13. Generating a copy of your <code>Food Record</code></a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Generates a neat and editable file containing the current Food entries.</p>
+</li>
+<li>
+<p>Prerequisite: Launch <code>Calgo</code> succesfully</p>
+</li>
+<li>
+<p>Test case: <code>export</code><br>
+Expected: Successfully generated FoodRecord.txt in the data/exports folder.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-code-food-record-code-data"><a class="link" href="#clearing-code-food-record-code-data">F.14. Clearing <code>Food Record</code> data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clears all food entries from Calgo. Note that data in Consumption Record is not deleted.</p>
+</li>
+<li>
+<p>Test case: <code>clear</code><br>
+Expected: Food Record has been cleared! Use the update command to add new food into your Food Record.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">F.15. Saving data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dealing with missing/corrupted data files.</p>
+</li>
+<li>
+<p>Calgo will start from a fresh state if your files are corrupted.</p>
+</li>
+<li>
+<p>Warning: You can edit the <code>.json</code> files in the <code>/data</code> folder. Be careful, if the files you
+edit ends up with invalid format, you risk losing all existing data.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -3334,7 +4006,8 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 <p>Our team successfully morphed AB3 and its relevant tests into the Calgo you see today.</p>
 </li>
 <li>
-<p>Our team’s project idea was validated and appreciated by peers and tutors, most notably from our presentation, demo and testing.</p>
+<p>Our team’s project idea was validated and appreciated by peers and tutors, most notably from our CS2101 presentation, CS2103T demo and PE-Dry Run testing.
+It also has potential to be collaborated with other peer projects such as FitBiz (Group F11-2).</p>
 </li>
 </ul>
 </div>
@@ -3350,10 +4023,10 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 <p>Implemented features consistently and incrementally, allowing us to make changes to past features and</p>
 </li>
 <li>
-<p>Experimented with new workflow and decided on one, Agile(Scrum), which we liked the most.</p>
+<p>Experimented with new workflow before deciding on one, Agile(Scrum), which we liked the most.</p>
 </li>
 <li>
-<p>Put in additional effort in making the GUI different and novel, despite it being not part of the grading scheme. This is another example of how we go an extra mile just for the sake of user centric-ness. For e.g. we tried out new JavaFX APIs like LineChart and TableView.</p>
+<p>Put in additional effort in making the GUI different and novel, even though it is not part of the grading rubric. This is another example of how we go the extra mile to make our product more user-centric. For e.g. we tried out new JavaFX APIs like LineChart and TableView.</p>
 </li>
 </ul>
 </div>
@@ -3363,16 +4036,16 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 <div class="ulist">
 <ul>
 <li>
-<p>Predominantly followed the forking workflow</p>
+<p>Predominantly followed the forking workflow.</p>
 </li>
 <li>
-<p>Diligently created issues and assigned them</p>
+<p>Diligently created issues and assigned them on GitHub, while also consistently communicating with each other on Telegram.</p>
 </li>
 <li>
-<p>Plan and incrementally implemented our user stories throughout different milestones.</p>
+<p>Planned and incrementally implemented our user stories throughout different milestones.</p>
 </li>
 <li>
-<p>Regularly review each other’s code on and off Github.</p>
+<p>Regularly reviewed each other’s code on and off Github.</p>
 </li>
 </ul>
 </div>
@@ -3381,4 +4054,4 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 12:31:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 12:57:30 UTC</div></div></div></body></html>
