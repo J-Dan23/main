@@ -32,8 +32,8 @@
 <li><a href="#Implementation-LexicographicalOrder">4.4. Lexicographical <code>Food</code> order</a></li>
 <li><a href="#Implementation-Export">4.5. Exporting the current <code>FoodRecord</code> into a portable file</a></li>
 <li><a href="#Implementation-ConsumptionManagement">4.6. <code>Food</code> consumption management</a></li>
-<li><a href="#Implementation-SmartUpdate">4.7. Updating the <code>FoodRecord</code></a></li>
-<li><a href="#real-time-suggestions-for-existing-code-food-code-in-code-foodrecord-code">4.8. Real-time Suggestions for Existing <code>Food</code> in <code>FoodRecord</code></a></li>
+<li><a href="#Implementation-SmartUpdate">4.7. Modifying the <code>FoodRecord</code></a></li>
+<li><a href="#Implementation-RealTimeSuggestion">4.8. Real-time Suggestions for Existing <code>Food</code> in <code>FoodRecord</code></a></li>
 <li><a href="#Implementation-HelpGuide">4.9. Command guide <code>help</code> command</a></li>
 <li><a href="#Implementation-CalorieGraph">4.10. Past seven days calorie data graph</a></li>
 <li><a href="#logging">4.11. Logging</a></li>
@@ -281,7 +281,7 @@ In particular, the <code>LogsCenter</code> class plays an important role at the 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The lifeline for <code>DeleteCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The lifeline for <code>DeleteCommandParser</code> and <code>DeleteCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </td>
 </tr>
 </table>
@@ -1588,26 +1588,24 @@ in <code>DailyFoodLog</code> for each <code>LocalDate</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-SmartUpdate"><a class="link" href="#Implementation-SmartUpdate">4.7. Updating the <code>FoodRecord</code></a></h3>
+<h3 id="Implementation-SmartUpdate"><a class="link" href="#Implementation-SmartUpdate">4.7. Modifying the <code>FoodRecord</code></a></h3>
 <div class="paragraph">
-<p>This section addresses how the <code>update</code> command works.</p>
+<p>(By Zhang Xian)</p>
 </div>
 <div class="paragraph">
-<p>The <code>update</code> command allows the user to update the <code>FoodRecord</code> by either updating a new <code>Food</code> into the <code>FoodRecord</code> or updating the
+<p>This section addresses how the <code>FoodRecord</code> can be modified by the <code>update</code> and <code>delete</code> commands.</p>
+</div>
+<div class="paragraph">
+<p>The <code>update</code> command allows the user to modify the <code>FoodRecord</code> by either adding a new <code>Food</code> into the <code>FoodRecord</code> or editing the
 nutritional values of an existing <code>Food</code> in the <code>FoodRecord</code>.</p>
 </div>
 <div class="paragraph">
-<p>From the user&#8217;s perspective, the <code>update</code> command decides whether to
+<p>From the user&#8217;s perspective, the <code>update</code> command does either of the adding and editing functions. This implementation of <code>update</code> decides whether to
 override an existing <code>Food</code> in the <code>FoodRecord</code> with new values, or create a new <code>Food</code> in the <code>FoodRecord</code> for them.</p>
 </div>
 <div class="paragraph">
-<p>For better user experience, the <code>Name</code> required in the <code>update</code> command is case-insensitive. This means that if "Apple" already exists in the
-<code>FoodRecord</code>, an <code>update</code> command with "apple" as the <code>Name</code> will result in nutritional values of "Apple" in the <code>FoodRecord</code> being updated,
-instead of a new <code>Food</code> with <code>Name</code> "apple" being created in the <code>FoodRecord</code></p>
-</div>
-<div class="paragraph">
-<p>On top of this, for all new <code>Food</code> being updated into the <code>FoodRecord</code> with the <code>update</code> command, the <code>Name</code> entry of the <code>Food</code> updated into the <code>FoodRecord</code>
-will be formatted to proper case. This means that if the user updates a new q into the <code>FoodRecord</code> with the <code>Name</code> as "char kuay teow", the <code>Food</code> that
+<p>For better user experience, for all new <code>Food</code> being updated into the <code>FoodRecord</code> with the <code>update</code> command, the <code>Name</code> attribute
+will be formatted to proper case. This means that if the user updates a new <code>Food</code> into the <code>FoodRecord</code> with the <code>Name</code> as "char kuay teow", the <code>Food</code> that
 is stored in the <code>FoodRecord</code> will be of <code>Name</code> "Char Kuay Teow".</p>
 </div>
 <div class="admonitionblock note">
@@ -1623,24 +1621,33 @@ please refer to its relevant section <a href="#Implementation-LexicographicalOrd
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>The <code>delete</code> command allows the user to modify the FoodRecord by deleting a specified <code>Food</code> entry from the FoodRecord.
+This command takes in the <code>Name</code> of the <code>Food</code> entry to be deleted.</p>
+</div>
+<div class="paragraph">
+<p>For both <code>delete</code> and <code>update</code> commands, the <code>Name</code> parameter is implemented to be case-insensitive. This means that <code>n/APPLE</code> and <code>n/apple</code> refers to
+the same <code>Food</code> entry with <code>Name</code> stored as <code>Apple</code>.</p>
+</div>
 <div class="sect3">
 <h4 id="implementation-7"><a class="link" href="#implementation-7">4.7.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The <code>update</code> command is facilitated by the FoodRecord which contains a UniqueFoodList which stores all the Food in the FoodRecord.
-This command either adds a new Food into this UniqueFoodList or edits the nutritional values of an existing Food in the UniqueFoodList.
-An additional operation is implemented to help with this:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>FoodRecord#hasFood()</code> - Checks if there is an existing <code>Food</code> in <code>FoodRecord</code> by checking if there is any <code>Food</code> in the FoodRecord
-with the same <code>Name</code>.</p>
-</li>
-</ul>
+<p>The modification of the <code>FoodRecord</code> is facilitated by <code>UniqueFoodList</code>, which is responsible for storing all the <code>Food</code> entries in the <code>FoodRecord</code>.
+Additional abstractions were used by <code>Model</code> and <code>Logic</code> for any operations that results in a modification of the <code>UniqueFoodList</code>.</p>
 </div>
 <div class="paragraph">
-<p>This operation was exposed in the <code>Model</code> interface as <code>Model#hasFood()</code> and allows the <code>UpdateCommand</code> to decide whether to
-add or edit <code>Food</code> in the <code>UniqueFoodList</code>.</p>
+<p>Both commands require an additional operation, <code>hasFood</code>, in <code>FoodRecord</code> to be implemented. <code>hasFood</code> checks if there is an existing <code>Food</code> in <code>FoodRecord</code>
+by checking if there is any <code>Food</code> in the <code>FoodRecord</code> with the same <code>Name</code>. Two <code>Food</code> entries is deemed to be of the same <code>Name</code> if their lowercase variant
+is the same.</p>
+</div>
+<div class="paragraph">
+<p>This operation was exposed in the <code>Model</code> interface as <code>hasFood</code>, allowing <code>UpdateCommand</code> and <code>DeleteCommand</code> this functionality.</p>
+</div>
+<div class="sect4">
+<h5 id="implementation-of-code-update-code-command"><a class="link" href="#implementation-of-code-update-code-command">Implementation of <code>update</code> command:</a></h5>
+<div class="paragraph">
+<p>For the <code>update</code> command, the <code>hasFood</code> operation decides whether <code>UpdateCommand</code> adds a new <code>Food</code> into <code>UniqueFoodList</code> or
+edits the nutritional values of an existing <code>Food</code> in the <code>UniqueFoodList</code>.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the <code>update</code> operation works in both cases:</p>
@@ -1649,7 +1656,7 @@ add or edit <code>Food</code> in the <code>UniqueFoodList</code>.</p>
 <div class="content">
 <img src="images/UpdateSequenceDiagram.png" alt="UpdateSequenceDiagram">
 </div>
-<div class="title">Figure 21. Sequence Diagram for Update command (to be updated)</div>
+<div class="title">Figure 21. Sequence Diagram for <code>update</code> command</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1667,8 +1674,8 @@ The lifeline for <code>UpdateCommandParser</code> and <code>UpdateCommand</code>
 <p>How the <code>update</code> command works:</p>
 </div>
 <div class="paragraph">
-<p>Step 1: LogicManager executes the user input of `update n/apple cal/52 p/2 c/14 f/1", using CalgoParser to realise this is
-an update command and creates a new UpdateCommandParser object.</p>
+<p>Step 1: <code>LogicManager</code> executes the user input of <code>update n/apple cal/52 p/2 c/14 f/1", using `CalgoParser</code> to realise this is
+an <code>update</code> command and creates a new <code>UpdateCommandParser</code> object.</p>
 </div>
 <div class="paragraph">
 <p>Step 2: <code>UpdateCommandParser</code> then parses the arguments provided by <code>CalgoParser</code> with the <code>parse</code> method.
@@ -1676,12 +1683,12 @@ During this parsing process, <code>UpdateCommandParser</code> calls the <code>co
 to proper case.</p>
 </div>
 <div class="paragraph">
-<p>Step 3: <code>UpdateCommandParser</code> then creates a new <code>UpdateCommand</code> object, which <code>LogicManager</code> calls the execute method with this object
+<p>Step 3: <code>UpdateCommandParser</code> then creates a new <code>UpdateCommand</code> object, which <code>LogicManager</code> calls the <code>execute</code> method with this object
 as an argument.</p>
 </div>
 <div class="paragraph">
 <p>Step 4: <code>UpdateCommand</code> now checks if there exists an existing <code>Food</code> in the <code>FoodRecord</code> by calling <code>Model</code> 's
-<code>hasFood</code> method, which checks if there is any Food in <code>FoodRecord</code> 's UniqueFoodList with the same <code>Name</code>.</p>
+<code>hasFood</code> method.</p>
 </div>
 <div class="paragraph">
 <p>Step 5:</p>
@@ -1694,16 +1701,16 @@ If Food already exists in the <code>FoodRecord</code>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Model calls the <code>getExistingFood</code> method with the user inputted Food
-as a parameter to get the existing Food, <code>existingFood</code> in the <code>UniqueFoodList</code>. It thens call the setFood method to replace the
-existing Food in the UniqueFoodList with the new <code>Food</code> which contains new nutritional values.</p>
+<p>Model calls the <code>getExistingFood</code> method with the user inputted <code>Food</code>
+as a parameter to get the existing <code>Food</code>, <code>existingFood</code> in the <code>UniqueFoodList</code>. It thens call the <code>setFood</code> method to replace the
+existing <code>Food</code> in the <code>UniqueFoodList</code> with the new <code>Food</code> which contains new nutritional values.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
 <p>Scenario 2:
-If Food does not exist in <code>FoodRecord</code>:</p>
+If <code>Food</code> does not exist in <code>FoodRecord</code>:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1723,7 +1730,58 @@ If Food does not exist in <code>FoodRecord</code>:</p>
 <div class="paragraph">
 <p>Step 6: A new <code>CommandResult</code> object is then created and returned back to <code>LogicManager</code>.</p>
 </div>
+</div>
+<div class="sect4">
+<h5 id="implementation-of-code-delete-code-command"><a class="link" href="#implementation-of-code-delete-code-command">Implementation of <code>delete</code> command:</a></h5>
+<div class="paragraph">
+<p>For the <code>delete</code> command, the <code>hasFood</code> operation allows <code>UpdateCommand</code> to check whether the Food that the user requests to be
+deleted exists in the <code>UniqueFoodList</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>delete</code> command works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleteSequenceDiagram.png" alt="DeleteSequenceDiagram">
+</div>
+<div class="title">Figure 22. Sequence Diagram for <code>delete</code> command</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The lifeline for <code>DeleteCommandParser</code> and <code>DeleteCommand</code> should end at their destroy markers (X) but due to a limitation of PlantUML, the lifelines reach the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>How the <code>delete</code> command works:</p>
+</div>
+<div class="paragraph">
+<p>Step 1:  <code>LogicManager</code> executes the user input of "delete n/Apple", using <code>CalgoParser</code> to realise this is
+an <code>delete</code> command and creates a new <code>DeleteCommandParser</code> object.</p>
+</div>
+<div class="paragraph">
+<p>Step 2: <code>DeleteCommandParser</code> then parses the arguments provided by <code>CalgoParser</code> with the <code>parse</code> method, before creating a new
+<code>DeleteCommand</code> object that is returned back to the <code>LogicManager</code> which calls the <code>execute</code> method with this as an argument.</p>
+</div>
+<div class="paragraph">
+<p>Step 3: <code>DeleteCommand</code> now checks if there exists an existing <code>Food</code> in the <code>FoodRecord</code> by calling <code>Model&#8217;s `hasFood</code> method, which
+checks if there is such <code>Food</code> in the <code>UniqueFoodList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 4: <code>Model</code> then calls the <code>getExistingFood</code> method to return the <code>Food</code> object to be removed from the <code>UniqueFoodList</code>. Thereafter,
+<code>Model</code> calls the <code>deleteFood</code> method with this <code>Food</code> object as an argument to remove this <code>Food</code> from the <code>UniqueFoodList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 5: A new <code>CommandResult</code> object is then created and returned back to the <code>LogicManager</code>.</p>
+</div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.2. Design considerations</a></h4>
@@ -1798,7 +1856,10 @@ If Food does not exist in <code>FoodRecord</code>:</p>
 <div class="sect3">
 <h4 id="summary-6"><a class="link" href="#summary-6">4.7.3. Summary</a></h4>
 <div class="paragraph">
-<p>The <code>update</code> command is a smart command that either updates an existing <code>Food</code> item in the <code>FoodRecord</code> with new nutritional information,
+<p>In summary, this section explains how commands related to modifying the <code>FoodRecord</code> is implemented.</p>
+</div>
+<div class="paragraph">
+<p>The <code>update</code> command is a smart command that either updates an existing <code>Food</code> entry in the <code>FoodRecord</code> with new nutritional information,
 or updates a new <code>Food</code> item into the <code>FoodRecord</code>
 The following activity diagram summarises what happens when a user enters a valid <code>update</code> command:</p>
 </div>
@@ -1806,18 +1867,32 @@ The following activity diagram summarises what happens when a user enters a vali
 <div class="content">
 <img src="images/UpdateActivityDiagram.png" alt="UpdateActivityDiagram">
 </div>
-<div class="title">Figure 22. Activity Diagram for Update command</div>
+<div class="title">Figure 23. Activity Diagram for <code>update</code> command</div>
+</div>
+<div class="paragraph">
+<p>The <code>delete</code> command allows the user to remove a <code>Food</code> entry from the <code>FoodRecord</code> by specifying it&#8217;s <code>Name</code> as an parameter.
+The following activity diagram summarises what happens when a user enters a valid 'delete' command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleteActivityDiagram.png" alt="DeleteActivityDiagram">
+</div>
+<div class="title">Figure 24. Activity Diagram for <code>delete</code> command</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="real-time-suggestions-for-existing-code-food-code-in-code-foodrecord-code"><a class="link" href="#real-time-suggestions-for-existing-code-food-code-in-code-foodrecord-code">4.8. Real-time Suggestions for Existing <code>Food</code> in <code>FoodRecord</code></a></h3>
+<h3 id="Implementation-RealTimeSuggestion"><a class="link" href="#Implementation-RealTimeSuggestion">4.8. Real-time Suggestions for Existing <code>Food</code> in <code>FoodRecord</code></a></h3>
 <div class="paragraph">
-<p>This section addresses how the GUI Result Display suggests Food with similar names to the user for the commands <code>update</code>, <code>delete</code> and <code>nom</code>.</p>
+<p>(By Zhang Xian)</p>
+</div>
+<div class="paragraph">
+<p>This section addresses how the GUI <code>Result Display</code> suggests <code>Food</code> with similar <code>Name</code> to the user for the commands <code>update</code>, <code>delete</code> and <code>nom</code>.</p>
 </div>
 <div class="paragraph">
 <p>When the user have many <code>Food</code> entries in the <code>FoodRecord</code>, they may have difficulties finding out if a particular <code>Food</code> exists in the <code>FoodRecord</code>.
-For better user experience, this feature listens to the input of the user for these three commands suggests similar existing Food entries in real time.</p>
+For better user experience, this feature listens to the input of the user for these three commands and suggests similar existing <code>Food</code> entries in real time in the GUI&#8217;s
+<code>Result Display</code>.</p>
 </div>
 <div class="paragraph">
 <p>This feature listens to the input of the user after the <code>Prefix</code> <code>n/</code> and checks if there is a <code>Food</code> entry in the <code>FoodRecord</code> with a similar <code>Name</code>.</p>
@@ -1838,16 +1913,65 @@ The <code>Name</code> parameter is case-insensitive and searches the <code>Food<
 <div class="sect3">
 <h4 id="implementation-8"><a class="link" href="#implementation-8">4.8.1. Implementation</a></h4>
 <div class="paragraph">
-<p>A listener set in place within the CommandBox to listen for user input passes the input to MainWindow.
-This feature is then facilitated by an operation <code>getSimilarfood</code> in the</p>
+<p>To be able to process user&#8217;s input in real-time, we set a <code>listener</code> in the <code>CommandBox</code> to listen for the input of any of the three commands: <code>update</code>, <code>delete</code> or <code>nom</code>
+This feature is then facilitated by different objects, mainly <code>MainWindow</code> and <code>UniqueFoodList</code>. <code>MainWindow</code> interacts with <code>LogicManager</code> 's method of <code>getSimilarFood</code> which exposes
+the <code>FoodRecord</code>, allowing a filtered list of similar <code>Food</code> entries in the <code>UniqueFoodList</code> to be returned back to the user.</p>
+</div>
+<div class="paragraph">
+<p>A predicate, <code>FoodRecordContainsFoodNamePredicate</code> is also essential in this implementation in ensuring that the correct similar <code>Food</code> items can be filtered from the <code>UniqueFoodList</code>
+back to the <code>LogicManager</code> to be displayed by the GUI. The <code>test</code> method of this predicate which is responsible for the above is shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">boolean</span> test(Food food) {
+    <span class="type">boolean</span> foodStartsWithInputFoodName = food.getName().fullName.toLowerCase()
+        .startsWith(foodName.toLowerCase().trim());
+    <span class="type">boolean</span> inputFoodNameStartsWithFood = foodName.toLowerCase().trim()
+        .startsWith(food.getName().fullName.toLowerCase());
+
+    <span class="keyword">return</span> foodStartsWithInputFoodName || inputFoodNameStartsWithFood;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both of the <code>boolean</code> used for this predicate is essential. For instance, if "Laksa is already present" in the <code>FoodRecord</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the user keys in "Lak", the first <code>boolean</code> <code>foodStartsWithInputFoodName</code> ensures that "Laksa" will be suggested to the user.</p>
+</li>
+<li>
+<p>If the user keys in "Laksa Spicy", the second <code>boolean</code> <code>inputFoodNameStartsWithFood</code> ensures that "Laksa" will be suggested to the user.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram will explain how the different objects interact to achieve the Real-time Suggestion Feature.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/RealTimeSuggestionSequenceDiagram.png" alt="RealTimeSuggestionSequenceDiagram">
 </div>
+<div class="title">Figure 25. Real-time Suggestion Feature Sequence Diagram</div>
 </div>
 <div class="paragraph">
-<p>Step1&#8230;&#8203;.</p>
+<p>Based on the above diagram, when a user has already entered any of the <code>CommandWord</code>: <code>update</code>, <code>delete</code> or <code>nom</code>, and also the Prefix <code>n/</code>:</p>
+</div>
+<div class="paragraph">
+<p>Step 1: <code>CommandBox</code> calls the <code>MainWindow</code> method of <code>getSuggestions</code> with the parameter as the entire <code>String</code> of user input in the <code>CommandBox</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2: <code>MainWindow</code> then parses the user inputted <code>String</code> and calls <code>LogicManager</code> method of <code>getSimilarFood</code> with the parameter <code>foodName</code> which is the entire <code>String</code> after the <code>Prefix</code> <code>n/</code></p>
+</div>
+<div class="paragraph">
+<p>Step 3: The <code>Model</code> then does the necessary work by calling methods <code>getFoodRecord</code> and <code>getFoodList</code>. This results in the current <code>UniqueFoodList</code> being returned</p>
+</div>
+<div class="paragraph">
+<p>Step 4: The <code>UniqueFoodList</code> is then filtered with the <code>Predicate&lt;Food&gt;</code>, <code>FoodRecordContainsFoodNamePredicate</code> which returns a <code>List&lt;Food&gt;</code> of <code>Food</code> objects that have similar <code>Name</code> fields to the user input.</p>
+</div>
+<div class="paragraph">
+<p>Step 5: Finally, the filtered <code>List&lt;Food&gt;</code> is then parsed into a <code>String</code> for the user by the <code>MainWindow</code> and then displayed in the GUI&#8217;s <code>Result Display</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1857,33 +1981,154 @@ This feature is then facilitated by an operation <code>getSimilarfood</code> in 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1: (current choice):</strong> ResultDisplay displays the names of similar Food entries in Food Record.</p>
+<p><strong>Alternative 1: (current choice):</strong> <code>ResultDisplay</code> displays the names of similar <code>Food</code> entries in <code>Food Record</code>.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Improved user experience, allowing user to still view the unfiltered <code>FoodRecord</code> in the GUI.</p>
 </li>
 <li>
-<p>Cons:</p>
+<p>User can have access to the raw <code>String</code> of the <code>Name</code> similar <code>Food</code> entries for copying and pasting.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Alternative 2:* Filter the GUI&#8217;s Food Record to similar Food entries.</p>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Additional interacting with <code>UI</code> components required, instead of just filtering <code>UniqueFoodList</code></p>
+</li>
+<li>
+<p>Cannot reusing existing lexicographical sorting feature of <code>FoodRecord</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Filter the GUI&#8217;s <code>Food Record</code> to show similar Food entries.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Feature is limited to minimal interactions with <code>UI</code>, making use of existing <code>UI</code>-<code>Model</code> abstractions.</p>
+</li>
+<li>
+<p>Compatible with existing code relating to the <code>FoodRecord</code>, allowing code to be reused.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Takes away most of the need for <code>find</code> and <code>list</code> features since they achieve mostly the same purpose.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-commands-that-utilise-real-time-suggestions"><a class="link" href="#aspect-commands-that-utilise-real-time-suggestions">Aspect: Commands that utilise Real-time Suggestions</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1: (current choice):</strong> Only three commands: <code>update</code>, <code>delete</code>, <code>nom</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Improves computational performance, since real-time features for every command will be computationally expensive.</p>
+</li>
+<li>
+<p>Keeps the desired outcomes of other features such as <code>find</code> and <code>list</code> intact</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Decrease in user experience, as they might expect this feature to be universal for all commands</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong> All the commands</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Better standardisation of feature across all commands.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Additional computational overhead.</p>
+</li>
+<li>
+<p>Not all commands have a <code>Name</code> field.</p>
+</li>
+<li>
+<p>Additional implementation or significant change in how this feature works is necessary to make it universal.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="summary-7"><a class="link" href="#summary-7">4.8.3. Summary</a></h4>
+<div class="paragraph">
+<p><code>CommandBox</code> listens for any of the three commands as mentioned, allowing <code>LogicManager</code> and <code>FoodRecord</code> to facilitate
+the suggestions of similar <code>Food</code> entries from the <code>UniqueFoodList</code> to display in the GUI&#8217;s <code>Result Display</code>. This can be summarised
+in the activity diagram below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RealTimeSuggestionActivityDiagram.png" alt="RealTimeSuggestionActivityDiagram">
+</div>
+<div class="title">Figure 26. Real-time Suggestion Feature Activity Diagram</div>
 </div>
 </div>
 </div>
@@ -1923,7 +2168,7 @@ based on the provided <code>command word</code> in the input.</p>
 <div class="content">
 <img src="images/HelpSequenceDiagram.png" alt="HelpSequenceDiagram">
 </div>
-<div class="title">Figure 23. Sequence Diagram for Help</div>
+<div class="title">Figure 27. Sequence Diagram for Help</div>
 </div>
 <div class="paragraph">
 <p>Step 1: <code>LogicManager</code> executes the user input, using <code>CalgoParser</code> to realise it is a <code>help</code> command, and thus creates
@@ -2098,7 +2343,7 @@ display only desired commands by entering an optional keyword after <code>help</
 </div>
 </div>
 <div class="sect3">
-<h4 id="summary-7"><a class="link" href="#summary-7">4.9.3. Summary</a></h4>
+<h4 id="summary-8"><a class="link" href="#summary-8">4.9.3. Summary</a></h4>
 <div class="paragraph">
 <p><code>help</code> will produce a popup, displaying a guide on the App&#8217;s available commands' purposes and usage format.</p>
 </div>
@@ -2106,7 +2351,7 @@ display only desired commands by entering an optional keyword after <code>help</
 <div class="content">
 <img src="images/HelpActivityDiagram.png" alt="HelpActivityDiagram">
 </div>
-<div class="title">Figure 24. Activity Diagram for Help</div>
+<div class="title">Figure 28. Activity Diagram for Help</div>
 </div>
 <div style="page-break-after: always;"></div>
 <div style="page-break-after: always;"></div>
@@ -2182,7 +2427,7 @@ most recent app data.</p>
 <div class="content">
 <img src="images/GraphSequenceDiagram.png" alt="GraphSequenceDiagram">
 </div>
-<div class="title">Figure 25. Sequence Diagram for GraphPanel</div>
+<div class="title">Figure 29. Sequence Diagram for GraphPanel</div>
 </div>
 <div class="paragraph">
 <p>Sequence Diagram for <code>Graph</code> feature.</p>
@@ -2241,7 +2486,7 @@ Third, <code>updateSeries</code> method is called to ensure the data populating 
 </div>
 </div>
 <div class="sect3">
-<h4 id="summary-8"><a class="link" href="#summary-8">4.10.3. Summary</a></h4>
+<h4 id="summary-9"><a class="link" href="#summary-9">4.10.3. Summary</a></h4>
 <div class="paragraph">
 <p>In summary, this section addresses how the graph obtains information on the past seven <code>DailyFoodLog</code>, and correspondingly
 produces a visual graph output onto Calgo&#8217;s <code>Main Window</code> GUI component viewable by the user.</p>
@@ -2462,7 +2707,7 @@ to the user.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user who gets bored of food easily</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete a Food item that I no longer want to eat in future from my Food Record</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">deletpe a Food item that I no longer want to eat in future from my Food Record</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">avoid having so many Food items in the Food Record that I no longer eat.</p></td>
 </tr>
 <tr>
@@ -2698,32 +2943,37 @@ Use case ends.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to add a new <code>Food</code> item in the <code>FoodRecord</code>.</p>
+<p>User wants to add a new <code>Food</code> entry in the <code>FoodRecord</code>.</p>
 </li>
 <li>
-<p><code>Calgo</code> creates and saves a new <code>Food</code> item in the <code>FoodRecord</code> with nutritional information specified by user.</p>
+<p>User begins to type in an <code>update</code> command with <code>Name</code> <code>Prefix</code>.</p>
+</li>
+<li>
+<p><code>Calgo</code> shows that there are no similar <code>Food</code> entries in GUI <code>Result Display</code>.</p>
+</li>
+<li>
+<p>User completes typing in remaining <code>Prefixes</code> of <code>Calorie</code>, <code>Protein</code>, <code>Carbohydrate</code>, <code>Fat</code> <code>Prefixes</code> accordingly and enters it in <code>Calgo</code>.</p>
+</li>
+<li>
+<p><code>Calgo</code> adds a new <code>Food</code> entry into <code>FoodRecord</code> with paramaters as specified by User.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
 </div>
-<h3 id="use-case-code-update-code-an-existing-code-food-code-item-in-current-code-foodrecord-code" class="discrete">Use case: <code>update</code> an existing <code>Food</code> item in current <code>FoodRecord</code></h3>
 <div class="paragraph">
-<p><strong>MSS</strong></p>
+<p><strong>Extensions</strong></p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to edit an existing <code>Food</code> item in the <code>FoodRecord</code>.</p>
-</li>
-<li>
-<p><code>Calgo</code> replaces the existing <code>Food</code> item&#8217;s nutritional values with the new information.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p><strong>3a. There are similar <code>Food</code> entries in the <code>FoodRecord</code></strong><br>
+3a1. <code>Calgo</code> the similar Food entries in the GUI&#8217;s <code>Result Display</code>
+Use case resumes from Step 3.</p>
 </div>
-</li>
-</ol>
+<div class="paragraph">
+<p><strong>5a. <code>Calgo&#8217;s FoodRecord already contains the same `Food</code> entry</strong><br>
+5a1. <code>Calgo</code> overrides this existing <code>Food</code> entry with the new <code>Food</code> entry
+Use case ends.</p>
 </div>
 <h3 id="use-case-code-delete-code-an-existing-code-food-code-item-in-current-code-foodrecord-code" class="discrete">Use case: <code>delete</code> an existing <code>Food</code> item in current <code>FoodRecord</code></h3>
 <div class="paragraph">
@@ -2732,15 +2982,32 @@ Use case ends.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to delete an existing <code>Food</code> item from the <code>FoodRecord</code></p>
+<p>User wants to delete a Food entry from the <code>FoodRecord</code></p>
 </li>
 <li>
-<p>Calgo deletes the existing <code>Food</code> item in the <code>FoodRecord</code>.</p>
+<p>User types in an delete command with the <code>Name</code> Prefix.</p>
+</li>
+<li>
+<p><code>Calgo</code> shows that the <code>Food</code> entry that the User wishes to delete exists in one of the similar Food items message in the GUI Result Display.</p>
+</li>
+<li>
+<p>User enters the command into <code>Calgo</code></p>
+</li>
+<li>
+<p><code>Calgo</code> deletes the <code>Food</code> entry from the <code>FoodRecord</code>.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>3a. The Food entry that the User wishes to delete does not exists in the <code>FoodRecord</code>.</strong><br>
+3a1. GUI <code>Result Display</code> shows that there are no similar <code>Food</code> items in the <code>FoodRecord</code>.
+Use cases resumes from Step 3.</p>
 </div>
 <h3 id="use-case-set-a-daily-code-goal-code" class="discrete">Use case: set a daily <code>goal</code></h3>
 <div class="paragraph">
@@ -3114,4 +3381,4 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 10:40:19 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 10:44:46 UTC</div></div></div></body></html>
