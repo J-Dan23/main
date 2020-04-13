@@ -590,7 +590,7 @@ For more information on lexicographical ordering, please refer to its relevant s
 <div class="content">
 <img src="images/FindSequenceDiagram.png" alt="FindSequenceDiagram">
 </div>
-<div class="title">Figure 12. Sequence Diagram for <code>find</code> command: categorical search and substring search</div>
+<div class="title">Figure 12. Sequence Diagram for <code>find</code> command: Categorical Search and Substring Search</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1225,7 +1225,7 @@ Meanwhile, <code>VALUE_COLUMN_SIZE</code> represents the allowed space for each 
 <div class="content">
 <img src="images/ExportSequenceDiagram.png" alt="ExportSequenceDiagram">
 </div>
-<div class="title">Figure 18. Sequence Diagram for <code>export</code> command: generating FoodRecord.txt</div>
+<div class="title">Figure 18. Sequence Diagram for <code>export</code> command: Generating FoodRecord.txt</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1905,7 +1905,7 @@ optional <code>command word</code> that filters the displayed command guide.</p>
 </td>
 <td class="content">
 <code>command word</code> filters out only commands which contain the <code>command word</code> as a substring. If no commands contain it
-as a substring, an error message will be displayed at the top of the <code>HelpWindow</code> and the full command guide will be shown.
+as a substring, an error message will be displayed at the top of the GUI component <code>Help Window</code> and the full command guide will be shown.
 </td>
 </tr>
 </table>
@@ -1946,8 +1946,8 @@ Otherwise, by default a list of all guides will be provided.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Step 4: The <code>CommandResult</code> is eventually passed to <code>MainWindow</code>, which then displays the command guide in a separate
-window, called <code>HelpWindow</code>.</p>
+<p>Step 4: The <code>CommandResult</code> is eventually passed to the <code>MainWindow</code> class, which then displays the command guide in a separate
+window, using the <code>HelpWindow</code> class.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1958,7 +1958,7 @@ window, called <code>HelpWindow</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> <code>HelpWindow</code> is displayed as a separate popup.</p>
+<p><strong>Alternative 1 (current choice):</strong> GUI component <code>Help Window</code> is displayed as a separate popup.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1986,7 +1986,7 @@ window, called <code>HelpWindow</code>.</p>
 must be updated in <code>HelpCommand</code> separately.</p>
 </li>
 <li>
-<p><code>HelpWindow</code> might obstruct view of the App upon initially loading it, causing annoyance.</p>
+<p>GUI component <code>Help Window</code> might obstruct view of the App upon initially loading it, causing annoyance.</p>
 </li>
 </ul>
 </div>
@@ -1995,7 +1995,7 @@ must be updated in <code>HelpCommand</code> separately.</p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> <code>HelpWindow</code> is not used, and instead content is displayed as part of <code>ResultDisplay</code>.</p>
+<p><strong>Alternative 2:</strong> GUI component <code>Help Window</code> is not used, and instead content is displayed as part of GUI component <code>Result Display</code>.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2016,7 +2016,7 @@ must be updated in <code>HelpCommand</code> separately.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>User must use the <code>help</code> command every time they require a guide, as <code>ResultDisplay</code> will be
+<p>User must use the <code>help</code> command every time they require a guide, as GUI component <code>Result Display</code> will be
 overwritten after other commands.</p>
 </li>
 </ul>
@@ -2045,7 +2045,7 @@ display only desired commands by entering an optional keyword after <code>help</
 <p>Desired command can be more rapidly found.</p>
 </li>
 <li>
-<p>Removes all unwanted commands from <code>HelpWindow</code>, reducing clutter.</p>
+<p>Removes all unwanted commands from GUI component <code>Help Window</code>, reducing clutter.</p>
 </li>
 </ul>
 </div>
@@ -2152,36 +2152,37 @@ of <code>DailyFoodLog</code>. The implementation of the <code>GraphPanel</code> 
 <div class="ulist">
 <ul>
 <li>
-<p><code>GraphPanel#initialiseTreeMap(Logic logic)</code> - Sets up the TreeMap that maps <code>LocalDate</code> date of <code>DailyFoodLog</code> to the <code>Double</code>
+<p><code>initialiseTreeMap</code> - Sets up the TreeMap that maps <code>LocalDate</code> date of <code>DailyFoodLog</code> to the <code>Double</code>
 total calorie consumption n that day.</p>
 </li>
 <li>
-<p><code>GraphPanel#initialseGraph()</code> - Sets up the <code>LineChart</code> with xAxis a <code>String</code> representing date, and yAxis a <code>Double</code> representing
+<p><code>initialseGraph</code> - Sets up the <code>LineChart</code> with xAxis a <code>String</code> representing date, and yAxis a <code>Double</code> representing
 total calories consumed on that date.</p>
 </li>
 <li>
-<p><code>GraphPanel#updateSeries()</code> - Ensures the <code>XYChart.series</code> that populates the graph with data is always updated with the
+<p><code>updateSeries</code> - Ensures the <code>XYChart.series</code> that populates the graph with data is always updated with the
 most recent app data.</p>
 </li>
 <li>
-<p><code>GraphPanel#makeGraph(Logic logic)</code> - Wrapper function that calls the above three methods.</p>
+<p><code>makeGraph</code> - Wrapper function that calls the above three methods.</p>
 </li>
 <li>
-<p><code>GraphPanel#getGraph(Logic logic)</code> - Public accessor function to generate and retrieve the <code>LineChart</code>.</p>
+<p><code>getGraph</code> - Public accessor function to generate and retrieve the <code>LineChart</code>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Calgo will display the past seven days' graph automatically, and likewise update automatically. It does so by having <code>MainWindow</code>
-call <code>GraphPanel#getGraph(Logic logic)</code> on startup and after execution of commands.</p>
+<p>Calgo will display the past seven days' graph automatically, and likewise update automatically. It does so by having the
+ <code>MainWindow</code> class call <code>getGraph</code> on startup and after execution of commands.</p>
 </div>
 <div class="paragraph">
-<p>The sequence diagram below demonstrates how the <code>Graph</code> feature works, such as upon loading of <code>MainWindow</code>.</p>
+<p>The sequence diagram below demonstrates how the <code>Graph</code> feature works.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/GraphSequenceDiagram.png" alt="GraphSequenceDiagram">
 </div>
+<div class="title">Figure 25. Sequence Diagram for GraphPanel</div>
 </div>
 <div class="paragraph">
 <p>Sequence Diagram for <code>Graph</code> feature.</p>
@@ -2237,6 +2238,17 @@ Third, <code>updateSeries</code> method is called to ensure the data populating 
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="summary-8"><a class="link" href="#summary-8">4.10.3. Summary</a></h4>
+<div class="paragraph">
+<p>In summary, this section addresses how the graph obtains information on the past seven <code>DailyFoodLog</code>, and correspondingly
+produces a visual graph output onto Calgo&#8217;s <code>Main Window</code> GUI component viewable by the user.</p>
+</div>
+<div class="paragraph">
+<p>The graph requires the <code>LogicManager</code> class to obtain the information, and the <code>MainWindow</code> class to facilitate display
+to the user.</p>
 </div>
 </div>
 </div>
@@ -2518,7 +2530,10 @@ Third, <code>updateSeries</code> method is called to ensure the data populating 
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the Calgo application and the <strong>Actor</strong> is the user, unless specified otherwise)</p>
+<p>For all use cases below, the <strong>System</strong> is the Calgo application and the <strong>Actor</strong> is the user, unless specified otherwise.<br></p>
+</div>
+<div class="paragraph">
+<p>Also note that the term <strong>MSS</strong> refers to the Main Success Scenario for each Use Case.</p>
 </div>
 <h3 id="use-case-obtain-reference-for-app-s-commands" class="discrete">Use case: obtain reference for app&#8217;s commands</h3>
 <div class="paragraph">
@@ -2527,15 +2542,32 @@ Third, <code>updateSeries</code> method is called to ensure the data populating 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests for a guide on the app&#8217;s commands.</p>
+<p>User wants to find the command guide for the commands in Calgo.</p>
 </li>
 <li>
-<p>Calgo shows a list of all available commands and their corresponding purpose and usage.</p>
+<p>User enters <code>help</code> command with no additional <code>command_word</code>.</p>
+</li>
+<li>
+<p><code>Calgo</code> generates a popup, displaying a list of all command guides in the popup.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>2a. User enters a <code>command_word</code> after <code>help</code>, such as foe example <code>help nom</code>.</strong>
+2a1. <code>Calgo</code> filters out only command guides containing the <code>command_word</code> "nom".
+2a2. <code>Calgo</code> generates a popup, displaying this filtered list of command guides.</p>
+</div>
+<div class="paragraph">
+<p><strong>2b. User enters a <code>command_word</code> after <code>help</code> that has no corresponding command guides.</strong>
+2b1. <code>Calgo</code> tries to filter out only command guides containing the <code>command_word</code> but fails to find any guides. Thus
+it defaults to display all command guides.
+Use case resumes from Step 2.</p>
 </div>
 <h3 id="use-case-code-find-code-code-food-code-item-by-code-name-code-or-code-tag-code-keyword-which-can-be-an-incomplete-word" class="discrete">Use case: <code>find</code> <code>Food</code> item by <code>Name</code> or <code>Tag</code> keyword (which can be an incomplete word)</h3>
 <div class="paragraph">
@@ -2550,7 +2582,7 @@ Third, <code>updateSeries</code> method is called to ensure the data populating 
 <p>User enters <code>find</code> command with the <code>Name</code> <code>Prefix</code>, or the <code>Tag</code> <code>Prefix</code>, accordingly.</p>
 </li>
 <li>
-<p><code>Calgo</code> shows a list of <code>Food</code> entries which contains the substring indicated in any part of the <code>Name</code> or <code>Tag</code> of the <code>Food</code> entries respectively.</p>
+<p>Calgo shows a list of <code>Food</code> entries which contains the substring indicated in any part of the <code>Name</code> or <code>Tag</code> of the <code>Food</code> entries respectively.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2703,46 +2735,83 @@ Use case ends.</p>
 <p>User requests to delete an existing <code>Food</code> item from the <code>FoodRecord</code></p>
 </li>
 <li>
-<p><code>Calgo</code> deletes the existing <code>Food</code> item in the <code>FoodRecord</code>.</p>
+<p>Calgo deletes the existing <code>Food</code> item in the <code>FoodRecord</code>.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
 </div>
-<h3 id="use-case-set-a-dietary-code-goal-code" class="discrete">Use case: set a dietary <code>goal</code></h3>
+<h3 id="use-case-set-a-daily-code-goal-code" class="discrete">Use case: set a daily <code>goal</code></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User uses <code>goal</code> command to set a dietary <code>DailyGoal</code> for the daily number of <code>Calorie</code> s to be consumed.</p>
+<p>User enters the <code>goal</code> command with the intended value.</p>
 </li>
 <li>
-<p><code>Calgo</code> stores this <code>DailyGoal</code> in user preferences and analyses <code>Food</code> consumption with respect to this <code>goal</code>.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
+<p>Calgo updates the user&#8217;s <code>goal</code> to the new value provided by the user.</p>
 </li>
 </ol>
 </div>
-<h3 id="use-case-generate-a-code-report-code-on-a-specific-day" class="discrete">Use case: generate a <code>report</code> on a specific day.</h3>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>1a. User enters an invalid input for the <code>goal</code>.</strong><br>
+  1a1. Calgo shows a message indicating the acceptable range of values for the <code>goal</code> command.<br>
+  1a2. User enters <code>goal</code> command with a new value.<br>
+Steps 1a1 and 1a2 are repeated until user enters a valid input.<br></p>
+</div>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+<h3 id="use-case-generate-a-code-report-code-on-a-specific-code-date-code" class="discrete">Use case: generate a <code>report</code> on a specific <code>date</code>.</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to obtain a <code>report</code> on his or her <code>Food</code> consumption patterns on a particular day.</p>
+<p>User enters the <code>report</code> command with a particular <code>date</code>.</p>
 </li>
 <li>
-<p>Calgo analyses the <code>Food</code> consumed on that day and generates a document with actionable insights for the user.</p>
+<p>Calgo analyses the <code>Food</code> consumed on that <code>date</code> and generates a <code>report</code> text file in the <code>data/reports</code> folder for the user.</p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
-</li>
-</ol>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>1a. There is no <code>Food</code> consumed on the inputted <code>date</code>.</strong><br>
+1a1. Calgo shows a message indicating that there was no <code>Food</code> consumed on the given <code>date</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+<div class="paragraph">
+<p><strong>1b. Inputted <code>date</code> in wrong format.</strong><br>
+1b1. Calgo shows a message indicating the correct format for the <code>date</code>.
+1b2. User enters <code>report</code> command with the <code>date</code> in the correct format.<br></p>
+</div>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+<div class="paragraph">
+<p><strong>1c. User enters <code>report</code> command without setting a daily calorie <code>goal</code>.</strong><br>
+1c1. Calgo generates a <code>report</code> without the sections related to the <code>goal</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>Use case ends.</p>
 </div>
 </div>
 </div>
@@ -2895,7 +2964,7 @@ Expected: The most recent window size and location is retained.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: Launch <code>Calgo</code> succesfully and a <code>Food</code> item Apple already exists in <code>FoodRecord</code></p>
+<p>Prerequisites: Launch Calgo successfully and a <code>Food</code> item Apple already exists in <code>FoodRecord</code></p>
 </li>
 <li>
 <p>Test case: <code>delete n\Apple</code><br>
@@ -2924,7 +2993,7 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: Launch <code>Calgo</code> successfully.</p>
+<p>Prerequisites: Launch Calgo successfully.</p>
 </li>
 <li>
 <p>Test case: <code>list</code><br>
@@ -3045,4 +3114,4 @@ Expected: The GUI will show all <code>Food</code> entries existing in the <code>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 05:01:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-04-13 10:40:19 UTC</div></div></div></body></html>
